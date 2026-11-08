@@ -417,7 +417,7 @@ export default function RightSidebar({
               >
                 {/* Monogram Top */}
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
+                  initial={{ opacity: 0, scale: 0.85 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6 }}
                   className="text-center mb-3"
@@ -435,51 +435,68 @@ export default function RightSidebar({
 
                 {/* Photobooth Dispenser Slot Machine */}
                 <div className="relative w-72 flex flex-col items-center">
-                  {/* Metallic Slot */}
-                  <img
-                    src={LACE10_ASSETS.photoboothSlot}
-                    alt="Photobooth Slot"
-                    className="w-full h-auto object-contain z-30 filter drop-shadow-[0_4px_10px_rgba(0,0,0,0.7)]"
-                  />
+                  {/* Metallic Slot Front Housing (z-30) */}
+                  <div className="relative z-30 w-full flex justify-center pointer-events-none select-none">
+                    <img
+                      src={LACE10_ASSETS.photoboothSlot}
+                      alt="Photobooth Slot"
+                      className="w-full h-auto object-contain filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.8)]"
+                    />
+                    {/* Shadow mouth inside slit giving depth */}
+                    <div className="absolute top-[28px] left-[18%] right-[18%] h-3 bg-gradient-to-b from-black/90 to-transparent pointer-events-none rounded-sm z-35" />
+                  </div>
 
-                  {/* Photostrip sliding down */}
-                  <motion.div
-                    initial={{ y: -180, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 1.8, ease: "easeOut" }}
-                    className="w-52 bg-[#751727] p-2.5 pt-3 pb-3 border-2 border-[#caa472] shadow-2xl rounded-sm flex flex-col gap-2.5 -mt-2 z-20"
+                  {/* Dispensing Chute: Anchored directly at the slit line (top ~28px) */}
+                  {/* overflow-hidden ensures NOTHING peeks out above the slit mouth */}
+                  <div 
+                    className="absolute top-[28px] w-52 overflow-hidden z-20 pb-4 pt-0"
+                    style={{ clipPath: 'inset(0 0 0 0)' }}
                   >
-                    <div className="w-full h-24 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40">
-                      <img
-                        src={rawGallery[0] || LACE10_ASSETS.defaultPhotos.photostrip1}
-                        alt="Couple Photo 1"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="w-full h-24 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40">
-                      <img
-                        src={rawGallery[1] || LACE10_ASSETS.defaultPhotos.photostrip2}
-                        alt="Couple Photo 2"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="w-full h-24 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40">
-                      <img
-                        src={rawGallery[2] || LACE10_ASSETS.defaultPhotos.photostrip3}
-                        alt="Couple Photo 3"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </motion.div>
+                    {/* Photostrip sliding smoothly down from inside the slot */}
+                    <motion.div
+                      initial={{ y: "-102%" }}
+                      animate={{ y: "0%" }}
+                      transition={{ 
+                        duration: 2.5, 
+                        ease: [0.16, 1, 0.3, 1] 
+                      }}
+                      className="w-full bg-[#751727] p-2.5 pt-3 pb-3 border-2 border-[#caa472] shadow-2xl rounded-sm flex flex-col gap-2.5"
+                    >
+                      <div className="w-full h-24 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40 shadow-inner">
+                        <img
+                          src={rawGallery[0] || LACE10_ASSETS.defaultPhotos.photostrip1}
+                          alt="Couple Photo 1"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="w-full h-24 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40 shadow-inner">
+                        <img
+                          src={rawGallery[1] || LACE10_ASSETS.defaultPhotos.photostrip2}
+                          alt="Couple Photo 2"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="w-full h-24 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40 shadow-inner">
+                        <img
+                          src={rawGallery[2] || LACE10_ASSETS.defaultPhotos.photostrip3}
+                          alt="Couple Photo 3"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </motion.div>
+                  </div>
+
+                  {/* Spacer to hold the layout height while the photostrip dispenses */}
+                  <div className="w-52 h-[385px] pointer-events-none" />
                 </div>
 
-                {/* Continue Button */}
+                {/* Continue Button (Gently appears as dispensing completes) */}
                 <motion.button
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.6 }}
+                  transition={{ delay: 2.2, duration: 0.6 }}
                   onClick={handleContinueToMain}
-                  className="mt-6 px-8 py-3 rounded-full bg-[#1f0508]/90 backdrop-blur-md border border-[#c49a6c] text-[#f5ebd8] text-xs font-serif uppercase tracking-[0.25em] hover:bg-[#851c2d] hover:text-white transition-all shadow-xl hover:scale-105 cursor-pointer"
+                  className="mt-4 px-8 py-3 rounded-full bg-[#1f0508]/90 backdrop-blur-md border border-[#c49a6c] text-[#f5ebd8] text-xs font-serif uppercase tracking-[0.25em] hover:bg-[#851c2d] hover:text-white transition-all shadow-xl hover:scale-105 cursor-pointer"
                 >
                   Tap to continue
                 </motion.button>
