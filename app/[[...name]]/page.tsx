@@ -136,23 +136,23 @@ export default async function Home({ params, searchParams }: Props) {
     LACE10_ASSETS.defaultPhotos.heroEnvelope;
 
   return (
-    <main className="min-h-[100dvh] w-full flex flex-col md:flex-row bg-[#2b0409] text-[#fdfaf6] overflow-hidden relative font-serif">
+    <main className="min-h-[100dvh] md:h-[100dvh] w-full flex flex-col md:flex-row bg-[#1b0307] text-[#fdfaf6] md:overflow-hidden relative font-serif">
       {/* ========================================================================= */}
-      {/* DESKTOP AMBIENT HERO DISPLAY (Hidden on mobile)                           */}
+      {/* DESKTOP AMBIENT HERO DISPLAY (KIRI / LEFT - Hidden on mobile)             */}
       {/* ========================================================================= */}
-      <div className="hidden md:flex relative md:w-[58%] lg:w-[62%] md:h-[100dvh] items-center justify-center overflow-hidden bg-[#1f0307] border-r border-[#c49a6c]/25">
+      <aside className="hidden md:flex relative md:w-[58%] lg:w-[62%] xl:w-[65%] md:h-[100dvh] shrink-0 items-center justify-center overflow-hidden bg-[#1f0307] border-r border-[#c49a6c]/25 select-none">
         {/* Background Velvet Curtain */}
         <Image
           src={LACE10_ASSETS.bgRedVelvet}
           alt={`Wedding ${brideName} & ${groomName}`}
           fill
-          sizes="(max-width: 768px) 0vw, 62vw"
-          className="object-cover object-center brightness-[0.7] select-none"
+          sizes="(max-width: 768px) 0vw, 65vw"
+          className="object-cover object-center brightness-[0.65] select-none"
           priority
         />
         {/* Burgundy & Gold Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#260307] via-[#260307]/50 to-transparent" />
-        <div className="absolute inset-0 bg-[#3b060d]/40 backdrop-blur-[1px]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#200307] via-[#200307]/50 to-transparent" />
+        <div className="absolute inset-0 bg-[#35050c]/40 backdrop-blur-[1px]" />
 
         {/* Center Card / Typography Showcase */}
         <div className="relative z-10 text-center px-10 py-12 rounded-3xl bg-[#260408]/85 backdrop-blur-md border border-[#c49a6c]/40 shadow-2xl max-w-lg mx-6 flex flex-col items-center">
@@ -188,21 +188,19 @@ export default async function Home({ params, searchParams }: Props) {
             Silakan buka undangan di panel sebelah kanan untuk melihat detail acara.
           </p>
         </div>
-      </div>
+      </aside>
 
       {/* ========================================================================= */}
-      {/* MOBILE / RIGHT SIDEBAR: INTERACTIVE LACE ENVELOPE & INVITATION            */}
+      {/* MOBILE / RIGHT SIDEBAR: INTERACTIVE LACE ENVELOPE & INVITATION (KANAN)    */}
       {/* ========================================================================= */}
-      <div className="w-full md:w-[42%] lg:w-[38%] min-h-[100dvh] flex-1 overflow-y-auto">
-        <RightSidebar
-          guestName={guestName}
-          guest={dbData.guest}
-          project={dbData.project}
-          events={dbData.events || []}
-          wishes={dbData.wishes || []}
-          stats={dbData.stats}
-        />
-      </div>
+      <RightSidebar
+        guestName={guestName}
+        guest={dbData.guest}
+        project={dbData.project}
+        events={dbData.events || []}
+        wishes={dbData.wishes || []}
+        stats={dbData.stats}
+      />
     </main>
   );
 }

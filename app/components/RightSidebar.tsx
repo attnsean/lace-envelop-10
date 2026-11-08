@@ -63,6 +63,7 @@ export default function RightSidebar({
   const [photoStep, setPhotoStep] = useState(false); // Photostrip dispenser transition step
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
   // RSVP Form State
   const [rsvpName, setRsvpName] = useState(guestName || '');
@@ -182,6 +183,9 @@ export default function RightSidebar({
   // Continue from Photostrip to Main Invitation
   const handleContinueToMain = () => {
     setHasOpened(true);
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = 0;
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -262,7 +266,12 @@ export default function RightSidebar({
   const weddingDayNum = weddingDate.getDate();
 
   return (
-    <div className="relative w-full min-h-screen bg-[#611220] text-[#f7f2ea] font-serif overflow-x-hidden select-none">
+    <div
+      ref={scrollContainerRef}
+      className={`relative w-full md:w-[42%] lg:w-[38%] xl:w-[35%] h-[100dvh] ${
+        hasOpened ? "overflow-y-auto" : "overflow-hidden"
+      } no-scrollbar bg-[#611220] text-[#f7f2ea] font-serif select-none flex-shrink-0`}
+    >
       {/* Background Audio */}
       <audio
         ref={audioRef}
@@ -277,7 +286,7 @@ export default function RightSidebar({
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           onClick={toggleAudio}
-          className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#1e0508]/85 backdrop-blur-md border border-[#c49a6c]/40 shadow-2xl flex items-center justify-center p-1 group hover:scale-105 transition-transform"
+          className="fixed md:absolute bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-[#1e0508]/85 backdrop-blur-md border border-[#c49a6c]/40 shadow-2xl flex items-center justify-center p-1 group hover:scale-105 transition-transform cursor-pointer"
           title={isPlaying ? "Jeda Musik" : "Putar Musik"}
         >
           <motion.img
@@ -302,7 +311,7 @@ export default function RightSidebar({
             key="cover-layer"
             initial={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } }}
-            className="fixed inset-0 z-50 flex flex-col items-center justify-center min-h-screen w-full px-4 overflow-hidden"
+            className="absolute inset-0 z-50 flex flex-col items-center justify-center h-[100dvh] max-h-[100dvh] w-full px-4 overflow-hidden select-none"
             style={{
               backgroundImage: `url(${photoStep ? LACE10_ASSETS.bgRedCurtain : LACE10_ASSETS.bgRedVelvet})`,
               backgroundSize: 'cover',
@@ -484,7 +493,7 @@ export default function RightSidebar({
       {/* PART 2: MAIN WEDDING INVITATION WEBSITE                                   */}
       {/* ========================================================================= */}
       {hasOpened && (
-        <main className="relative w-full max-w-md mx-auto min-h-screen bg-[#611220] shadow-2xl overflow-hidden pb-16">
+        <main className="relative w-full min-h-screen bg-[#611220] overflow-hidden pb-16">
           {/* --------------------------------------------------------------------- */}
           {/* SECTION 1: HERO COVER COMPOSITION (Red Satin Background)               */}
           {/* --------------------------------------------------------------------- */}
