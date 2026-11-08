@@ -2,11 +2,12 @@ export const LACE10_CDN = "https://cdn.serastory.com/templates/lace-envelop-10";
 
 export const LACE10_ASSETS = {
   // Backgrounds
-  bgRedVelvet: `${LACE10_CDN}/MAHUsD3n64U.png`,
+  bgRedVelvet: `${LACE10_CDN}/MAHUSyWfb7c.jpg`,
   bgRedCurtain: `${LACE10_CDN}/MAHUSyWfb7c.jpg`,
-  bgGreenSatin: `${LACE10_CDN}/MAERfzm93O8.jpg`,
+  bgRedSatinDraped: `${LACE10_CDN}/MAHUSx9qL74.jpg`,
+  bgGreenSatin: `${LACE10_CDN}/MAHUazIZtL8.jpg`,
   bgGreenDraped: `${LACE10_CDN}/MAHUazIZtL8.jpg`,
-  bgRedSatin: `${LACE10_CDN}/MAHUazIZtL8.jpg`,
+  bgRedSatin: `${LACE10_CDN}/MAHUSx9qL74.jpg`,
   
   // Envelopes & Seals
   envelopeClosed: `${LACE10_CDN}/MAG7Iwxzl6U.png`,

@@ -171,18 +171,18 @@ export default function RightSidebar({
     }
   };
 
-  // Handle Open Invitation
+  // Handle Open Envelope
   const handleOpenEnvelope = () => {
     setPhotoStep(true);
-    // Play audio on opening
     if (audioRef.current) {
       audioRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
     }
-    // Smooth transition from photostrip dispenser to main content
-    setTimeout(() => {
-      setHasOpened(true);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 3800);
+  };
+
+  // Continue from Photostrip to Main Invitation
+  const handleContinueToMain = () => {
+    setHasOpened(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   // Copy Bank Number
@@ -296,21 +296,21 @@ export default function RightSidebar({
       {/* ========================================================================= */}
       {/* PART 1: LUXURY OPENING ENVELOPE EXPERIENCE                                */}
       {/* ========================================================================= */}
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {!hasOpened && (
           <motion.div
             key="cover-layer"
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0, transition: { duration: 0.9, ease: "easeInOut" } }}
+            exit={{ opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } }}
             className="fixed inset-0 z-50 flex flex-col items-center justify-center min-h-screen w-full px-4 overflow-hidden"
             style={{
-              backgroundImage: `url(${LACE10_ASSETS.bgRedVelvet})`,
+              backgroundImage: `url(${photoStep ? LACE10_ASSETS.bgRedCurtain : LACE10_ASSETS.bgRedVelvet})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
           >
             {/* Dark romantic vignette overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#3b060d]/60 via-transparent to-[#280409]/80 pointer-events-none"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-[#250307]/70 via-transparent to-[#1a0205]/85 pointer-events-none"></div>
 
             {/* Falling petals */}
             <FallingPetals />
@@ -318,8 +318,10 @@ export default function RightSidebar({
             {!photoStep ? (
               /* STAGE 1: CLOSED ENVELOPE WITH SEAL & RECIPIENT */
               <motion.div
+                key="envelope-stage"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.5 } }}
                 transition={{ duration: 0.8 }}
                 className="relative z-30 flex flex-col items-center max-w-sm w-full mx-auto"
               >
@@ -328,7 +330,7 @@ export default function RightSidebar({
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
-                  className="font-serif italic text-3xl sm:text-4xl text-[#f5ebe1] tracking-wide mb-6 text-center drop-shadow-md"
+                  className="text-4xl sm:text-5xl text-[#f5ebe1] tracking-wide mb-8 text-center drop-shadow-md"
                   style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
                 >
                   You Are Invited !!
@@ -343,11 +345,11 @@ export default function RightSidebar({
                     className="w-full h-full object-contain filter drop-shadow-[0_15px_35px_rgba(0,0,0,0.65)]"
                   />
 
-                  {/* Top-Right Floral Bouquet */}
+                  {/* Top-Right Botanical Bouquet */}
                   <img
                     src={LACE10_ASSETS.flowerRoseBouquet}
                     alt="Rose Bouquet"
-                    className="absolute -top-6 -right-6 w-24 sm:w-28 h-auto object-contain pointer-events-none filter drop-shadow-md"
+                    className="absolute -top-8 -right-6 w-24 sm:w-28 h-auto object-contain pointer-events-none filter drop-shadow-md"
                   />
 
                   {/* Bottom-Left Velvet Dahlia */}
@@ -359,10 +361,10 @@ export default function RightSidebar({
 
                   {/* Guest Name Plaque */}
                   <div className="absolute top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-center w-[80%] z-10">
-                    <p className="text-[11px] sm:text-xs uppercase tracking-[0.2em] text-[#d6b797] font-medium mb-1">
+                    <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-[#d6b797] font-medium mb-1 font-serif">
                       Kepada Yth.
                     </p>
-                    <p className="text-base sm:text-lg font-bold text-[#fff7ee] tracking-wide truncate">
+                    <p className="text-base sm:text-lg font-bold text-[#fff7ee] tracking-wide truncate font-serif">
                       {guestName || 'Tamu Undangan'}
                     </p>
                   </div>
@@ -390,7 +392,7 @@ export default function RightSidebar({
                   onClick={handleOpenEnvelope}
                   className="mt-8 cursor-pointer text-center group"
                 >
-                  <span className="text-xs sm:text-sm tracking-[0.25em] text-[#e8cfb5] uppercase font-light border-b border-[#e8cfb5]/50 pb-0.5 group-hover:text-white group-hover:border-white transition-colors">
+                  <span className="text-xs sm:text-sm tracking-[0.25em] text-[#e8cfb5] uppercase font-serif border-b border-[#e8cfb5]/50 pb-0.5 group-hover:text-white group-hover:border-white transition-colors">
                     Tap to open
                   </span>
                 </motion.div>
@@ -398,8 +400,10 @@ export default function RightSidebar({
             ) : (
               /* STAGE 2: PHOTOSTRIP DISPENSER ANIMATION */
               <motion.div
+                key="photostrip-stage"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
+                exit={{ opacity: 0, y: -20, transition: { duration: 0.6 } }}
                 className="relative z-30 flex flex-col items-center max-w-sm w-full mx-auto"
               >
                 {/* Monogram Top */}
@@ -407,15 +411,15 @@ export default function RightSidebar({
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6 }}
-                  className="text-center mb-2"
+                  className="text-center mb-3"
                 >
                   <span
-                    className="text-4xl text-[#d4af37] font-serif tracking-widest drop-shadow-md"
-                    style={{ fontFamily: "'Alex Brush', cursive" }}
+                    className="text-5xl text-[#d4af37] font-serif tracking-widest drop-shadow-md block"
+                    style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
                   >
                     {groomNickname.charAt(0)} &amp; {brideNickname.charAt(0)}
                   </span>
-                  <p className="text-xs uppercase tracking-[0.3em] text-[#e5c7a9] mt-1 font-light">
+                  <p className="text-xs uppercase tracking-[0.3em] text-[#e5c7a9] mt-1 font-serif">
                     Our Getting Married....
                   </p>
                 </motion.div>
@@ -431,26 +435,26 @@ export default function RightSidebar({
 
                   {/* Photostrip sliding down */}
                   <motion.div
-                    initial={{ y: -160, opacity: 0 }}
+                    initial={{ y: -180, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 1.8, ease: "easeOut" }}
-                    className="w-52 bg-[#751727] p-2 pt-3 pb-3 border-2 border-[#caa472] shadow-2xl rounded-sm flex flex-col gap-2 -mt-2 z-20"
+                    className="w-52 bg-[#751727] p-2.5 pt-3 pb-3 border-2 border-[#caa472] shadow-2xl rounded-sm flex flex-col gap-2.5 -mt-2 z-20"
                   >
-                    <div className="w-full h-24 bg-neutral-800 rounded overflow-hidden border border-[#caa472]/40">
+                    <div className="w-full h-24 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40">
                       <img
                         src={rawGallery[0] || LACE10_ASSETS.defaultPhotos.photostrip1}
                         alt="Couple Photo 1"
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="w-full h-24 bg-neutral-800 rounded overflow-hidden border border-[#caa472]/40">
+                    <div className="w-full h-24 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40">
                       <img
                         src={rawGallery[1] || LACE10_ASSETS.defaultPhotos.photostrip2}
                         alt="Couple Photo 2"
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="w-full h-24 bg-neutral-800 rounded overflow-hidden border border-[#caa472]/40">
+                    <div className="w-full h-24 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40">
                       <img
                         src={rawGallery[2] || LACE10_ASSETS.defaultPhotos.photostrip3}
                         alt="Couple Photo 3"
@@ -464,9 +468,9 @@ export default function RightSidebar({
                 <motion.button
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 2.0 }}
-                  onClick={() => setHasOpened(true)}
-                  className="mt-6 px-6 py-2.5 rounded-full bg-[#1f0508]/80 backdrop-blur-md border border-[#c49a6c]/60 text-[#f5ebd8] text-xs uppercase tracking-[0.25em] hover:bg-[#851c2d] hover:text-white transition-all shadow-lg"
+                  transition={{ delay: 1.6 }}
+                  onClick={handleContinueToMain}
+                  className="mt-6 px-8 py-3 rounded-full bg-[#1f0508]/90 backdrop-blur-md border border-[#c49a6c] text-[#f5ebd8] text-xs font-serif uppercase tracking-[0.25em] hover:bg-[#851c2d] hover:text-white transition-all shadow-xl hover:scale-105 cursor-pointer"
                 >
                   Tap to continue
                 </motion.button>
@@ -480,14 +484,14 @@ export default function RightSidebar({
       {/* PART 2: MAIN WEDDING INVITATION WEBSITE                                   */}
       {/* ========================================================================= */}
       {hasOpened && (
-        <main className="relative w-full max-w-md mx-auto min-h-screen bg-[#6b1322] shadow-2xl overflow-hidden pb-16">
+        <main className="relative w-full max-w-md mx-auto min-h-screen bg-[#611220] shadow-2xl overflow-hidden pb-16">
           {/* --------------------------------------------------------------------- */}
           {/* SECTION 1: HERO COVER COMPOSITION (Red Satin Background)               */}
           {/* --------------------------------------------------------------------- */}
           <section
             className="relative w-full min-h-[920px] px-4 pt-10 pb-16 flex flex-col items-center justify-between overflow-hidden"
             style={{
-              backgroundImage: `url(${LACE10_ASSETS.bgRedSatin})`,
+              backgroundImage: `url(${LACE10_ASSETS.bgRedSatinDraped})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
@@ -520,14 +524,6 @@ export default function RightSidebar({
 
             {/* Middle Section: Monogram, Oval Plaque & Mini RSVP Badge */}
             <div className="relative w-full flex flex-col items-center mt-4">
-              {/* Monogram Backdrop */}
-              <div
-                className="text-6xl text-[#3d5a45]/60 font-serif absolute -top-8 left-12 select-none pointer-events-none"
-                style={{ fontFamily: "'Playfair Display', serif" }}
-              >
-                {groomNickname.charAt(0)}{brideNickname.charAt(0)}
-              </div>
-
               {/* Ceramic Oval Plaque */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -1251,7 +1247,7 @@ export default function RightSidebar({
                     <button
                       type="button"
                       onClick={() => copyToClipboard(acc.account_number, acc.bank_name)}
-                      className="px-3 py-1 rounded-full bg-[#821c2c] text-white text-[10px] font-sans uppercase tracking-wider hover:bg-[#5c1320] transition-colors shadow"
+                      className="px-3 py-1 rounded-full bg-[#821c2c] text-white text-[10px] font-sans uppercase tracking-wider hover:bg-[#5c1320] transition-colors shadow cursor-pointer"
                     >
                       {copiedBank === acc.bank_name ? 'Tersalin ✓' : 'Salin Rekening'}
                     </button>
@@ -1372,7 +1368,7 @@ export default function RightSidebar({
                   <button
                     type="submit"
                     disabled={isSubmittingRsvp}
-                    className="w-full py-2.5 mt-2 rounded-lg bg-[#821c2c] text-white text-xs font-sans uppercase tracking-widest font-semibold hover:bg-[#5c1320] transition-colors shadow"
+                    className="w-full py-2.5 mt-2 rounded-lg bg-[#821c2c] text-white text-xs font-sans uppercase tracking-widest font-semibold hover:bg-[#5c1320] transition-colors shadow cursor-pointer"
                   >
                     {isSubmittingRsvp ? 'Mengirim...' : 'Kirim Konfirmasi'}
                   </button>
@@ -1404,7 +1400,7 @@ export default function RightSidebar({
                 <button
                   type="submit"
                   disabled={isSubmittingWish}
-                  className="py-2 rounded-lg bg-[#821c2c] text-white text-xs font-sans uppercase tracking-wider font-semibold hover:bg-[#5c1320] transition-colors"
+                  className="py-2 rounded-lg bg-[#821c2c] text-white text-xs font-sans uppercase tracking-wider font-semibold hover:bg-[#5c1320] transition-colors cursor-pointer"
                 >
                   {isSubmittingWish ? 'Mengirim...' : 'Kirim Ucapan'}
                 </button>
