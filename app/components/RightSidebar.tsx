@@ -497,187 +497,249 @@ export default function RightSidebar({
           {/* --------------------------------------------------------------------- */}
           {/* SECTION 1: HERO COVER COMPOSITION (Red Satin Background)               */}
           {/* --------------------------------------------------------------------- */}
+          {/* --------------------------------------------------------------------- */}
+          {/* SECTION 1: HERO COVER COLLAGE (Exact 1:1 Canva Flatlay Reproduction)  */}
+          {/* --------------------------------------------------------------------- */}
           <section
-            className="relative w-full min-h-[920px] px-4 pt-10 pb-16 flex flex-col items-center justify-between overflow-hidden"
+            className="relative w-full aspect-[430/508] max-w-[430px] mx-auto overflow-hidden select-none"
             style={{
               backgroundImage: `url(${LACE10_ASSETS.bgRedSatinDraped})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
           >
-            {/* Top Couple Envelope Pop-up */}
+            {/* 1. Pleated Red Circular Fan on the left background */}
+            <div
+              className="absolute -left-[14%] top-[19%] w-[54%] aspect-square rounded-full overflow-hidden shadow-2xl pointer-events-none opacity-95"
+              style={{
+                backgroundImage: `url(${LACE10_ASSETS.pleatedSunburstMat})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            />
+
+            {/* Moss & Floral sprigs draped over the fan */}
+            <img
+              src={LACE10_ASSETS.hangingMoss}
+              alt="Moss"
+              className="absolute left-[7%] top-[25%] w-[12%] h-auto object-contain pointer-events-none opacity-90 z-10"
+            />
+            <img
+              src={LACE10_ASSETS.flowerRoseBouquet}
+              alt="Rose Accent"
+              className="absolute left-[13%] top-[21%] w-[18%] h-auto object-contain pointer-events-none z-10 rotate-[-15deg]"
+            />
+
+            {/* 2. Serif Monogram "Z S" in Olive Green in the Center Background */}
+            <div className="absolute left-[45%] top-[29%] z-0 pointer-events-none flex flex-col items-center leading-none">
+              <span className="font-serif text-[62px] text-[#4d5c43] font-normal tracking-tight opacity-95">
+                Z
+              </span>
+              <span className="font-serif text-[48px] text-[#4d5c43] font-normal tracking-tight -mt-4 opacity-95">
+                s
+              </span>
+            </div>
+
+            {/* 3. Top Open Envelope with Couple Photo & Flower Bouquet */}
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="relative w-64 h-56 mt-2 flex items-center justify-center"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="absolute left-[34%] top-[4%] w-[49%] h-[38%] z-10 flex items-center justify-center cursor-pointer group"
+              onClick={() => setLightboxImg(rawGallery[0] || LACE10_ASSETS.defaultPhotos.heroEnvelope)}
             >
-              <img
-                src={LACE10_ASSETS.envelopeOpen}
-                alt="Open Envelope"
-                className="w-full h-full object-contain filter drop-shadow-xl"
-              />
-              <div className="absolute top-2 w-44 h-36 rounded-md overflow-hidden border border-[#d6b588]/50 shadow-md">
+              {/* Couple Photo peaking inside the open flap */}
+              <div className="absolute top-[0%] left-[17%] w-[66%] h-[72%] bg-white p-1 shadow-md rounded-xs overflow-hidden">
                 <img
                   src={rawGallery[0] || LACE10_ASSETS.defaultPhotos.heroEnvelope}
                   alt="Couple Hero"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
+              {/* Open Envelope Front & Flap */}
+              <img
+                src={LACE10_ASSETS.envelopeOpen}
+                alt="Open Envelope"
+                className="absolute inset-0 w-full h-full object-contain filter drop-shadow-lg pointer-events-none"
+              />
+              {/* Dark Red Flower Bouquet on Top-Right */}
               <img
                 src={LACE10_ASSETS.flowerRoseBouquet}
                 alt="Rose"
-                className="absolute -top-4 -right-4 w-16 h-auto object-contain pointer-events-none"
+                className="absolute -top-[6%] -right-[8%] w-[38%] h-auto object-contain pointer-events-none z-20"
               />
             </motion.div>
 
-            {/* Middle Section: Monogram, Oval Plaque & Mini RSVP Badge */}
-            <div className="relative w-full flex flex-col items-center mt-4">
-              {/* Ceramic Oval Plaque */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                className="relative w-64 bg-[#f8f4ed] text-[#4d1620] rounded-full px-6 py-8 border-2 border-[#e0cbb2] shadow-2xl text-center flex flex-col items-center justify-center my-4"
-              >
-                <p className="text-[10px] uppercase tracking-[0.3em] text-[#6d2532] font-semibold mb-1">
-                  The Wedding Of
+            {/* 4. Mini RSVP Envelope on the Left (Tilted -5deg, with open lace flap & wax seal) */}
+            <motion.a
+              href="#rsvp-section"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.96 }}
+              className="absolute left-[17%] top-[17%] w-[32%] aspect-[1/1] z-20 flex items-center justify-center cursor-pointer filter drop-shadow-xl"
+              style={{ rotate: '-5deg' }}
+            >
+              <img
+                src={LACE10_ASSETS.miniRsvpEnvelope}
+                alt="Mini RSVP Envelope"
+                className="w-full h-full object-contain pointer-events-none"
+              />
+              {/* Text inside the lace flap */}
+              <div className="absolute top-[28%] text-center px-1 pointer-events-none">
+                <p className="text-[7.5px] font-serif text-[#691823]">
+                  Kindly
                 </p>
-                <h1
-                  className="text-4xl text-[#751a2a] my-0.5 tracking-wide"
-                  style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
-                >
-                  {brideNickname}
-                </h1>
-                <span className="text-xl text-[#751a2a] italic my-0.5">&amp;</span>
-                <h1
-                  className="text-4xl text-[#751a2a] my-0.5 tracking-wide"
-                  style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
-                >
-                  {groomNickname}
-                </h1>
-                <img
-                  src={LACE10_ASSETS.doveOliveBranch}
-                  alt="Dove"
-                  className="w-8 h-8 object-contain mt-2 opacity-80"
-                />
-              </motion.div>
+                <p className="text-[9.5px] font-serif font-bold text-[#691823] tracking-tight">
+                  RSVP Here!!
+                </p>
+                <p className="text-[7.5px] font-serif text-[#691823] underline mt-0.5">
+                  Tap to open
+                </p>
+              </div>
+              {/* Wax Seal Rose on the envelope closure */}
+              <img
+                src={LACE10_ASSETS.waxSealRose}
+                alt="Wax Seal"
+                className="absolute bottom-[23%] left-[38%] w-[24%] h-auto object-contain filter drop-shadow-md pointer-events-none"
+              />
+            </motion.a>
 
-              {/* Mini RSVP Envelope (Clickable shortcut) */}
-              <motion.a
-                href="#rsvp-section"
-                whileHover={{ scale: 1.05 }}
-                className="relative -mt-6 w-36 h-28 flex items-center justify-center cursor-pointer group"
+            {/* 5. Right Elongated Oval Plaque ("The Wedding Of Zahra & Sopyan") */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="absolute left-[58%] top-[18%] w-[34%] h-[48%] z-20 bg-[#fdfaf5] rounded-[60px] border-2 border-[#e6decb] shadow-2xl p-2.5 text-center flex flex-col items-center justify-center"
+            >
+              <p className="text-[8.5px] font-serif italic text-[#5a4a42] tracking-wider mb-1">
+                The Wedding Of
+              </p>
+              <h1
+                className="text-[26px] leading-[1.1] text-[#6b1523] tracking-wide my-0.5"
+                style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
               >
-                <img
-                  src={LACE10_ASSETS.miniRsvpEnvelope}
-                  alt="Mini RSVP"
-                  className="w-full h-full object-contain filter drop-shadow-md group-hover:brightness-105"
-                />
-                <div className="absolute top-[30%] text-center px-2">
-                  <p className="text-[9px] uppercase tracking-wider text-[#521923] font-bold">
-                    Kindly RSVP Here!!
-                  </p>
-                  <p className="text-[8px] text-[#782836] underline mt-0.5">
-                    Tap to open
-                  </p>
-                </div>
-              </motion.a>
-            </div>
+                {brideNickname}
+              </h1>
+              <span className="text-[13px] text-[#6b1523] italic font-serif my-0.5">&amp;</span>
+              <h1
+                className="text-[26px] leading-[1.1] text-[#6b1523] tracking-wide my-0.5"
+                style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
+              >
+                {groomNickname}
+              </h1>
+              {/* Two Doves icon at bottom */}
+              <img
+                src={LACE10_ASSETS.doveOliveBranch}
+                alt="Doves"
+                className="w-[26px] h-auto object-contain mt-1.5 opacity-75"
+              />
+            </motion.div>
 
-            {/* Bottom Row: Save The Date Pill Card & Time/Venue Card */}
-            <div className="w-full grid grid-cols-2 gap-3 px-2 mt-4 items-end">
-              {/* Left Pill Card: Save The Date */}
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="relative bg-[#f8f4ed] text-[#42111a] rounded-t-full rounded-b-3xl p-4 text-center border border-[#d6b797] shadow-xl flex flex-col items-center justify-center"
-              >
+            {/* 6. Bottom-Left Tall Arched Card ("Save The Date") */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="absolute left-[21%] top-[44%] w-[27%] h-[48%] z-20 bg-[#6b1523] p-[2px] rounded-t-full rounded-b-md shadow-2xl"
+            >
+              <div className="w-full h-full bg-[#fdfaf5] rounded-t-full rounded-b-sm border border-[#6b7f5e] p-2 flex flex-col items-center justify-center text-center">
                 <img
                   src={LACE10_ASSETS.swansHeart}
                   alt="Swans"
-                  className="w-10 h-auto object-contain mb-1"
+                  className="w-[28px] h-auto object-contain mb-0.5 opacity-90"
                 />
-                <p className="text-[9px] uppercase tracking-[0.2em] text-[#6d2532] font-semibold mb-2">
+                <p className="text-[7.5px] font-serif uppercase tracking-[0.18em] text-[#5a4a42] mb-1">
                   Save The Date
                 </p>
-                <p className="text-xs font-serif uppercase tracking-widest text-[#7a202e] mb-1">
+                <p className="text-[11px] font-serif uppercase tracking-wider text-[#6b1523] font-medium">
                   {formattedDayName}
                 </p>
-                <div className="flex flex-col items-center my-1">
-                  <span className="text-2xl font-bold text-[#5c1320] leading-none">
+                <div className="flex flex-col items-center my-0.5 leading-none">
+                  <span className="text-[20px] font-serif font-bold text-[#6b1523] leading-none">
                     {formattedDateNum}
                   </span>
-                  <span className="text-xs text-[#7a202e] my-0.5">•</span>
-                  <span className="text-lg font-bold text-[#5c1320] leading-none">
+                  <span className="text-[9px] text-[#6b1523] my-0.5">•</span>
+                  <span className="text-[13px] font-serif font-bold text-[#6b1523] leading-none">
                     {formattedMonthNum}
                   </span>
-                  <span className="text-xs text-[#7a202e] my-0.5">•</span>
-                  <span className="text-sm font-semibold text-[#5c1320]">
+                  <span className="text-[9px] text-[#6b1523] my-0.5">•</span>
+                  <span className="text-[10px] font-serif text-[#6b1523]">
                     {formattedYear}
                   </span>
                 </div>
-                {/* Red Ribbon bow decoration */}
-                <img
-                  src={LACE10_ASSETS.redRibbonBow}
-                  alt="Red Bow"
-                  className="absolute -bottom-3 -right-2 w-10 h-auto object-contain filter drop-shadow"
-                />
-              </motion.div>
-
-              {/* Right Cards: Event Details, Vinyl & Candle */}
-              <div className="flex flex-col items-center gap-3">
-                <motion.div
-                  initial={{ opacity: 0, x: 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  className="w-full bg-[#f8f4ed] text-[#42111a] rounded-xl p-3 border border-[#d6b797] shadow-lg text-center"
-                >
-                  <p className="text-[10px] font-bold text-[#6d2532] uppercase tracking-wider mb-1">
-                    Jam 09.00 - selesai
-                  </p>
-                  <p className="text-[11px] font-semibold text-[#42111a] leading-tight mb-1">
-                    {akadEvent.venue_name || 'Aula Desa Batulawang'}
-                  </p>
-                  <p className="text-[9px] text-neutral-600 leading-tight">
-                    {akadEvent.venue_address || 'Jl. Cisereuh, Kec. Cipanas, Cianjur'}
-                  </p>
-                </motion.div>
-
-                {/* Vinyl Record & Candle Row */}
-                <div className="w-full flex items-center justify-around px-2 pt-2">
-                  {/* Vinyl Music Player */}
-                  <div
-                    onClick={toggleAudio}
-                    className="flex flex-col items-center cursor-pointer group"
-                  >
-                    <motion.div
-                      animate={{ rotate: isPlaying ? 360 : 0 }}
-                      transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
-                      className="w-16 h-16 rounded-full overflow-hidden shadow-lg border border-neutral-700"
-                    >
-                      <img
-                        src={LACE10_ASSETS.vinylRecord}
-                        alt="Vinyl"
-                        className="w-full h-full object-contain"
-                      />
-                    </motion.div>
-                    <span className="text-[8px] uppercase tracking-widest text-[#f5ebd8] mt-1 group-hover:text-white">
-                      {isPlaying ? 'Pause music' : 'Tap to music'}
-                    </span>
-                  </div>
-
-                  {/* Brass Candle Holder */}
-                  <div className="w-10 flex flex-col items-center">
-                    <img
-                      src={LACE10_ASSETS.candleBrassStand}
-                      alt="Candle"
-                      className="w-full h-auto object-contain filter drop-shadow"
-                    />
-                  </div>
-                </div>
               </div>
+              {/* 3D Red Satin Ribbon Bow attached to the right edge */}
+              <img
+                src={LACE10_ASSETS.redRibbonBow}
+                alt="Red Bow"
+                className="absolute -right-[14px] top-[36%] w-[32px] h-auto object-contain filter drop-shadow-md z-30 pointer-events-none"
+              />
+            </motion.div>
+
+            {/* 7. Bottom-Center/Right Square Venue Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="absolute left-[49%] top-[50%] w-[22%] h-[22%] z-20 bg-[#6b1523] p-[2px] rounded-sm shadow-xl"
+            >
+              {/* Hanging Moss behind on the right */}
+              <img
+                src={LACE10_ASSETS.hangingMoss}
+                alt="Moss"
+                className="absolute -right-[12px] -top-[14px] w-[22px] h-auto object-contain pointer-events-none opacity-80 z-0"
+              />
+              <div className="relative z-10 w-full h-full bg-[#fdfaf5] p-1.5 flex flex-col items-center justify-center text-center">
+                <p className="text-[7.5px] font-serif font-bold text-[#6b1523] leading-tight mb-0.5">
+                  Jam 09.00 - selesai
+                </p>
+                <p className="text-[8px] font-serif font-semibold text-[#333] leading-tight mb-0.5">
+                  {akadEvent.venue_name || 'Aula Desa Batulawang'}
+                </p>
+                <p className="text-[6.5px] text-[#555] font-sans leading-tight">
+                  {akadEvent.venue_address || 'Jl. Cisereuh, Kec. Cipanas, Kabupaten Cianjur, Jawa Barat'}
+                </p>
+              </div>
+            </motion.div>
+
+            {/* 8. Spinning Vinyl Record Music Player below venue card */}
+            <div
+              onClick={toggleAudio}
+              className="absolute left-[49%] top-[72%] w-[20%] aspect-square z-20 flex items-center justify-center cursor-pointer group"
+              title={isPlaying ? 'Pause Musik' : 'Putar Musik'}
+            >
+              <motion.div
+                animate={{ rotate: isPlaying ? 360 : 0 }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: 'linear' }}
+                className="relative w-full h-full rounded-full overflow-hidden shadow-2xl filter drop-shadow-lg"
+              >
+                <img
+                  src={LACE10_ASSETS.vinylDisc}
+                  alt="Vinyl Record"
+                  className="w-full h-full object-contain"
+                />
+                {/* Red center label with play triangle button */}
+                <div className="absolute inset-0 m-auto w-[36%] h-[36%] rounded-full bg-[#851c2d] border border-[#f5ebd8] flex items-center justify-center shadow-inner">
+                  {isPlaying ? (
+                    <div className="flex gap-0.5">
+                      <div className="w-[2px] h-2 bg-white rounded-full"></div>
+                      <div className="w-[2px] h-2 bg-white rounded-full"></div>
+                    </div>
+                  ) : (
+                    <svg className="w-2.5 h-2.5 text-white fill-current ml-0.5" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  )}
+                </div>
+              </motion.div>
+            </div>
+
+            {/* 9. Brass Candlestick Holder with Burning Red Candle */}
+            <div className="absolute left-[72%] top-[62%] w-[11%] h-auto z-20 pointer-events-none">
+              <img
+                src={LACE10_ASSETS.candleBrassStand}
+                alt="Candle"
+                className="w-full h-auto object-contain filter drop-shadow-md"
+              />
             </div>
           </section>
 
@@ -790,80 +852,84 @@ export default function RightSidebar({
           {/* SECTION 3: SALAM & MEMPELAI (Green Silk Satin Texture)                 */}
           {/* --------------------------------------------------------------------- */}
           <section
-            className="relative w-full px-5 py-14 overflow-hidden flex flex-col items-center"
+            className="relative w-full px-4 py-12 overflow-hidden flex flex-col items-center"
             style={{
               backgroundImage: `url(${LACE10_ASSETS.bgGreenDraped})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
           >
-            {/* Laser-Cut White Arched Lace Frame */}
+            {/* Laser-Cut White Arched Lace Frame Card */}
             <motion.div
               initial={{ opacity: 0, y: 35 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="relative w-full max-w-sm bg-[#f8f4ed] text-[#3b1219] rounded-[40px] px-6 py-10 shadow-2xl border-4 border-[#fffdfa] flex flex-col items-center text-center"
+              className="relative w-full max-w-[360px] aspect-[800/1299] mx-auto filter drop-shadow-2xl"
             >
-              {/* Lace border overlay inside */}
-              <div className="absolute inset-2 border border-dashed border-[#851c2d]/30 rounded-[34px] pointer-events-none"></div>
+              <img
+                src={LACE10_ASSETS.laceArchGreen}
+                alt="Lace Arch Frame"
+                className="absolute inset-0 w-full h-full object-contain pointer-events-none z-10"
+              />
+              <div className="relative z-20 w-full h-full pt-[14%] pb-[12%] px-[15%] flex flex-col items-center justify-between text-center select-none">
+                {/* Bismillah Calligraphy */}
+                <div className="w-[85%] max-w-[200px]">
+                  <svg viewBox="0 0 300 80" className="w-full h-auto fill-[#7a1827]">
+                    <text
+                      x="150"
+                      y="50"
+                      textAnchor="middle"
+                      className="font-serif text-[32px] font-bold fill-[#7a1827]"
+                    >
+                      بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+                    </text>
+                  </svg>
+                </div>
 
-              {/* Bismillah Calligraphy */}
-              <div className="w-44 mb-4">
-                <svg viewBox="0 0 300 80" className="w-full h-auto fill-[#851c2d]">
-                  <path d="M150,15 C120,15 90,25 70,35 C90,45 120,55 150,55 C180,55 210,45 230,35 C210,25 180,15 150,15 Z" opacity="0.1" />
-                  <text
-                    x="150"
-                    y="45"
-                    textAnchor="middle"
-                    className="font-serif text-2xl font-bold fill-[#851c2d]"
+                {/* Greeting */}
+                <div className="my-1">
+                  <p className="text-[10px] sm:text-[11px] font-serif text-[#333] leading-tight font-medium">
+                    Assalamualaikum Warahmatullahi Wabarakatuh
+                  </p>
+                  <p className="text-[8px] sm:text-[9px] text-[#555] font-sans leading-tight mt-1">
+                    Tanpa mengurangi rasa hormat kami, dengan memohon Rahmat dan Ridho Allah SWT, kami mengundang Anda untuk menjadi bagian dari hari bahagia kami:
+                  </p>
+                </div>
+
+                {/* Bride Profile */}
+                <div className="my-1">
+                  <h2
+                    className="text-2xl sm:text-3xl text-[#7a1827] tracking-wide"
+                    style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
                   >
-                    بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-                  </text>
-                </svg>
-              </div>
+                    {brideName}
+                  </h2>
+                  <p className="text-[8.5px] sm:text-[9.5px] text-[#555] font-sans mt-0.5">
+                    Putri kedua dari {brideFather} dan {brideMother}
+                  </p>
+                </div>
 
-              {/* Greeting */}
-              <p className="text-xs sm:text-sm font-serif text-neutral-800 leading-relaxed mb-6 px-2">
-                Assalamualaikum Warahmatullahi Wabarakatuh
-                <br />
-                <span className="text-[11px] text-neutral-600 font-sans block mt-1">
-                  Tanpa mengurangi rasa hormat kami, dengan memohon Rahmat dan Ridho Allah SWT, kami mengundang Anda untuk menjadi bagian dari hari bahagia kami:
-                </span>
-              </p>
+                {/* Ampersand Divider */}
+                <span className="text-sm sm:text-base text-[#7a1827] font-serif italic">&amp;</span>
 
-              {/* Bride Profile */}
-              <div className="mb-4">
-                <h2
-                  className="text-3xl sm:text-4xl text-[#7a1827] tracking-wide"
-                  style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
-                >
-                  {brideName}
-                </h2>
-                <p className="text-[11px] text-neutral-600 font-sans mt-1">
-                  Putri dari {brideFather} &amp; {brideMother}
+                {/* Groom Profile */}
+                <div className="my-1">
+                  <h2
+                    className="text-2xl sm:text-3xl text-[#7a1827] tracking-wide"
+                    style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
+                  >
+                    {groomName}
+                  </h2>
+                  <p className="text-[8.5px] sm:text-[9.5px] text-[#555] font-sans mt-0.5">
+                    Putra pertama dari {groomFather} dan {groomMother}
+                  </p>
+                </div>
+
+                {/* Closing blessing text */}
+                <p className="text-[8px] sm:text-[9px] text-[#555] font-sans leading-tight italic">
+                  Kehadiran serta doa restu Anda akan sangat berarti bagi perjalanan kami
                 </p>
               </div>
-
-              {/* Ampersand Divider */}
-              <div className="text-2xl text-[#851c2d] my-1 font-serif italic">&amp;</div>
-
-              {/* Groom Profile */}
-              <div className="mt-2 mb-6">
-                <h2
-                  className="text-3xl sm:text-4xl text-[#7a1827] tracking-wide"
-                  style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
-                >
-                  {groomName}
-                </h2>
-                <p className="text-[11px] text-neutral-600 font-sans mt-1">
-                  Putra dari {groomFather} &amp; {groomMother}
-                </p>
-              </div>
-
-              {/* Closing blessing text */}
-              <p className="text-[11px] text-neutral-600 italic font-serif leading-relaxed px-4">
-                "Kehadiran serta doa restu Anda akan sangat berarti bagi perjalanan kehidupan baru kami."
-              </p>
             </motion.div>
           </section>
 
@@ -1065,27 +1131,33 @@ export default function RightSidebar({
           {/* SECTION 6: KUTIPAN AYAT SUCI (Baroque Lace Mirror Frame)               */}
           {/* --------------------------------------------------------------------- */}
           <section
-            className="relative w-full px-5 py-14 flex flex-col items-center overflow-hidden"
+            className="relative w-full px-4 py-12 flex flex-col items-center overflow-hidden"
             style={{
               backgroundImage: `url(${LACE10_ASSETS.bgRedVelvet})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
           >
+            {/* Baroque Ornate Lace Arch Card */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="relative w-full max-w-sm bg-[#f8f4ed] text-[#42111a] rounded-[45px] p-8 sm:p-10 shadow-2xl border-4 border-[#fffefc] text-center flex flex-col items-center justify-center"
+              className="relative w-full max-w-[340px] aspect-[800/997] mx-auto filter drop-shadow-2xl flex items-center justify-center"
             >
-              <div className="absolute inset-3 border border-dotted border-[#851c2d]/40 rounded-[38px] pointer-events-none"></div>
-
-              <p className="text-sm sm:text-base font-serif italic text-neutral-800 leading-relaxed mb-4">
-                &ldquo;Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang.&rdquo;
-              </p>
-              <p className="text-xs uppercase tracking-[0.25em] text-[#851c2d] font-bold">
-                Qs. Ar-Rum : 21
-              </p>
+              <img
+                src={LACE10_ASSETS.baroqueArchQuran}
+                alt="Baroque Frame"
+                className="absolute inset-0 w-full h-full object-contain pointer-events-none z-10"
+              />
+              <div className="relative z-20 w-full h-full pt-[22%] pb-[14%] px-[16%] flex flex-col items-center justify-center text-center select-none">
+                <p className="text-xs sm:text-sm font-serif italic text-[#3d1017] leading-relaxed mb-4">
+                  &ldquo;Allah menciptakan pasangan dari diri manusia agar merasa tenteram, serta menjadikan rasa cinta dan kasih sayang di antara mereka&rdquo;
+                </p>
+                <p className="text-[10px] sm:text-[11px] font-serif uppercase tracking-[0.2em] text-[#7a1827] font-semibold">
+                  Qs. (Ar-Rum) - Ayat 21
+                </p>
+              </div>
             </motion.div>
           </section>
 
@@ -1137,18 +1209,102 @@ export default function RightSidebar({
               Our Moment
             </h2>
 
-            {/* Casual Polaroids / Candids */}
-            <div className="w-full flex items-center justify-center gap-3 my-4">
-              {LACE10_ASSETS.defaultPhotos.casualMoments.slice(0, 3).map((img, i) => (
-                <div
-                  key={`candid-${i}`}
-                  onClick={() => setLightboxImg(img)}
-                  className="w-24 h-28 bg-[#f8f4ed] p-1.5 pb-4 shadow-xl rounded border border-[#caa472] transform hover:scale-105 transition-transform cursor-pointer"
-                  style={{ rotate: i % 2 === 0 ? '-3deg' : '4deg' }}
+            {/* Casual Polaroids / Candids Collage (5 Photos matching Canva) */}
+            <div className="w-full max-w-sm flex flex-col items-center gap-3 my-4">
+              {/* Photo 1: Top Wide Polaroid */}
+              {LACE10_ASSETS.defaultPhotos.casualMoments[0] && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  onClick={() => setLightboxImg(LACE10_ASSETS.defaultPhotos.casualMoments[0])}
+                  className="w-[78%] bg-[#f8f4ed] p-2 pb-6 shadow-2xl rounded-xs border border-[#caa472]/40 transform rotate-[1deg] hover:scale-105 transition-transform cursor-pointer"
                 >
-                  <img src={img} alt="Candid" className="w-full h-full object-cover rounded-xs" />
-                </div>
-              ))}
+                  <div className="w-full aspect-[4/3] overflow-hidden rounded-xs">
+                    <img
+                      src={LACE10_ASSETS.defaultPhotos.casualMoments[0]}
+                      alt="Moment 1"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Row 2: Two Polaroids */}
+              <div className="w-full flex items-center justify-center gap-3">
+                {LACE10_ASSETS.defaultPhotos.casualMoments[1] && (
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    onClick={() => setLightboxImg(LACE10_ASSETS.defaultPhotos.casualMoments[1])}
+                    className="w-[45%] bg-[#f8f4ed] p-1.5 pb-5 shadow-xl rounded-xs border border-[#caa472]/40 transform -rotate-[4deg] hover:scale-105 transition-transform cursor-pointer"
+                  >
+                    <div className="w-full aspect-[3/4] overflow-hidden rounded-xs">
+                      <img
+                        src={LACE10_ASSETS.defaultPhotos.casualMoments[1]}
+                        alt="Moment 2"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </motion.div>
+                )}
+                {LACE10_ASSETS.defaultPhotos.casualMoments[2] && (
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    onClick={() => setLightboxImg(LACE10_ASSETS.defaultPhotos.casualMoments[2])}
+                    className="w-[45%] bg-[#f8f4ed] p-1.5 pb-5 shadow-xl rounded-xs border border-[#caa472]/40 transform rotate-[3deg] hover:scale-105 transition-transform cursor-pointer"
+                  >
+                    <div className="w-full aspect-[4/3] overflow-hidden rounded-xs">
+                      <img
+                        src={LACE10_ASSETS.defaultPhotos.casualMoments[2]}
+                        alt="Moment 3"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+
+              {/* Row 3: Two Polaroids overlapping */}
+              <div className="w-full flex items-center justify-center -space-x-4 mt-1">
+                {LACE10_ASSETS.defaultPhotos.casualMoments[3] && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    onClick={() => setLightboxImg(LACE10_ASSETS.defaultPhotos.casualMoments[3])}
+                    className="w-[48%] bg-[#f8f4ed] p-1.5 pb-5 shadow-xl rounded-xs border border-[#caa472]/40 transform rotate-[2deg] hover:scale-105 transition-transform cursor-pointer z-10"
+                  >
+                    <div className="w-full aspect-[3/4] overflow-hidden rounded-xs">
+                      <img
+                        src={LACE10_ASSETS.defaultPhotos.casualMoments[3]}
+                        alt="Moment 4"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </motion.div>
+                )}
+                {LACE10_ASSETS.defaultPhotos.casualMoments[4] && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    onClick={() => setLightboxImg(LACE10_ASSETS.defaultPhotos.casualMoments[4])}
+                    className="w-[48%] bg-[#f8f4ed] p-1.5 pb-5 shadow-xl rounded-xs border border-[#caa472]/40 transform -rotate-[3deg] hover:scale-105 transition-transform cursor-pointer z-20"
+                  >
+                    <div className="w-full aspect-[3/4] overflow-hidden rounded-xs">
+                      <img
+                        src={LACE10_ASSETS.defaultPhotos.casualMoments[4]}
+                        alt="Moment 5"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </motion.div>
+                )}
+              </div>
             </div>
 
             {/* Two Doves Carrying Ribbon */}

@@ -28,10 +28,14 @@ export const LACE10_ASSETS = {
   hangingMoss1: `${LACE10_CDN}/MAHUS6Moc9k.jpg?opt=1`,
   hangingMoss2: `${LACE10_CDN}/MAHUS7jtgs4.jpg?opt=1`,
   hangingMossPng: `${LACE10_CDN}/MAHUUy-Ol04.png?opt=1`,
+  hangingMoss: `${LACE10_CDN}/MAHUUy-Ol04.png?opt=1`,
   redPlacematWoven: `${LACE10_CDN}/MAHUS9fjDBc.jpg?opt=1`,
+  pleatedSunburstMat: `${LACE10_CDN}/MAHUS9fjDBc.jpg?opt=1`,
   fallingPetals: `${LACE10_CDN}/MAGyjiiy8bQ.png?opt=1`,
   
   // Frames & Laces
+  laceArchGreen: `${LACE10_CDN}/clean_lace_arch_green.png?opt=1`,
+  baroqueArchQuran: `${LACE10_CDN}/clean_baroque_arch_quran.png?opt=1`,
   laceArchDouble: `${LACE10_CDN}/MAHGKX51LLE.png?opt=1`,
   laceArchDoubleAlt: `${LACE10_CDN}/MAHLB5aA0WY.png?opt=1`,
   laceOvalMirror: `${LACE10_CDN}/MAHJjnXkf0s.png?opt=1`,
@@ -51,6 +55,7 @@ export const LACE10_ASSETS = {
   
   // Interactive & Objects
   vinylRecord: `${LACE10_CDN}/MAELDq_0pU0.png?opt=1`,
+  vinylDisc: `${LACE10_CDN}/MAELDq_0pU0.png?opt=1`,
   candleBrassStand: `${LACE10_CDN}/MAG4Z2z2P8M.png?opt=1`,
   photoboothSlot: `${LACE10_CDN}/MAHMK1GtEJw.png?opt=1`,
   dovesFlightRibbon: `${LACE10_CDN}/MAHAEHj-FDs.png?opt=1`,
