@@ -570,36 +570,39 @@ export default function RightSidebar({
               />
             </motion.div>
 
-            {/* 4. Mini RSVP Envelope on the Left (Tilted -5deg, with open lace flap & wax seal) */}
+            {/* 4. Mini RSVP Envelope on the Left (Tilted -5deg, with open flap & wax seal) */}
             <motion.a
               href="#rsvp-section"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.96 }}
-              className="absolute left-[17%] top-[17%] w-[32%] aspect-[1/1] z-20 flex items-center justify-center cursor-pointer filter drop-shadow-xl"
+              className="absolute left-[17%] top-[17%] w-[33%] aspect-[2400/1743] z-20 flex items-center justify-center cursor-pointer filter drop-shadow-xl"
               style={{ rotate: '-5deg' }}
             >
-              <img
-                src={LACE10_ASSETS.miniRsvpEnvelope}
-                alt="Mini RSVP Envelope"
-                className="w-full h-full object-contain pointer-events-none"
-              />
-              {/* Text inside the lace flap */}
-              <div className="absolute top-[28%] text-center px-1 pointer-events-none">
-                <p className="text-[7.5px] font-serif text-[#691823]">
+              {/* White lace insert card */}
+              <div className="absolute -top-[24%] left-[12%] w-[76%] h-[82%] bg-[#fdfaf5] border-2 border-dashed border-[#691823]/40 rounded-t-full shadow-md flex flex-col items-center justify-start pt-1.5 px-1 text-center pointer-events-none">
+                <p className="text-[7.5px] font-serif text-[#691823] leading-none">
                   Kindly
                 </p>
-                <p className="text-[9.5px] font-serif font-bold text-[#691823] tracking-tight">
+                <p className="text-[9.5px] font-serif font-bold text-[#691823] tracking-tight leading-tight my-0.5">
                   RSVP Here!!
                 </p>
-                <p className="text-[7.5px] font-serif text-[#691823] underline mt-0.5">
+                <p className="text-[7px] font-serif text-[#691823] underline leading-none">
                   Tap to open
                 </p>
               </div>
+
+              {/* Red Envelope body */}
+              <img
+                src={LACE10_ASSETS.envelopeOpen}
+                alt="Mini RSVP Envelope"
+                className="w-full h-full object-contain pointer-events-none relative z-10"
+              />
+
               {/* Wax Seal Rose on the envelope closure */}
               <img
                 src={LACE10_ASSETS.waxSealRose}
                 alt="Wax Seal"
-                className="absolute bottom-[23%] left-[38%] w-[24%] h-auto object-contain filter drop-shadow-md pointer-events-none"
+                className="absolute bottom-[2%] left-[37%] w-[26%] h-auto object-contain filter drop-shadow-md pointer-events-none z-20"
               />
             </motion.a>
 
