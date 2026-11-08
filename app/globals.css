@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Arapey:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Forum&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Tangerine:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Abigail';
+  src: url('/fonts/Abigail.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'BritannicBold';
+  src: url('/fonts/BRITANIC.TTF') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PapeterieScript';
+  src: url('/fonts/PapeterieDupontScript.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PapeterieSerif';
+  src: url('/fonts/PapeterieDupontSerif.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PapeterieSerifAlt';
+  src: url('/fonts/PapeterieDupontSerifAlt.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --background: #2b0409;
+  --foreground: #fdfaf6;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #1f0307;
+}
+::-webkit-scrollbar-thumb {
+  background: #7a1827;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #caa472;
+}
