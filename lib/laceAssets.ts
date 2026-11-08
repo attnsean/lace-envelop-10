@@ -35,7 +35,7 @@ export const LACE10_ASSETS = {
   laceArchDouble: `${LACE10_CDN}/MAHGKX51LLE.png`,
   laceArchDoubleAlt: `${LACE10_CDN}/MAHLB5aA0WY.png`,
   laceOvalMirror: `${LACE10_CDN}/MAHJjnXkf0s.png`,
-  laceScallopFrame: `${LACE10_CDN}/MAHKOuSn5YQ.png`,
+  laceScallopFrame: `${LACE10_CDN}/MAHKOuSn5YQ.png?v=2`,
   laceBorderWhite: `${LACE10_CDN}/MAG0CeeNALk.png`,
   notchedCardAkad: `${LACE10_CDN}/MAHID6oiAfM.png`,
   notchedCardResepsi: `${LACE10_CDN}/MAHUax8JAb0.png`,

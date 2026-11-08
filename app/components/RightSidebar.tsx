@@ -1005,18 +1005,20 @@ export default function RightSidebar({
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="relative w-64 h-80 rounded-2xl p-2 bg-[#f8f4ed] border-2 border-[#caa472] shadow-2xl flex items-center justify-center cursor-pointer group"
+                className="relative w-64 h-88 rounded-3xl p-3 bg-[#fdfaf5] shadow-2xl flex items-center justify-center cursor-pointer group overflow-hidden border border-[#e8d7c3]"
                 onClick={() => setLightboxImg(rawGallery[3] || LACE10_ASSETS.defaultPhotos.bridePortrait1)}
               >
-                <img
-                  src={rawGallery[3] || LACE10_ASSETS.defaultPhotos.bridePortrait1}
-                  alt="Bride Portrait 1"
-                  className="w-full h-full object-cover rounded-xl group-hover:scale-[1.02] transition-transform duration-500"
-                />
+                <div className="w-full h-full rounded-2xl overflow-hidden">
+                  <img
+                    src={rawGallery[3] || LACE10_ASSETS.defaultPhotos.bridePortrait1}
+                    alt="Bride Portrait 1"
+                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                  />
+                </div>
                 <img
                   src={LACE10_ASSETS.laceScallopFrame}
                   alt="Lace Border"
-                  className="absolute inset-0 w-full h-full object-fill pointer-events-none"
+                  className="absolute inset-0 w-full h-full object-fill pointer-events-none z-10"
                 />
               </motion.div>
 
@@ -1024,18 +1026,20 @@ export default function RightSidebar({
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="relative w-64 h-80 rounded-2xl p-2 bg-[#f8f4ed] border-2 border-[#caa472] shadow-2xl flex items-center justify-center cursor-pointer group"
+                className="relative w-64 h-88 rounded-3xl p-3 bg-[#fdfaf5] shadow-2xl flex items-center justify-center cursor-pointer group overflow-hidden border border-[#e8d7c3]"
                 onClick={() => setLightboxImg(rawGallery[4] || LACE10_ASSETS.defaultPhotos.bridePortrait2)}
               >
-                <img
-                  src={rawGallery[4] || LACE10_ASSETS.defaultPhotos.bridePortrait2}
-                  alt="Bride Portrait 2"
-                  className="w-full h-full object-cover rounded-xl group-hover:scale-[1.02] transition-transform duration-500"
-                />
+                <div className="w-full h-full rounded-2xl overflow-hidden">
+                  <img
+                    src={rawGallery[4] || LACE10_ASSETS.defaultPhotos.bridePortrait2}
+                    alt="Bride Portrait 2"
+                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                  />
+                </div>
                 <img
                   src={LACE10_ASSETS.laceScallopFrame}
                   alt="Lace Border"
-                  className="absolute inset-0 w-full h-full object-fill pointer-events-none"
+                  className="absolute inset-0 w-full h-full object-fill pointer-events-none z-10"
                 />
               </motion.div>
             </div>
