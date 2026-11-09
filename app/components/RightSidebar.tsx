@@ -1474,25 +1474,33 @@ export default function RightSidebar({
 
             {/* Timeline Schedule Cards with Luxury Borders */}
             <div className="relative z-10 w-full max-w-xs flex flex-col gap-3 mt-4 text-[#f8f4ed]">
-              {[
-                { time: '07.30 WIB', title: 'Mapag Panganten' },
-                { time: '08.00 - 10.00 WIB', title: 'Akad Nikah' },
-                { time: '10.00 - 11.00 WIB', title: 'Sungkeman' },
-                { time: '11.00 - 11.30 WIB', title: 'Upacara Adat Sunda' },
-                { time: '12.00 - 16.00 WIB', title: 'Resepsi Pernikahan' },
-              ].map((item, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-center justify-between p-3.5 rounded-2xl bg-[#fdfaf5]/95 border-2 border-[#caa472] shadow-xl text-[#3d1017] hover:scale-[1.02] transition-transform"
-                >
-                  <span className="px-3 py-1 rounded-full bg-[#7a1827] text-white text-[11px] font-sans font-bold tracking-wider shadow">
-                    {item.time}
-                  </span>
-                  <span className="text-xs sm:text-sm font-serif font-bold text-[#42111a]">
-                    {item.title}
-                  </span>
-                </div>
-              ))}
+              {(() => {
+                const rundownList = (Array.isArray((project as any)?.dining_schedule) && (project as any).dining_schedule.length > 0)
+                  ? (project as any).dining_schedule
+                  : (Array.isArray((project as any)?.rundown) && (project as any).rundown.length > 0)
+                  ? (project as any).rundown
+                  : [
+                      { time: '07.30 WIB', title: 'Mapag Panganten' },
+                      { time: '08.00 - 10.00 WIB', title: 'Akad Nikah' },
+                      { time: '10.00 - 11.00 WIB', title: 'Sungkeman' },
+                      { time: '11.00 - 11.30 WIB', title: 'Upacara Adat Sunda' },
+                      { time: '12.00 - 16.00 WIB', title: 'Resepsi Pernikahan' },
+                    ];
+
+                return rundownList.map((item: any, idx: number) => (
+                  <div
+                    key={idx}
+                    className="flex items-center justify-between p-3.5 rounded-2xl bg-[#fdfaf5]/95 border-2 border-[#caa472] shadow-xl text-[#3d1017] hover:scale-[1.02] transition-transform"
+                  >
+                    <span className="px-3 py-1 rounded-full bg-[#7a1827] text-white text-[11px] font-sans font-bold tracking-wider shadow shrink-0">
+                      {item.time}
+                    </span>
+                    <span className="text-xs sm:text-sm font-serif font-bold text-[#42111a] text-right ml-2">
+                      {item.title}
+                    </span>
+                  </div>
+                ));
+              })()}
             </div>
 
             {/* Bottom Getaway Wedding Car Illustration */}
