@@ -28,7 +28,7 @@ const FallingPetals = () => (
         }}
         animate={{
           y: ['0vh', '110vh'],
-          x: [0, (i % 2 === 0 ? 30 : -30), 0],
+          x: [0, i % 2 === 0 ? 30 : -30, 0],
           rotate: [0, 180 + i * 25, 360],
           opacity: [0, 0.9, 0.8, 0],
         }}
@@ -247,24 +247,6 @@ export default function RightSidebar({
     setIsSubmittingWish(false);
   };
 
-  // Calendar generation for the wedding month
-  const getCalendarDays = () => {
-    const year = weddingDate.getFullYear();
-    const month = weddingDate.getMonth(); // 0-indexed
-    const firstDay = new Date(year, month, 1).getDay(); // 0 is Sun
-    const totalDays = new Date(year, month + 1, 0).getDate();
-    const days = [];
-    for (let i = 0; i < firstDay; i++) {
-      days.push(null);
-    }
-    for (let d = 1; d <= totalDays; d++) {
-      days.push(d);
-    }
-    return days;
-  };
-  const calendarDays = getCalendarDays();
-  const weddingDayNum = weddingDate.getDate();
-
   return (
     <div
       ref={scrollContainerRef}
@@ -447,7 +429,6 @@ export default function RightSidebar({
                   </div>
 
                   {/* Dispensing Chute: Anchored directly at the slit line (top ~28px) */}
-                  {/* overflow-hidden ensures NOTHING peeks out above the slit mouth */}
                   <div 
                     className="absolute top-[28px] w-52 overflow-hidden z-20 pb-4 pt-0"
                     style={{ clipPath: 'inset(0 0 0 0)' }}
@@ -490,7 +471,7 @@ export default function RightSidebar({
                   <div className="w-52 h-[385px] pointer-events-none" />
                 </div>
 
-                {/* Continue Button (Gently appears as dispensing completes) */}
+                {/* Continue Button */}
                 <motion.button
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -512,10 +493,7 @@ export default function RightSidebar({
       {hasOpened && (
         <main className="relative w-full min-h-screen bg-[#611220] overflow-hidden pb-16">
           {/* --------------------------------------------------------------------- */}
-          {/* SECTION 1: HERO COVER COMPOSITION (Red Satin Background)               */}
-          {/* --------------------------------------------------------------------- */}
-          {/* --------------------------------------------------------------------- */}
-          {/* SECTION 1: HERO COVER COLLAGE (Exact 1:1 Canva Flatlay Reproduction)  */}
+          {/* SECTION 0: HERO FLATLAY COLLAGE (Exact 1:1 Canva Flatlay Composition) */}
           {/* --------------------------------------------------------------------- */}
           <section
             className="relative w-full aspect-[430/508] max-w-[430px] mx-auto overflow-hidden select-none"
@@ -550,10 +528,10 @@ export default function RightSidebar({
             {/* 2. Serif Monogram "Z S" in Olive Green in the Center Background */}
             <div className="absolute left-[45%] top-[29%] z-0 pointer-events-none flex flex-col items-center leading-none">
               <span className="font-serif text-[62px] text-[#4d5c43] font-normal tracking-tight opacity-95">
-                Z
+                {brideNickname.charAt(0)}
               </span>
               <span className="font-serif text-[48px] text-[#4d5c43] font-normal tracking-tight -mt-4 opacity-95">
-                s
+                {groomNickname.charAt(0).toLowerCase()}
               </span>
             </div>
 
@@ -764,112 +742,107 @@ export default function RightSidebar({
           </section>
 
           {/* --------------------------------------------------------------------- */}
-          {/* SECTION 2: CALENDAR & COUNTDOWN                                       */}
+          {/* SECTION 1: RED SATIN TRANSITION BANNER (Exact Canva Section 1)        */}
           {/* --------------------------------------------------------------------- */}
-          <section className="relative w-full px-5 py-8 bg-[#611220] flex flex-col items-center">
-            {/* Flourish Divider */}
-            <div className="w-48 h-auto mb-6 flex justify-center">
+          <section
+            className="relative w-full px-5 py-10 flex flex-col items-center justify-center overflow-hidden"
+            style={{
+              backgroundImage: `url(${LACE10_ASSETS.bgRedSatinDraped})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          >
+            {/* Top Delicate White Lace Border */}
+            <div className="w-full max-w-sm mb-4 opacity-75">
               <img
-                src={LACE10_ASSETS.flourishDividerHeart}
-                alt="Divider"
-                className="w-full h-auto object-contain opacity-80"
+                src={LACE10_ASSETS.laceBorderWhite}
+                alt="Lace Border"
+                className="w-full h-auto object-contain filter drop-shadow"
               />
             </div>
 
-            {/* Calendar Card with Love Heart on the Wedding Date */}
+            {/* Centered Luxury Save The Date Banner Card */}
             <motion.div
-              initial={{ opacity: 0, y: 25 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="w-full max-w-xs bg-[#f8f4ed] text-[#3d1017] rounded-3xl p-5 shadow-2xl border border-[#d6b797]/60"
+              className="relative w-full max-w-xs bg-[#fdfaf5] text-[#3d1017] rounded-3xl p-6 shadow-2xl border-2 border-[#caa472]/70 flex flex-col items-center text-center"
             >
-              {/* Month Header */}
-              <div className="text-center mb-4">
-                <p className="text-xs uppercase tracking-[0.25em] text-[#7a202e] font-semibold">
-                  {formattedMonthLong} {formattedYear}
-                </p>
+              {/* 3D Red Satin Bow on Top Center */}
+              <img
+                src={LACE10_ASSETS.redRibbonBow}
+                alt="Red Bow"
+                className="absolute -top-5 left-1/2 -translate-x-1/2 w-14 h-auto object-contain filter drop-shadow-md z-20"
+              />
+
+              {/* Gold / Rose Seal */}
+              <div className="w-9 h-9 mt-1 mb-2">
+                <img
+                  src={LACE10_ASSETS.waxSealRose}
+                  alt="Seal"
+                  className="w-full h-full object-contain filter drop-shadow-sm"
+                />
               </div>
 
-              {/* Weekday Labels */}
-              <div className="grid grid-cols-7 gap-1 text-center text-[10px] font-bold text-[#8f2738] mb-2 uppercase tracking-wider">
-                <span>Sun</span>
-                <span>Mon</span>
-                <span>Tue</span>
-                <span>Wed</span>
-                <span>Thu</span>
-                <span>Fri</span>
-                <span>Sat</span>
-              </div>
-
-              {/* Calendar Grid */}
-              <div className="grid grid-cols-7 gap-1 text-center text-xs font-serif text-[#4a131c]">
-                {calendarDays.map((day, idx) => {
-                  if (day === null) {
-                    return <div key={`empty-${idx}`} className="h-8"></div>;
-                  }
-                  const isWeddingDay = day === weddingDayNum;
-                  return (
-                    <div
-                      key={`day-${day}`}
-                      className="h-8 flex items-center justify-center relative font-medium"
-                    >
-                      {isWeddingDay ? (
-                        <div className="relative flex items-center justify-center w-8 h-8">
-                          <motion.div
-                            animate={{ scale: [1, 1.15, 1] }}
-                            transition={{ duration: 1.8, repeat: Infinity }}
-                            className="absolute inset-0 flex items-center justify-center text-red-600"
-                          >
-                            <svg
-                              className="w-7 h-7 text-[#851c2d] fill-current opacity-20"
-                              viewBox="0 0 24 24"
-                            >
-                              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                            </svg>
-                          </motion.div>
-                          <span className="relative z-10 font-bold text-[#851c2d]">
-                            {day}
-                          </span>
-                        </div>
-                      ) : (
-                        <span>{day}</span>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </motion.div>
-
-            {/* Countdown Box */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="w-full max-w-xs mt-6 bg-[#f8f4ed] text-[#42111a] rounded-xl px-4 py-3 border border-[#d6b797]/60 shadow-xl text-center"
-            >
-              <p className="text-[10px] uppercase tracking-[0.25em] text-[#7a202e] font-semibold mb-1">
-                Counting Days
+              <p className="text-[10px] uppercase font-serif tracking-[0.3em] text-[#7a1827] font-semibold mb-1">
+                Save The Date
               </p>
-              <div className="flex items-center justify-center gap-2 font-serif text-2xl font-bold text-[#5c1320]">
-                <span>{timeLeft.days}</span>
-                <span className="text-[#851c2d]">:</span>
-                <span>{String(timeLeft.hours).padStart(2, '0')}</span>
-                <span className="text-[#851c2d]">:</span>
-                <span>{String(timeLeft.minutes).padStart(2, '0')}</span>
-                <span className="text-[#851c2d]">:</span>
-                <span className="text-[#3a6b46]">{String(timeLeft.seconds).padStart(2, '0')}</span>
-              </div>
-              <div className="flex items-center justify-around text-[9px] uppercase tracking-wider text-neutral-500 mt-1">
-                <span>Days</span>
-                <span>Hours</span>
-                <span>Minutes</span>
-                <span>Seconds</span>
+
+              <h2
+                className="text-3xl text-[#7a1827] tracking-wide mb-1"
+                style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
+              >
+                {brideNickname} &amp; {groomNickname}
+              </h2>
+
+              <p className="text-xs font-serif text-[#555] tracking-wider mb-4">
+                {formattedDayName}, {formattedDateNum} {formattedMonthLong} {formattedYear}
+              </p>
+
+              {/* Minimal Luxury Countdown Timer */}
+              <div className="w-full pt-3 border-t border-[#caa472]/30 flex items-center justify-center gap-2 text-[#42111a]">
+                <div className="bg-[#f5ebd8] px-2.5 py-1.5 rounded-lg border border-[#c49a6c]/40 text-center min-w-[50px]">
+                  <span className="font-serif text-base font-bold text-[#7a1827] block leading-tight">
+                    {timeLeft.days}
+                  </span>
+                  <span className="text-[7.5px] uppercase tracking-wider text-[#666] font-sans">Hari</span>
+                </div>
+                <span className="text-[#caa472] font-bold">:</span>
+                <div className="bg-[#f5ebd8] px-2.5 py-1.5 rounded-lg border border-[#c49a6c]/40 text-center min-w-[50px]">
+                  <span className="font-serif text-base font-bold text-[#7a1827] block leading-tight">
+                    {String(timeLeft.hours).padStart(2, '0')}
+                  </span>
+                  <span className="text-[7.5px] uppercase tracking-wider text-[#666] font-sans">Jam</span>
+                </div>
+                <span className="text-[#caa472] font-bold">:</span>
+                <div className="bg-[#f5ebd8] px-2.5 py-1.5 rounded-lg border border-[#c49a6c]/40 text-center min-w-[50px]">
+                  <span className="font-serif text-base font-bold text-[#7a1827] block leading-tight">
+                    {String(timeLeft.minutes).padStart(2, '0')}
+                  </span>
+                  <span className="text-[7.5px] uppercase tracking-wider text-[#666] font-sans">Menit</span>
+                </div>
+                <span className="text-[#caa472] font-bold">:</span>
+                <div className="bg-[#f5ebd8] px-2.5 py-1.5 rounded-lg border border-[#c49a6c]/40 text-center min-w-[50px]">
+                  <span className="font-serif text-base font-bold text-[#44663d] block leading-tight">
+                    {String(timeLeft.seconds).padStart(2, '0')}
+                  </span>
+                  <span className="text-[7.5px] uppercase tracking-wider text-[#666] font-sans">Detik</span>
+                </div>
               </div>
             </motion.div>
+
+            {/* Bottom Delicate White Lace Border */}
+            <div className="w-full max-w-sm mt-4 opacity-75">
+              <img
+                src={LACE10_ASSETS.laceBorderWhite}
+                alt="Lace Border"
+                className="w-full h-auto object-contain filter drop-shadow rotate-180"
+              />
+            </div>
           </section>
 
           {/* --------------------------------------------------------------------- */}
-          {/* SECTION 3: SALAM & MEMPELAI (Green Silk Satin Texture)                 */}
+          {/* SECTION 2: SALAM & MEMPELAI (Laser-cut Arched Lace Card on Green Silk) */}
           {/* --------------------------------------------------------------------- */}
           <section
             className="relative w-full px-4 py-12 overflow-hidden flex flex-col items-center"
@@ -891,9 +864,9 @@ export default function RightSidebar({
                 alt="Lace Arch Frame"
                 className="absolute inset-0 w-full h-full object-contain pointer-events-none z-10"
               />
-              <div className="relative z-20 w-full h-full pt-[14%] pb-[12%] px-[15%] flex flex-col items-center justify-between text-center select-none">
+              <div className="relative z-20 w-full h-full pt-[13%] pb-[11%] px-[14%] flex flex-col items-center justify-between text-center select-none">
                 {/* Bismillah Calligraphy */}
-                <div className="w-[85%] max-w-[200px]">
+                <div className="w-[80%] max-w-[190px]">
                   <svg viewBox="0 0 300 80" className="w-full h-auto fill-[#7a1827]">
                     <text
                       x="150"
@@ -907,17 +880,17 @@ export default function RightSidebar({
                 </div>
 
                 {/* Greeting */}
-                <div className="my-1">
-                  <p className="text-[10px] sm:text-[11px] font-serif text-[#333] leading-tight font-medium">
+                <div className="my-0.5">
+                  <p className="text-[10px] sm:text-[11px] font-serif text-[#2a2a2a] leading-tight font-bold">
                     Assalamualaikum Warahmatullahi Wabarakatuh
                   </p>
-                  <p className="text-[8px] sm:text-[9px] text-[#555] font-sans leading-tight mt-1">
+                  <p className="text-[8px] sm:text-[9px] text-[#4a4a4a] font-sans leading-tight mt-1 max-w-[240px] mx-auto">
                     Tanpa mengurangi rasa hormat kami, dengan memohon Rahmat dan Ridho Allah SWT, kami mengundang Anda untuk menjadi bagian dari hari bahagia kami:
                   </p>
                 </div>
 
                 {/* Bride Profile */}
-                <div className="my-1">
+                <div className="my-0.5">
                   <h2
                     className="text-2xl sm:text-3xl text-[#7a1827] tracking-wide"
                     style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
@@ -930,10 +903,10 @@ export default function RightSidebar({
                 </div>
 
                 {/* Ampersand Divider */}
-                <span className="text-sm sm:text-base text-[#7a1827] font-serif italic">&amp;</span>
+                <span className="text-sm sm:text-base text-[#7a1827] font-serif italic my-0.5">&amp;</span>
 
                 {/* Groom Profile */}
-                <div className="my-1">
+                <div className="my-0.5">
                   <h2
                     className="text-2xl sm:text-3xl text-[#7a1827] tracking-wide"
                     style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
@@ -946,7 +919,7 @@ export default function RightSidebar({
                 </div>
 
                 {/* Closing blessing text */}
-                <p className="text-[8px] sm:text-[9px] text-[#555] font-sans leading-tight italic">
+                <p className="text-[8px] sm:text-[9px] text-[#555] font-sans leading-tight italic max-w-[230px] mx-auto">
                   Kehadiran serta doa restu Anda akan sangat berarti bagi perjalanan kami
                 </p>
               </div>
@@ -954,7 +927,7 @@ export default function RightSidebar({
           </section>
 
           {/* --------------------------------------------------------------------- */}
-          {/* SECTION 4: EVENT DETAILS (Akad & Resepsi Cards)                       */}
+          {/* SECTION 3: EVENT DETAILS (Akad & Resepsi Cards on Green Silk)         */}
           {/* --------------------------------------------------------------------- */}
           <section
             className="relative w-full px-5 py-12 flex flex-col items-center gap-6 overflow-hidden"
@@ -984,7 +957,7 @@ export default function RightSidebar({
               />
 
               {/* Label Pill */}
-              <div className="inline-block px-5 py-1 rounded-full bg-[#f1e6d4] border border-[#c49a6c] text-[#7a1827] text-sm font-serif font-bold uppercase tracking-widest mb-3">
+              <div className="inline-block px-5 py-1 rounded-full bg-[#f1e6d4] border border-[#c49a6c] text-[#7a1827] text-xs font-serif font-bold uppercase tracking-widest mb-3">
                 {akadEvent.custom_label || 'Akad Nikah'}
               </div>
 
@@ -1039,7 +1012,7 @@ export default function RightSidebar({
                   className="w-8 h-8 object-contain -mt-2 mb-1"
                 />
 
-                <div className="inline-block px-3 py-0.5 rounded-full bg-[#f1e6d4] border border-[#c49a6c] text-[#7a1827] text-xs font-serif font-bold uppercase tracking-wider mb-2">
+                <div className="inline-block px-3 py-0.5 rounded-full bg-[#f1e6d4] border border-[#c49a6c] text-[#7a1827] text-[11px] font-serif font-bold uppercase tracking-wider mb-2">
                   {resepsiEvent.custom_label || 'Resepsi'}
                 </div>
 
@@ -1069,7 +1042,7 @@ export default function RightSidebar({
           </section>
 
           {/* --------------------------------------------------------------------- */}
-          {/* SECTION 5: THE BRIDE (Scalloped Lace Portrait Frames)                 */}
+          {/* SECTION 4: THE BRIDE & GROOM (Scalloped Lace Portrait Frames)         */}
           {/* --------------------------------------------------------------------- */}
           <section
             className="relative w-full px-5 py-14 flex flex-col items-center overflow-hidden"
@@ -1148,7 +1121,7 @@ export default function RightSidebar({
           </section>
 
           {/* --------------------------------------------------------------------- */}
-          {/* SECTION 6: KUTIPAN AYAT SUCI (Baroque Lace Mirror Frame)               */}
+          {/* SECTION 5: KUTIPAN AYAT SUCI (Baroque Lace Mirror Frame)               */}
           {/* --------------------------------------------------------------------- */}
           <section
             className="relative w-full px-4 py-12 flex flex-col items-center overflow-hidden"
@@ -1182,7 +1155,7 @@ export default function RightSidebar({
           </section>
 
           {/* --------------------------------------------------------------------- */}
-          {/* SECTION 7: EDITORIAL PHOTO MOSAIC                                     */}
+          {/* SECTION 6: EDITORIAL PHOTO MOSAIC                                     */}
           {/* --------------------------------------------------------------------- */}
           <section
             className="relative w-full px-4 py-12 flex flex-col items-center overflow-hidden"
@@ -1218,7 +1191,7 @@ export default function RightSidebar({
           </section>
 
           {/* --------------------------------------------------------------------- */}
-          {/* SECTION 8: CASUAL MOMENTS & RUNDOWN ACARA                             */}
+          {/* SECTION 7: CASUAL MOMENTS & RUNDOWN ACARA                             */}
           {/* --------------------------------------------------------------------- */}
           <section className="relative w-full px-5 py-12 bg-[#57101c] flex flex-col items-center text-center">
             {/* Title */}
@@ -1370,7 +1343,7 @@ export default function RightSidebar({
           </section>
 
           {/* --------------------------------------------------------------------- */}
-          {/* SECTION 9: WEDDING GIFT (Bank Cards & Cashless Envelope)              */}
+          {/* SECTION 8: WEDDING GIFT (Bank Cards & Cashless Envelope)              */}
           {/* --------------------------------------------------------------------- */}
           <section className="relative w-full px-5 py-12 bg-[#611220] flex flex-col items-center text-center">
             {/* Getaway Wedding Car Illustration */}
@@ -1447,7 +1420,7 @@ export default function RightSidebar({
           </section>
 
           {/* --------------------------------------------------------------------- */}
-          {/* SECTION 10: LOCATION & MAPS                                           */}
+          {/* SECTION 9: LOCATION & MAPS                                            */}
           {/* --------------------------------------------------------------------- */}
           <section className="relative w-full px-5 py-12 bg-[#57101c] flex flex-col items-center text-center">
             <h2 className="text-3xl font-serif text-[#f5ebd8] uppercase tracking-wider mb-2">
@@ -1486,7 +1459,7 @@ export default function RightSidebar({
           </section>
 
           {/* --------------------------------------------------------------------- */}
-          {/* SECTION 11: RSVP & BLESSING WALL                                      */}
+          {/* SECTION 10: RSVP & BLESSING WALL                                      */}
           {/* --------------------------------------------------------------------- */}
           <section id="rsvp-section" className="relative w-full px-5 py-12 bg-[#611220] flex flex-col items-center">
             <h2 className="text-3xl font-serif text-[#f5ebd8] uppercase tracking-wider text-center mb-2">
