@@ -470,9 +470,9 @@ export default function RightSidebar({
                       initial={{ y: "-100%" }}
                       animate={{ y: "0%" }}
                       transition={{ 
-                        duration: 3.5, 
-                        ease: [0.22, 1, 0.36, 1],
-                        delay: 0.4
+                        duration: 3.8, 
+                        ease: [0.25, 0.1, 0.25, 1],
+                        delay: 0.8
                       }}
                       className="w-full bg-[#751727] p-2.5 pt-3 pb-3 border-2 border-[#caa472] shadow-[0_12px_28px_rgba(0,0,0,0.7)] rounded-sm flex flex-col gap-2.5 pointer-events-auto"
                     >
@@ -523,7 +523,7 @@ export default function RightSidebar({
                 <motion.div
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 3.4, duration: 0.6 }}
+                  transition={{ delay: 4.8, duration: 0.6 }}
                   className="mt-4 flex flex-col items-center gap-2 z-20"
                 >
                   <button
