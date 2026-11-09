@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { LACE10_ASSETS } from '../../lib/laceAssets';
 import { formatPersonName } from '../../lib/format';
+import TimelineSection, { StoryEvent } from './TimelineSection';
 
 interface RightSidebarProps {
   guestName: string;
@@ -122,6 +123,20 @@ export default function RightSidebar({
   const rawGallery = Array.isArray(project?.gallery_photos) && project.gallery_photos.length > 0 
     ? project.gallery_photos 
     : (Array.isArray(project?.photo_urls) && project.photo_urls.length > 0 ? project.photo_urls : LACE10_ASSETS.defaultPhotos.gallery);
+
+  // Love Story data from Supabase / Project
+  let loveStoryData: StoryEvent[] | null = null;
+  if (Array.isArray(project?.love_story_items) && project.love_story_items.length > 0) {
+    loveStoryData = project.love_story_items;
+  } else if (Array.isArray(project?.love_story)) {
+    loveStoryData = project.love_story;
+  } else if (typeof project?.love_story === 'string') {
+    try {
+      const parsed = JSON.parse(project.love_story);
+      if (Array.isArray(parsed)) loveStoryData = parsed;
+      else if (parsed && Array.isArray(parsed.items)) loveStoryData = parsed.items;
+    } catch (e) {}
+  }
 
   // Bank Accounts / Gifts
   let bankAccounts: any[] = [];
@@ -1421,6 +1436,15 @@ export default function RightSidebar({
               />
             </div>
           </section>
+
+          {/* --------------------------------------------------------------------- */}
+          {/* SECTION 7.5: OUR LOVE STORY (Timeline Perjalanan Cinta)               */}
+          {/* --------------------------------------------------------------------- */}
+          <TimelineSection
+            loveStoryItems={loveStoryData}
+            groomName={groomNickname}
+            brideName={brideNickname}
+          />
 
           {/* --------------------------------------------------------------------- */}
           {/* SECTION 8: RUNDOWN ACARA (Full Width Velvet BG & Elegant Cards)       */}
