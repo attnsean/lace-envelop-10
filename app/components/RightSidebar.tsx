@@ -742,103 +742,105 @@ export default function RightSidebar({
           </section>
 
           {/* --------------------------------------------------------------------- */}
-          {/* SECTION 1: RED SATIN TRANSITION BANNER (Exact Canva Section 1)        */}
+          {/* SECTION 1: RED SATIN TRANSITION BANNER (1:1 Exact Canva Section 1)    */}
           {/* --------------------------------------------------------------------- */}
           <section
-            className="relative w-full px-5 py-10 flex flex-col items-center justify-center overflow-hidden"
+            className="relative w-full max-w-[430px] h-[514px] mx-auto overflow-hidden select-none"
             style={{
-              backgroundImage: `url(${LACE10_ASSETS.bgRedSatinDraped})`,
+              backgroundImage: `url(${LACE10_ASSETS.bgRedCurtain})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
           >
-            {/* Top Delicate White Lace Border */}
-            <div className="w-full max-w-sm mb-4 opacity-75">
-              <img
-                src={LACE10_ASSETS.laceBorderWhite}
-                alt="Lace Border"
-                className="w-full h-auto object-contain filter drop-shadow"
-              />
-            </div>
+            {/* Top Delicate Horizontal Lace Ribbon Divider (width: 358px, height: 20px) */}
+            <img
+              src={LACE10_ASSETS.sec1LaceRibbon}
+              alt="Lace Ribbon"
+              className="absolute top-[46px] left-1/2 -translate-x-1/2 w-[358px] h-[20px] object-contain pointer-events-none opacity-95"
+            />
 
-            {/* Centered Luxury Save The Date Banner Card */}
+            {/* Center Rounded Cream Card with Red Envelope Artwork */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="relative w-full max-w-xs bg-[#fdfaf5] text-[#3d1017] rounded-3xl p-6 shadow-2xl border-2 border-[#caa472]/70 flex flex-col items-center text-center"
+              className="absolute top-[83px] left-1/2 -translate-x-1/2 w-[324px] h-[279px] bg-[#fff8ea] rounded-[22px] shadow-2xl overflow-hidden border border-[#d6b797]/60 flex flex-col items-center justify-center p-4 text-center"
             >
-              {/* 3D Red Satin Bow on Top Center */}
+              {/* Red Envelope Artwork Overlay */}
               <img
-                src={LACE10_ASSETS.redRibbonBow}
-                alt="Red Bow"
-                className="absolute -top-5 left-1/2 -translate-x-1/2 w-14 h-auto object-contain filter drop-shadow-md z-20"
+                src={LACE10_ASSETS.sec1Envelope}
+                alt="Envelope Frame"
+                className="absolute inset-0 w-full h-full object-contain pointer-events-none opacity-90"
               />
 
-              {/* Gold / Rose Seal */}
-              <div className="w-9 h-9 mt-1 mb-2">
-                <img
-                  src={LACE10_ASSETS.waxSealRose}
-                  alt="Seal"
-                  className="w-full h-full object-contain filter drop-shadow-sm"
-                />
-              </div>
+              {/* Red Ribbon Bow & Wax Seal Accent */}
+              <img
+                src={LACE10_ASSETS.sec1BowSeal}
+                alt="Bow Seal"
+                className="absolute top-3 left-1/2 -translate-x-1/2 w-10 h-auto object-contain pointer-events-none z-20 filter drop-shadow"
+              />
 
-              <p className="text-[10px] uppercase font-serif tracking-[0.3em] text-[#7a1827] font-semibold mb-1">
-                Save The Date
-              </p>
-
-              <h2
-                className="text-3xl text-[#7a1827] tracking-wide mb-1"
-                style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
-              >
-                {brideNickname} &amp; {groomNickname}
-              </h2>
-
-              <p className="text-xs font-serif text-[#555] tracking-wider mb-4">
-                {formattedDayName}, {formattedDateNum} {formattedMonthLong} {formattedYear}
-              </p>
-
-              {/* Minimal Luxury Countdown Timer */}
-              <div className="w-full pt-3 border-t border-[#caa472]/30 flex items-center justify-center gap-2 text-[#42111a]">
-                <div className="bg-[#f5ebd8] px-2.5 py-1.5 rounded-lg border border-[#c49a6c]/40 text-center min-w-[50px]">
-                  <span className="font-serif text-base font-bold text-[#7a1827] block leading-tight">
-                    {timeLeft.days}
-                  </span>
-                  <span className="text-[7.5px] uppercase tracking-wider text-[#666] font-sans">Hari</span>
-                </div>
-                <span className="text-[#caa472] font-bold">:</span>
-                <div className="bg-[#f5ebd8] px-2.5 py-1.5 rounded-lg border border-[#c49a6c]/40 text-center min-w-[50px]">
-                  <span className="font-serif text-base font-bold text-[#7a1827] block leading-tight">
-                    {String(timeLeft.hours).padStart(2, '0')}
-                  </span>
-                  <span className="text-[7.5px] uppercase tracking-wider text-[#666] font-sans">Jam</span>
-                </div>
-                <span className="text-[#caa472] font-bold">:</span>
-                <div className="bg-[#f5ebd8] px-2.5 py-1.5 rounded-lg border border-[#c49a6c]/40 text-center min-w-[50px]">
-                  <span className="font-serif text-base font-bold text-[#7a1827] block leading-tight">
-                    {String(timeLeft.minutes).padStart(2, '0')}
-                  </span>
-                  <span className="text-[7.5px] uppercase tracking-wider text-[#666] font-sans">Menit</span>
-                </div>
-                <span className="text-[#caa472] font-bold">:</span>
-                <div className="bg-[#f5ebd8] px-2.5 py-1.5 rounded-lg border border-[#c49a6c]/40 text-center min-w-[50px]">
-                  <span className="font-serif text-base font-bold text-[#44663d] block leading-tight">
-                    {String(timeLeft.seconds).padStart(2, '0')}
-                  </span>
-                  <span className="text-[7.5px] uppercase tracking-wider text-[#666] font-sans">Detik</span>
-                </div>
+              {/* Invitation Typography inside card */}
+              <div className="relative z-10 mt-6 flex flex-col items-center">
+                <p className="text-[10px] uppercase font-serif tracking-[0.3em] text-[#7a1827] font-bold mb-1">
+                  Save The Date
+                </p>
+                <h2
+                  className="text-3xl text-[#7a1827] tracking-wide my-0.5"
+                  style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
+                >
+                  {brideNickname} &amp; {groomNickname}
+                </h2>
+                <p className="text-[11px] font-serif text-[#4a131c] tracking-wider mt-1">
+                  {formattedDayName}, {formattedDateNum} {formattedMonthLong} {formattedYear}
+                </p>
               </div>
             </motion.div>
 
-            {/* Bottom Delicate White Lace Border */}
-            <div className="w-full max-w-sm mt-4 opacity-75">
-              <img
-                src={LACE10_ASSETS.laceBorderWhite}
-                alt="Lace Border"
-                className="w-full h-auto object-contain filter drop-shadow rotate-180"
-              />
-            </div>
+            {/* Corner Flower Sprigs */}
+            <img
+              src={LACE10_ASSETS.sec1Flower}
+              alt="Flower Accent"
+              className="absolute top-[373px] right-[35px] w-[36px] h-[36px] object-contain pointer-events-none opacity-90"
+            />
+            <img
+              src={LACE10_ASSETS.sec1Flower}
+              alt="Flower Accent"
+              className="absolute top-[456px] left-[35px] w-[36px] h-[36px] object-contain pointer-events-none opacity-90 rotate-180"
+            />
+
+            {/* Countdown Box (matching Canva tickcounter countdown at top: 393px, width: 324px, height: 81px) */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="absolute top-[393px] left-1/2 -translate-x-1/2 w-[324px] h-[81px] rounded-xl bg-[#200408]/85 backdrop-blur-sm border border-[#caa472]/50 shadow-xl flex flex-col items-center justify-center px-4"
+            >
+              <p className="text-[9px] uppercase tracking-[0.3em] text-[#e5c7a9] font-serif font-bold mb-1">
+                Counting Days
+              </p>
+              <div className="flex items-center justify-center gap-3 text-white font-serif">
+                <div className="text-center min-w-[42px]">
+                  <span className="text-lg font-bold text-[#fce8cf] block leading-none">{timeLeft.days}</span>
+                  <span className="text-[7.5px] uppercase tracking-wider text-neutral-300 font-sans">Hari</span>
+                </div>
+                <span className="text-[#caa472] font-bold text-base -mt-2">:</span>
+                <div className="text-center min-w-[42px]">
+                  <span className="text-lg font-bold text-[#fce8cf] block leading-none">{String(timeLeft.hours).padStart(2, '0')}</span>
+                  <span className="text-[7.5px] uppercase tracking-wider text-neutral-300 font-sans">Jam</span>
+                </div>
+                <span className="text-[#caa472] font-bold text-base -mt-2">:</span>
+                <div className="text-center min-w-[42px]">
+                  <span className="text-lg font-bold text-[#fce8cf] block leading-none">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                  <span className="text-[7.5px] uppercase tracking-wider text-neutral-300 font-sans">Menit</span>
+                </div>
+                <span className="text-[#caa472] font-bold text-base -mt-2">:</span>
+                <div className="text-center min-w-[42px]">
+                  <span className="text-lg font-bold text-[#9ae6b4] block leading-none">{String(timeLeft.seconds).padStart(2, '0')}</span>
+                  <span className="text-[7.5px] uppercase tracking-wider text-neutral-300 font-sans">Detik</span>
+                </div>
+              </div>
+            </motion.div>
           </section>
 
           {/* --------------------------------------------------------------------- */}
@@ -1158,14 +1160,14 @@ export default function RightSidebar({
           {/* SECTION 6: EDITORIAL PHOTO MOSAIC                                     */}
           {/* --------------------------------------------------------------------- */}
           <section
-            className="relative w-full px-4 py-12 flex flex-col items-center overflow-hidden"
+            className="relative w-full px-4 py-10 flex flex-col items-center overflow-hidden"
             style={{
               backgroundImage: `url(${LACE10_ASSETS.bgRedCurtain})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
           >
-            <div className="w-full grid grid-cols-3 gap-2">
+            <div className="w-full max-w-[400px] grid grid-cols-3 gap-2">
               {rawGallery.slice(0, 9).map((photo: string, idx: number) => {
                 const isSpan2 = idx === 0 || idx === 4;
                 return (
@@ -1175,7 +1177,7 @@ export default function RightSidebar({
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     onClick={() => setLightboxImg(photo)}
-                    className={`relative rounded-lg overflow-hidden border border-[#d6b797]/50 shadow-md cursor-pointer group ${
+                    className={`relative rounded-lg overflow-hidden border border-[#d6b797]/60 shadow-md cursor-pointer group ${
                       isSpan2 ? 'col-span-2 h-44' : 'col-span-1 h-32'
                     }`}
                   >
@@ -1191,9 +1193,12 @@ export default function RightSidebar({
           </section>
 
           {/* --------------------------------------------------------------------- */}
-          {/* SECTION 7: CASUAL MOMENTS & RUNDOWN ACARA                             */}
+          {/* SECTION 7: OUR MOMENT (5 Polaroids & Flying Doves)                     */}
           {/* --------------------------------------------------------------------- */}
-          <section className="relative w-full px-5 py-12 bg-[#57101c] flex flex-col items-center text-center">
+          <section
+            className="relative w-full px-5 py-12 flex flex-col items-center text-center overflow-hidden"
+            style={{ backgroundColor: '#791a2d' }}
+          >
             {/* Title */}
             <h2
               className="text-4xl text-[#f5ebd8] mb-4"
@@ -1211,7 +1216,7 @@ export default function RightSidebar({
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   onClick={() => setLightboxImg(LACE10_ASSETS.defaultPhotos.casualMoments[0])}
-                  className="w-[78%] bg-[#f8f4ed] p-2 pb-6 shadow-2xl rounded-xs border border-[#caa472]/40 transform rotate-[1deg] hover:scale-105 transition-transform cursor-pointer"
+                  className="w-[82%] bg-[#f8f4ed] p-2 pb-6 shadow-2xl rounded-xs border border-[#caa472]/40 transform rotate-[1deg] hover:scale-105 transition-transform cursor-pointer"
                 >
                   <div className="w-full aspect-[4/3] overflow-hidden rounded-xs">
                     <img
@@ -1231,7 +1236,7 @@ export default function RightSidebar({
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     onClick={() => setLightboxImg(LACE10_ASSETS.defaultPhotos.casualMoments[1])}
-                    className="w-[45%] bg-[#f8f4ed] p-1.5 pb-5 shadow-xl rounded-xs border border-[#caa472]/40 transform -rotate-[4deg] hover:scale-105 transition-transform cursor-pointer"
+                    className="w-[46%] bg-[#f8f4ed] p-1.5 pb-5 shadow-xl rounded-xs border border-[#caa472]/40 transform -rotate-[4deg] hover:scale-105 transition-transform cursor-pointer"
                   >
                     <div className="w-full aspect-[3/4] overflow-hidden rounded-xs">
                       <img
@@ -1248,7 +1253,7 @@ export default function RightSidebar({
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     onClick={() => setLightboxImg(LACE10_ASSETS.defaultPhotos.casualMoments[2])}
-                    className="w-[45%] bg-[#f8f4ed] p-1.5 pb-5 shadow-xl rounded-xs border border-[#caa472]/40 transform rotate-[3deg] hover:scale-105 transition-transform cursor-pointer"
+                    className="w-[46%] bg-[#f8f4ed] p-1.5 pb-5 shadow-xl rounded-xs border border-[#caa472]/40 transform rotate-[3deg] hover:scale-105 transition-transform cursor-pointer"
                   >
                     <div className="w-full aspect-[4/3] overflow-hidden rounded-xs">
                       <img
@@ -1308,10 +1313,17 @@ export default function RightSidebar({
                 className="w-full h-auto object-contain opacity-90"
               />
             </div>
+          </section>
 
-            {/* Rundown Title & Wavy Divider */}
+          {/* --------------------------------------------------------------------- */}
+          {/* SECTION 8: RUNDOWN ACARA (Exact Canva Section 8)                      */}
+          {/* --------------------------------------------------------------------- */}
+          <section
+            className="relative w-full px-5 py-12 flex flex-col items-center text-center overflow-hidden"
+            style={{ backgroundColor: '#791a2d' }}
+          >
             <h3
-              className="text-3xl text-[#f5ebd8]"
+              className="text-4xl text-[#f5ebd8] mb-1"
               style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
             >
               Rundown Acara
@@ -1319,7 +1331,7 @@ export default function RightSidebar({
             <img
               src={LACE10_ASSETS.rundownWavyLine}
               alt="Wavy Line"
-              className="w-40 h-auto object-contain my-3 opacity-80"
+              className="w-44 h-auto object-contain my-3 opacity-80"
             />
 
             {/* Timeline Schedule */}
@@ -1333,9 +1345,9 @@ export default function RightSidebar({
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center justify-between p-2.5 rounded-lg bg-[#3b0811]/60 border border-[#c49a6c]/30 shadow-sm"
+                  className="flex items-center justify-between p-3 rounded-xl bg-[#4d0c19]/70 border border-[#caa472]/40 shadow-sm"
                 >
-                  <span className="text-xs font-sans font-bold text-[#f3dfc8]">{item.time}</span>
+                  <span className="text-xs font-sans font-bold text-[#f5ebd8] tracking-wider">{item.time}</span>
                   <span className="text-xs font-serif text-[#f8f4ed]">{item.title}</span>
                 </div>
               ))}
@@ -1343,9 +1355,12 @@ export default function RightSidebar({
           </section>
 
           {/* --------------------------------------------------------------------- */}
-          {/* SECTION 8: WEDDING GIFT (Bank Cards & Cashless Envelope)              */}
+          {/* SECTION 9: WEDDING GIFT (Bank Cards & Cashless Envelope)              */}
           {/* --------------------------------------------------------------------- */}
-          <section className="relative w-full px-5 py-12 bg-[#611220] flex flex-col items-center text-center">
+          <section
+            className="relative w-full px-5 py-12 flex flex-col items-center text-center overflow-hidden"
+            style={{ backgroundColor: '#791a2d' }}
+          >
             {/* Getaway Wedding Car Illustration */}
             <div className="w-44 h-auto mb-3">
               <img
@@ -1370,15 +1385,8 @@ export default function RightSidebar({
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="relative w-full h-44 rounded-2xl bg-gradient-to-br from-[#f8f4ed] via-[#f1e6d4] to-[#e4ceb4] text-[#3d1017] p-5 shadow-2xl border border-[#c49a6c] flex flex-col justify-between text-left overflow-hidden"
+                  className="relative w-full h-44 rounded-2xl bg-gradient-to-br from-[#fdfaf5] via-[#f7eedf] to-[#e8d5be] text-[#3d1017] p-5 shadow-2xl border-2 border-[#caa472] flex flex-col justify-between text-left overflow-hidden"
                 >
-                  {/* Batik watermark right */}
-                  <img
-                    src={LACE10_ASSETS.laceBorderWhite}
-                    alt="Pattern"
-                    className="absolute -right-6 -bottom-6 w-36 h-36 object-contain opacity-20 pointer-events-none"
-                  />
-
                   {/* Header: Chip & Bank Name */}
                   <div className="flex items-center justify-between">
                     <img
@@ -1394,7 +1402,7 @@ export default function RightSidebar({
                   {/* Card Number & Holder */}
                   <div className="mt-2">
                     <p className="text-[9px] uppercase tracking-wider text-neutral-600 font-sans">
-                      No. Rekening / e-Wallet
+                      {acc.type === 'ewallet' ? 'No. e-Wallet' : 'No. Rekening'}
                     </p>
                     <p className="font-mono text-base font-bold text-[#42111a] tracking-wider my-0.5">
                       {acc.account_number}
@@ -1409,9 +1417,9 @@ export default function RightSidebar({
                     <button
                       type="button"
                       onClick={() => copyToClipboard(acc.account_number, acc.bank_name)}
-                      className="px-3 py-1 rounded-full bg-[#821c2c] text-white text-[10px] font-sans uppercase tracking-wider hover:bg-[#5c1320] transition-colors shadow cursor-pointer"
+                      className="px-3.5 py-1 rounded-full bg-[#821c2c] text-white text-[10px] font-sans uppercase tracking-wider hover:bg-[#5c1320] transition-colors shadow cursor-pointer"
                     >
-                      {copiedBank === acc.bank_name ? 'Tersalin ✓' : 'Salin Rekening'}
+                      {copiedBank === acc.bank_name ? 'Tersalin ✓' : 'Salin'}
                     </button>
                   </div>
                 </motion.div>
@@ -1420,9 +1428,12 @@ export default function RightSidebar({
           </section>
 
           {/* --------------------------------------------------------------------- */}
-          {/* SECTION 9: LOCATION & MAPS                                            */}
+          {/* SECTION 10: LOCATION & MAPS                                           */}
           {/* --------------------------------------------------------------------- */}
-          <section className="relative w-full px-5 py-12 bg-[#57101c] flex flex-col items-center text-center">
+          <section
+            className="relative w-full px-5 py-12 flex flex-col items-center text-center overflow-hidden"
+            style={{ backgroundColor: '#791a2d' }}
+          >
             <h2 className="text-3xl font-serif text-[#f5ebd8] uppercase tracking-wider mb-2">
               Location
             </h2>
@@ -1459,7 +1470,7 @@ export default function RightSidebar({
           </section>
 
           {/* --------------------------------------------------------------------- */}
-          {/* SECTION 10: RSVP & BLESSING WALL                                      */}
+          {/* SECTION 11: RSVP & BLESSING WALL                                      */}
           {/* --------------------------------------------------------------------- */}
           <section id="rsvp-section" className="relative w-full px-5 py-12 bg-[#611220] flex flex-col items-center">
             <h2 className="text-3xl font-serif text-[#f5ebd8] uppercase tracking-wider text-center mb-2">

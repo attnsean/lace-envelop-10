@@ -18,6 +18,12 @@ export const LACE10_ASSETS = {
   waxSealGold: `${LACE10_CDN}/MAHWcYczVww.png?opt=1`,
   miniRsvpEnvelope: `${LACE10_CDN}/MAHUVpaSVwg.png?opt=1`,
   
+  // Section 1 Specific Exact Canva Assets
+  sec1Envelope: `${LACE10_CDN}/canva_sec1_envelope.png?opt=1`,
+  sec1Flower: `${LACE10_CDN}/canva_sec1_flower.png?opt=1`,
+  sec1LaceRibbon: `${LACE10_CDN}/lace_horizontal_ribbon.png?opt=1`,
+  sec1BowSeal: `${LACE10_CDN}/sec1_bow_seal.png?opt=1`,
+
   // Flowers & Botanicals
   flowerRedDahlia: `${LACE10_CDN}/MAEviNk56K0.png?opt=1`,
   flowerRoseBouquet: `${LACE10_CDN}/MAEPotF7v-c.png?opt=1`,
@@ -40,7 +46,6 @@ export const LACE10_ASSETS = {
   laceArchDoubleAlt: `${LACE10_CDN}/MAHLB5aA0WY.png?opt=1`,
   laceOvalMirror: `${LACE10_CDN}/MAHJjnXkf0s.png?opt=1`,
   laceScallopFrame: `${LACE10_CDN}/MAHKOuSn5YQ.png?opt=1`,
-  laceBorderWhite: `${LACE10_CDN}/MAG0CeeNALk.png?opt=1`,
   notchedCardAkad: `${LACE10_CDN}/MAHID6oiAfM.png?opt=1`,
   notchedCardResepsi: `${LACE10_CDN}/MAHUax8JAb0.png?opt=1`,
   
