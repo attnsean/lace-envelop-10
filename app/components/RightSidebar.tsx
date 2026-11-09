@@ -201,6 +201,9 @@ export default function RightSidebar({
   // Continue from Photostrip to Main Invitation
   const handleContinueToMain = () => {
     setHasOpened(true);
+    if (audioRef.current && audioRef.current.paused) {
+      audioRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+    }
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollTop = 0;
     }
