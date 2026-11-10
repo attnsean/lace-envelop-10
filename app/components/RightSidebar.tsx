@@ -122,37 +122,41 @@ export default function RightSidebar({
   const [lightboxImg, setLightboxImg] = useState<string | null>(null);
 
   // Extract couple data
-  const brideName = formatPersonName(project?.bride_name) || "Yulia Fatimatul Zahra";
-  const brideNickname = formatPersonName(project?.bride_nickname) || "Zahra";
-  const groomName = formatPersonName(project?.groom_name) || "Sopyan Hidayat";
-  const groomNickname = formatPersonName(project?.groom_nickname) || "Sopyan";
+  const brideName = formatPersonName(project?.bride_nickname) || formatPersonName(project?.bride_name) || "Nabila";
+  const brideNickname = formatPersonName(project?.bride_nickname) || "Nabila";
+  const groomName = formatPersonName(project?.groom_nickname) || formatPersonName(project?.groom_name) || "Rayhan";
+  const groomNickname = formatPersonName(project?.groom_nickname) || "Rayhan";
 
-  const isDemo = !project || (!project.id && !project.project_name);
-  const brideFather = isDemo ? "Bapak Hendra Jaya" : (project?.bride_father?.trim() || "");
-  const brideMother = isDemo ? "Ibu Nurul Sa'adah" : (project?.bride_mother?.trim() || "");
-  const groomFather = isDemo ? "Bapak Atep Sumardi" : (project?.groom_father?.trim() || "");
-  const groomMother = isDemo ? "Ibu Ai Karina" : (project?.groom_mother?.trim() || "");
+  const brideFather = project?.bride_father?.trim() || "Bapak Hendra Wijaya";
+  const brideMother = project?.bride_mother?.trim() || "Ibu Maria Wijaya";
+  const groomFather = project?.groom_father?.trim() || "Bapak Deni Bastian";
+  const groomMother = project?.groom_mother?.trim() || "Ibu Aisha Dania";
 
-  // Event parsing
+  // Event parsing - dynamically derived from project and events
+  const defaultEventDate = project?.wedding_date || "2027-12-28";
+  const defaultVenueName = project?.venue_name || "Menara 165";
+  const defaultVenueAddress = project?.venue_address || "Jl. TB Simatupang, Cilandak Timur, Jakarta Selatan";
+  const defaultVenueMaps = project?.venue_maps_url || "https://maps.google.com/?q=Menara+165+Jakarta+Selatan";
+
   const akadEvent = events.find(e => e.event_type?.toLowerCase().includes('akad')) || events[0] || {
     custom_label: 'Akad Nikah',
-    event_date: '2026-11-27',
-    event_time: '07.00 WIB',
-    venue_name: 'Kediaman Mempelai Wanita',
-    venue_address: 'Kp. Koleberes, RT/RW 02/03, Desa Talaga, Kec. Cugenang, Kab. Cianjur',
-    venue_maps_url: 'https://maps.google.com/?q=Kp.+Koleberes,+Desa+Talaga,+Kec.+Cugenang,+Kab.+Cianjur'
+    event_date: defaultEventDate,
+    event_time: '08.00 WIB',
+    venue_name: defaultVenueName,
+    venue_address: defaultVenueAddress,
+    venue_maps_url: defaultVenueMaps
   };
 
   const resepsiEvent = events.find(e => e.event_type?.toLowerCase().includes('resepsi')) || events[1] || {
     custom_label: 'Resepsi Pernikahan',
-    event_date: '2026-11-28',
-    event_time: '08.30 WIB',
-    venue_name: 'Kediaman Mempelai Wanita',
-    venue_address: 'Kp. Koleberes, RT/RW 02/03, Desa Talaga, Kec. Cugenang, Kab. Cianjur',
-    venue_maps_url: 'https://maps.google.com/?q=Kp.+Koleberes,+Desa+Talaga,+Kec.+Cugenang,+Kab.+Cianjur'
+    event_date: defaultEventDate,
+    event_time: '11.00 WIB',
+    venue_name: defaultVenueName,
+    venue_address: defaultVenueAddress,
+    venue_maps_url: defaultVenueMaps
   };
 
-  const parseSafeLocalDate = (dateStr?: string | null, fallback = "2026-11-27"): Date => {
+  const parseSafeLocalDate = (dateStr?: string | null, fallback = "2027-12-28"): Date => {
     const raw = (dateStr && dateStr.trim()) || fallback;
     const clean = raw.split("T")[0];
     const parts = clean.split("-");
@@ -165,13 +169,13 @@ export default function RightSidebar({
     return new Date(raw);
   };
 
-  const weddingDateStr = akadEvent?.event_date || events[0]?.event_date || project?.wedding_date || "2026-11-27";
-  const weddingDate = parseSafeLocalDate(weddingDateStr);
-  const formattedDayName = weddingDate.toLocaleDateString("id-ID", { weekday: "long" }) || "Jumat";
-  const formattedDateNum = String(weddingDate.getDate()).padStart(2, "0") || "27";
-  const formattedMonthNum = String(weddingDate.getMonth() + 1).padStart(2, "0") || "11";
-  const formattedYear = String(weddingDate.getFullYear()) || "2026";
-  const formattedMonthLong = weddingDate.toLocaleDateString("id-ID", { month: "long" }) || "November";
+  const weddingDateStr = akadEvent?.event_date || events[0]?.event_date || project?.wedding_date || defaultEventDate;
+  const weddingDate = parseSafeLocalDate(weddingDateStr, defaultEventDate);
+  const formattedDayName = weddingDate.toLocaleDateString("id-ID", { weekday: "long" }) || "Minggu";
+  const formattedDateNum = String(weddingDate.getDate()).padStart(2, "0") || "28";
+  const formattedMonthNum = String(weddingDate.getMonth() + 1).padStart(2, "0") || "12";
+  const formattedYear = String(weddingDate.getFullYear()) || "2027";
+  const formattedMonthLong = weddingDate.toLocaleDateString("id-ID", { month: "long" }) || "Desember";
 
   const formatEventDate = (rawDate?: string | null, fallbackDate?: Date) => {
     const dt = parseSafeLocalDate(rawDate, fallbackDate ? `${fallbackDate.getFullYear()}-${String(fallbackDate.getMonth() + 1).padStart(2, '0')}-${String(fallbackDate.getDate()).padStart(2, '0')}` : undefined);
@@ -189,23 +193,34 @@ export default function RightSidebar({
   const resepsiDateFormatted = formatEventDate(resepsiEvent?.event_date, weddingDate);
   const isSeparateDates = akadDateFormatted.dateNum !== resepsiDateFormatted.dateNum;
 
-  // Gallery Photos
-  const rawGallery = Array.isArray(project?.gallery_photos) && project.gallery_photos.length > 0 
-    ? project.gallery_photos 
-    : (Array.isArray(project?.photo_urls) && project.photo_urls.length > 0 ? project.photo_urls : LACE10_ASSETS.defaultPhotos.gallery);
+  // Helper to safely extract clean image URL string regardless of whether it is a string or { url, public_url }
+  const extractPhotoUrl = (item: any): string => {
+    if (!item) return '';
+    if (typeof item === 'string') return item;
+    return item.url || item.public_url || item.src || '';
+  };
+
+  // Gallery Photos (100% normalized string URLs)
+  const rawGallery: string[] = (
+    Array.isArray(project?.gallery_photos) && project.gallery_photos.length > 0 
+      ? project.gallery_photos.map(extractPhotoUrl).filter(Boolean)
+      : (Array.isArray(project?.photo_urls) && project.photo_urls.length > 0 
+          ? project.photo_urls.map(extractPhotoUrl).filter(Boolean) 
+          : LACE10_ASSETS.defaultPhotos.gallery)
+  );
 
   // Candid / Polaroid moments (Prioritize real uploaded photos)
-  const candidPhotos = (rawGallery && rawGallery.length > 0)
+  const candidPhotos: string[] = (rawGallery && rawGallery.length > 0)
     ? (rawGallery.length >= 5 
         ? (rawGallery.length >= 10 ? rawGallery.slice(5, 10) : rawGallery.slice(0, 5))
         : rawGallery)
     : LACE10_ASSETS.defaultPhotos.casualMoments;
 
-  const getCandidPhoto = (idx: number) => {
+  const getCandidPhoto = (idx: number): string => {
     if (candidPhotos && candidPhotos.length > 0) {
-      return candidPhotos[idx % candidPhotos.length];
+      return extractPhotoUrl(candidPhotos[idx % candidPhotos.length]);
     }
-    return LACE10_ASSETS.defaultPhotos.casualMoments[idx] || rawGallery[0];
+    return LACE10_ASSETS.defaultPhotos.casualMoments[idx] || rawGallery[0] || '';
   };
 
   // Love Story data from Supabase / Project
@@ -951,7 +966,7 @@ export default function RightSidebar({
                     </p>
                     <div className="inline-flex items-center gap-1 mt-0.5 px-2 py-0.5 rounded-full bg-[#f4e6d2]/80 border border-[#d6b797]">
                       <span className="text-[6.5px] font-serif uppercase tracking-[0.22em] text-[#6b1523] font-bold">
-                        {groomNickname ? groomNickname[0] : "H"} &amp; {brideNickname ? brideNickname[0] : "S"}
+                        {groomNickname ? groomNickname[0] : "R"} &amp; {brideNickname ? brideNickname[0] : "N"}
                       </span>
                     </div>
                   </div>
@@ -1120,7 +1135,9 @@ export default function RightSidebar({
                 {brideNickname} &amp; {groomNickname}
               </h2>
               <p className="text-xs font-serif text-[#e5c7a9] tracking-widest mt-1">
-                {formattedDayName}, {formattedDateNum} {formattedMonthLong} {formattedYear}
+                {isSeparateDates 
+                  ? `${akadDateFormatted.dayName}, ${akadDateFormatted.dateNum} & ${resepsiDateFormatted.dayName}, ${resepsiDateFormatted.dateNum} ${formattedMonthLong} ${formattedYear}`
+                  : `${formattedDayName}, ${formattedDateNum} ${formattedMonthLong} ${formattedYear}`}
               </p>
             </motion.div>
 

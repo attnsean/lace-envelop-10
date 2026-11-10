@@ -56,10 +56,10 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     guestName = dbData.guest.name;
   }
 
-  const brideName = formatPersonName(dbData.project?.bride_nickname) || "Zahra";
-  const groomName = formatPersonName(dbData.project?.groom_nickname) || "Sopyan";
-  const brideFull = formatPersonName(dbData.project?.bride_name) || "Yulia Fatimatul Zahra";
-  const groomFull = formatPersonName(dbData.project?.groom_name) || "Sopyan Hidayat";
+  const brideName = formatPersonName(dbData.project?.bride_nickname) || "Nabila";
+  const groomName = formatPersonName(dbData.project?.groom_nickname) || "Rayhan";
+  const brideFull = formatPersonName(dbData.project?.bride_name) || "Nabila Syakira, S.E., M.B.A.";
+  const groomFull = formatPersonName(dbData.project?.groom_name) || "Rayhan Pratama, S.T., M.M.";
 
   const title = `Wedding Invitation for ${guestName} | ${brideName} & ${groomName}`;
   const description = `We cordially invite ${guestName} to celebrate the wedding of ${brideFull} & ${groomFull}.`;
@@ -114,21 +114,21 @@ export default async function Home({ params, searchParams }: Props) {
     guestName = dbData.guest.name;
   }
 
-  const brideName = formatPersonName(dbData.project?.bride_nickname) || "Zahra";
-  const groomName = formatPersonName(dbData.project?.groom_nickname) || "Sopyan";
-  const brideFull = formatPersonName(dbData.project?.bride_name) || "Yulia Fatimatul Zahra";
-  const groomFull = formatPersonName(dbData.project?.groom_name) || "Sopyan Hidayat";
+  const brideName = formatPersonName(dbData.project?.bride_nickname) || "Nabila";
+  const groomName = formatPersonName(dbData.project?.groom_nickname) || "Rayhan";
+  const brideFull = formatPersonName(dbData.project?.bride_name) || "Nabila Syakira, S.E., M.B.A.";
+  const groomFull = formatPersonName(dbData.project?.groom_name) || "Rayhan Pratama, S.T., M.M.";
 
   const weddingDateRaw = dbData.events?.[0]?.event_date || dbData.project?.wedding_date;
   const formatDateDot = (dateStr?: string | null) => {
-    if (!dateStr) return "27 . 11 . 2026";
+    if (!dateStr) return "28 . 12 . 2027";
     const clean = dateStr.split("T")[0];
     const parts = clean.split("-");
     if (parts.length === 3) {
       return `${parts[2]} . ${parts[1]} . ${parts[0]}`;
     }
     const date = new Date(dateStr);
-    if (isNaN(date.getTime())) return "27 . 11 . 2026";
+    if (isNaN(date.getTime())) return "28 . 12 . 2027";
     const day = String(date.getDate()).padStart(2, "0");
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const year = date.getFullYear();
