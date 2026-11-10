@@ -1346,10 +1346,10 @@ export default function RightSidebar({
               />
               <div className="relative z-20 w-full h-full pt-[22%] pb-[14%] px-[16%] flex flex-col items-center justify-center text-center select-none">
                 <p className="text-xs sm:text-sm font-serif italic text-[#3d1017] leading-relaxed mb-4">
-                  &ldquo;Allah menciptakan pasangan dari diri manusia agar merasa tenteram, serta menjadikan rasa cinta dan kasih sayang di antara mereka&rdquo;
+                  &ldquo;{project?.quote_translation || project?.love_story || "Allah menciptakan pasangan dari diri manusia agar merasa tenteram, serta menjadikan rasa cinta dan kasih sayang di antara mereka"}&rdquo;
                 </p>
                 <p className="text-[10px] sm:text-[11px] font-serif uppercase tracking-[0.2em] text-[#7a1827] font-semibold">
-                  Qs. (Ar-Rum) - Ayat 21
+                  {project?.quote_source || ((project?.religion === "kristen" || project?.religion === "katolik") ? "1 Korintus 13:4-7" : "Qs. (Ar-Rum) - Ayat 21")}
                 </p>
               </div>
             </motion.div>
