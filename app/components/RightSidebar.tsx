@@ -819,62 +819,36 @@ export default function RightSidebar({
                 />
               </motion.a>
 
-              {/* 5. Right Arched Plaque ("The Wedding Of") - Repositioned cleanly below envelope */}
+              {/* 5. Right Arched Plaque ("The Wedding Of") */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.92 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="absolute left-[55%] top-[39%] w-[41%] h-[48%] z-20 bg-gradient-to-b from-[#8f2132] via-[#6b1523] to-[#4a0d18] p-[2.5px] rounded-t-[54px] rounded-b-2xl shadow-[0_14px_35px_rgba(0,0,0,0.6)]"
+                className="absolute left-[44%] top-[39%] w-[52%] z-20 bg-gradient-to-b from-[#8f2132] via-[#6b1523] to-[#4a0d18] p-[2.5px] rounded-t-[44px] rounded-b-xl shadow-[0_14px_35px_rgba(0,0,0,0.6)]"
               >
-                <div className="w-full h-full bg-[#fdfaf5] rounded-t-[51px] rounded-b-xl border border-[#caa472]/60 p-2 flex flex-col items-center justify-between text-center relative overflow-hidden py-2 sm:py-2.5">
-                  {/* Subtle inner vintage dashed border */}
-                  <div className="absolute inset-1 rounded-t-[48px] rounded-b-lg border border-dashed border-[#caa472]/30 pointer-events-none" />
-
-                  {/* Top Arch Decoration */}
-                  <div className="relative z-10 flex flex-col items-center mt-0.5">
-                    <div className="flex items-center gap-1 mb-0.5">
-                      <span className="text-[6.5px] text-[#caa472]">✦</span>
-                      <p className="text-[7.5px] font-serif uppercase tracking-[0.24em] text-[#8c6b45] font-bold">
-                        The Wedding Of
-                      </p>
-                      <span className="text-[6.5px] text-[#caa472]">✦</span>
-                    </div>
-                    <div className="w-8 h-[1px] bg-gradient-to-r from-transparent via-[#caa472]/60 to-transparent" />
+                <div className="w-full bg-[#fdfaf5] rounded-t-[41px] rounded-b-lg border border-[#caa472]/60 p-2 flex flex-col items-center text-center relative overflow-hidden py-1.5">
+                  <div className="absolute inset-1 rounded-t-[38px] rounded-b border border-dashed border-[#caa472]/30 pointer-events-none" />
+                  <div className="relative z-10 flex items-center gap-1">
+                    <span className="text-[6px] text-[#caa472]">✦</span>
+                    <p className="text-[7px] font-serif uppercase tracking-[0.24em] text-[#8c6b45] font-bold">
+                      The Wedding Of
+                    </p>
+                    <span className="text-[6px] text-[#caa472]">✦</span>
                   </div>
-
-                  {/* Couple Calligraphy */}
-                  <div className="relative z-10 flex flex-col items-center my-0.5 leading-none">
+                  <div className="relative z-10 flex items-center justify-center gap-2 my-0.5">
                     <h1
-                      className="text-[24px] leading-[1.05] text-[#7a1827] tracking-wide my-0.5 drop-shadow-xs"
+                      className="text-[23px] leading-tight text-[#7a1827] drop-shadow-xs"
                       style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
                     >
                       {brideNickname}
                     </h1>
-                    <div className="flex items-center justify-center gap-1 my-0.5">
-                      <div className="w-3 h-[1px] bg-[#caa472]/40" />
-                      <span className="text-[11px] text-[#8c6b45] italic font-serif leading-none">&amp;</span>
-                      <div className="w-3 h-[1px] bg-[#caa472]/40" />
-                    </div>
+                    <span className="text-[11px] text-[#8c6b45] italic font-serif">&amp;</span>
                     <h1
-                      className="text-[24px] leading-[1.05] text-[#7a1827] tracking-wide my-0.5 drop-shadow-xs"
+                      className="text-[23px] leading-tight text-[#7a1827] drop-shadow-xs"
                       style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
                     >
                       {groomNickname}
                     </h1>
-                  </div>
-
-                  {/* Bottom Emblem with Dove & Badge */}
-                  <div className="relative z-10 flex flex-col items-center pb-0.5">
-                    <img
-                      src={LACE10_ASSETS.doveOliveBranch}
-                      alt="Doves"
-                      className="w-[22px] h-auto object-contain opacity-90 filter drop-shadow-xs mb-0.5"
-                    />
-                    <div className="inline-flex items-center px-2 py-0.5 rounded-full bg-gradient-to-r from-[#eedcc5] via-[#f9f1e4] to-[#eedcc5] border border-[#c49a6c]">
-                      <span className="text-[5.5px] font-serif uppercase tracking-[0.2em] text-[#7a1827] font-bold">
-                        Forever Starts Here
-                      </span>
-                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -884,7 +858,7 @@ export default function RightSidebar({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="absolute left-[6%] top-[39%] w-[34%] h-[55%] z-20 bg-gradient-to-b from-[#8f2132] via-[#6b1523] to-[#4a0d18] p-[2.5px] rounded-t-full rounded-b-2xl shadow-[0_14px_35px_rgba(0,0,0,0.65)]"
+                className="absolute left-[5%] top-[39%] w-[36%] h-[57%] z-20 bg-gradient-to-b from-[#8f2132] via-[#6b1523] to-[#4a0d18] p-[2.5px] rounded-t-full rounded-b-2xl shadow-[0_14px_35px_rgba(0,0,0,0.65)]"
               >
                 <div className="w-full h-full bg-[#fdfaf5] rounded-t-full rounded-b-xl border border-[#caa472]/60 p-2 flex flex-col items-center justify-between text-center py-2.5 sm:py-3.5 relative overflow-hidden">
                   {/* Subtle inner vintage dashed border */}
@@ -990,7 +964,7 @@ export default function RightSidebar({
                 />
               </motion.div>
 
-              {/* 7. Center Venue & Schedule Details Card */}
+              {/* 7. Schedule & Venue Details Card ("Rangkaian Acara") */}
               {(() => {
                 const hasSeparateVenues = Boolean(
                   resepsiEvent && 
@@ -998,108 +972,67 @@ export default function RightSidebar({
                   akadEvent.venue_name && 
                   resepsiEvent.venue_name.trim().toLowerCase() !== akadEvent.venue_name.trim().toLowerCase()
                 );
-                const hasSeparateDates = akadDateFormatted.dateNum !== resepsiDateFormatted.dateNum;
-                const hasSeparateTimes = (akadEvent.event_time || "").trim() !== (resepsiEvent.event_time || "").trim();
 
                 return (
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="absolute left-[24%] top-[60%] w-[46%] min-h-[25%] z-30 bg-[#fdfbf7] p-2 rounded-xl border border-[#caa472]/90 shadow-[0_14px_35px_rgba(0,0,0,0.65)] flex flex-col items-center justify-center text-center select-none"
+                    className="absolute left-[44%] top-[57%] w-[52%] z-20 bg-[#fdfbf7] p-2.5 rounded-2xl border border-[#caa472]/90 shadow-[0_14px_35px_rgba(0,0,0,0.6)] flex flex-col items-center justify-center text-center select-none"
                   >
                     {/* Header Label */}
-                    <div className="w-full pb-0.5 mb-1 border-b border-[#caa472]/40 text-center">
-                      <span className="text-[7.5px] font-serif uppercase tracking-[0.16em] text-[#7a1827] font-bold">
+                    <div className="w-full pb-0.5 mb-1.5 border-b border-[#caa472]/40 text-center flex items-center justify-center gap-1.5">
+                      <span className="text-[6px] text-[#caa472]">✦</span>
+                      <span className="text-[7.5px] font-serif uppercase tracking-[0.18em] text-[#7a1827] font-bold">
                         Rangkaian Acara
                       </span>
+                      <span className="text-[6px] text-[#caa472]">✦</span>
                     </div>
 
                     {/* Akad Nikah Session */}
-                    <div className="w-full bg-[#f8f3ea] rounded-md px-1.5 py-0.5 border border-[#caa472]/35 mb-1 text-left">
-                      <div className="flex items-center justify-between gap-0.5">
+                    <div className="w-full bg-[#f8f3ea] rounded-lg px-2 py-1 border border-[#caa472]/35 mb-1 text-left">
+                      <div className="flex items-center justify-between gap-1">
                         <span className="text-[6.8px] font-serif uppercase tracking-[0.08em] text-[#7a1827] font-bold">
                           {akadEvent.custom_label || "Akad Nikah"}
                         </span>
-                        <span className="text-[6.2px] font-sans font-bold text-[#6b1523] bg-[#eedbc5] px-1 py-0.2 rounded shrink-0">
+                        <span className="text-[6.2px] font-sans font-bold text-[#6b1523] bg-[#eedbc5] px-1.5 py-0.2 rounded shrink-0">
                           {akadEvent.event_time || "07.00 WIB"}
                         </span>
                       </div>
                       <p className="text-[6.2px] font-serif text-[#665044] leading-tight mt-0.5">
-                        {akadDateFormatted.dayName}, {akadDateFormatted.dateNum} {akadDateFormatted.monthLong.slice(0, 3)} {akadDateFormatted.year}
+                        {akadDateFormatted.dayName}, {akadDateFormatted.dateNum} {akadDateFormatted.monthLong} {akadDateFormatted.year}
                       </p>
                     </div>
 
                     {/* Resepsi Pernikahan Session */}
-                    <div className="w-full bg-[#f8f3ea] rounded-md px-1.5 py-0.5 border border-[#caa472]/35 mb-1 text-left">
-                      <div className="flex items-center justify-between gap-0.5">
+                    <div className="w-full bg-[#f8f3ea] rounded-lg px-2 py-1 border border-[#caa472]/35 mb-1 text-left">
+                      <div className="flex items-center justify-between gap-1">
                         <span className="text-[6.8px] font-serif uppercase tracking-[0.08em] text-[#7a1827] font-bold">
                           {resepsiEvent.custom_label || "Resepsi Pernikahan"}
                         </span>
-                        <span className="text-[6.2px] font-sans font-bold text-[#6b1523] bg-[#eedbc5] px-1 py-0.2 rounded shrink-0">
+                        <span className="text-[6.2px] font-sans font-bold text-[#6b1523] bg-[#eedbc5] px-1.5 py-0.2 rounded shrink-0">
                           {resepsiEvent.event_time || "08.30 WIB"}
                         </span>
                       </div>
                       <p className="text-[6.2px] font-serif text-[#665044] leading-tight mt-0.5">
-                        {resepsiDateFormatted.dayName}, {resepsiDateFormatted.dateNum} {resepsiDateFormatted.monthLong.slice(0, 3)} {resepsiDateFormatted.year}
+                        {resepsiDateFormatted.dayName}, {resepsiDateFormatted.dateNum} {resepsiDateFormatted.monthLong} {resepsiDateFormatted.year}
                       </p>
                     </div>
 
                     {/* Venue Location */}
-                    <div className="w-full text-center pt-0.5 border-t border-[#caa472]/25 mt-0.5">
+                    <div className="w-full text-center pt-1 border-t border-[#caa472]/25 mt-0.5">
                       <p className="text-[7.5px] font-serif font-bold text-[#222] truncate leading-tight">
                         {hasSeparateVenues 
                           ? `${akadEvent.venue_name} & ${resepsiEvent.venue_name}`
                           : (akadEvent.venue_name || "Kediaman Mempelai Wanita")}
                       </p>
-                      <p className="text-[6px] text-neutral-600 font-sans leading-tight line-clamp-1 mt-0.5">
+                      <p className="text-[5.8px] text-neutral-600 font-sans leading-tight truncate mt-0.5">
                         {akadEvent.venue_address}
                       </p>
                     </div>
                   </motion.div>
                 );
               })()}
-
-              {/* 8. Spinning Vinyl Record Music Player below venue card */}
-              <div
-                onClick={toggleAudio}
-                className="absolute left-[38%] bottom-[2%] w-[22%] aspect-square z-35 flex items-center justify-center cursor-pointer group"
-                title={isPlaying ? "Pause Musik" : "Putar Musik"}
-              >
-                <motion.div
-                  animate={{ rotate: isPlaying ? 360 : 0 }}
-                  transition={{ duration: 3.5, repeat: Infinity, ease: "linear" }}
-                  className="relative w-full h-full rounded-full overflow-hidden shadow-2xl filter drop-shadow-xl hover:scale-105 transition-transform"
-                >
-                  <img
-                    src={LACE10_ASSETS.vinylDisc}
-                    alt="Vinyl Record"
-                    className="w-full h-full object-contain"
-                  />
-                  {/* Red center label with play/pause button */}
-                  <div className="absolute inset-0 m-auto w-[36%] h-[36%] rounded-full bg-[#851c2d] border border-[#f5ebd8] flex items-center justify-center shadow-inner">
-                    {isPlaying ? (
-                      <div className="flex gap-0.5">
-                        <div className="w-[2px] h-2 bg-white rounded-full"></div>
-                        <div className="w-[2px] h-2 bg-white rounded-full"></div>
-                      </div>
-                    ) : (
-                      <svg className="w-2.5 h-2.5 text-white fill-current ml-0.5" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                    )}
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* 9. Brass Candlestick Holder with Burning Red Candle */}
-              <div className="absolute left-[82%] top-[60%] w-[12%] h-auto z-20 pointer-events-none">
-                <img
-                  src={LACE10_ASSETS.candleBrassStand}
-                  alt="Candle"
-                  className="w-full h-auto object-contain filter drop-shadow-md"
-                />
-              </div>
             </div>
           </section>
 
