@@ -276,6 +276,7 @@ export default function RightSidebar({
         body: JSON.stringify({
           project_id: project?.id,
           name: rsvpName,
+          guest_name: rsvpName,
           attendance: rsvpAttendance,
           pax: rsvpPax,
         }),
@@ -2029,7 +2030,7 @@ export default function RightSidebar({
           {/* --------------------------------------------------------------------- */}
           <section
             id="rsvp-section"
-            className="relative w-full px-5 py-14 flex flex-col items-center overflow-hidden"
+            className="relative w-full px-5 py-16 flex flex-col items-center overflow-hidden"
             style={{
               backgroundImage: `url(${LACE10_ASSETS.bgRedCurtain})`,
               backgroundSize: 'cover',
@@ -2037,106 +2038,192 @@ export default function RightSidebar({
             }}
           >
             {/* Dark luxury vignette overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#1b0307]/80 via-transparent to-[#1b0307]/90 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#1b0307]/85 via-[#1b0307]/75 to-[#1b0307]/95 pointer-events-none" />
 
-            <h2 className="relative z-10 text-3xl font-serif text-[#f5ebd8] uppercase tracking-wider text-center mb-2 drop-shadow">
-              Konfirmasi Kehadiran
-            </h2>
-            <p className="relative z-10 text-xs text-[#e8cfb5] font-sans text-center max-w-xs mb-6">
-              Mohon konfirmasi kehadiran Anda untuk membantu kami mempersiapkan jamuan terbaik.
-            </p>
+            {/* Section Header */}
+            <div className="relative z-10 flex flex-col items-center text-center mb-6">
+              <span className="text-[10px] tracking-[0.35em] text-[#caa472] uppercase font-serif font-bold mb-1">
+                The Honor of Your Presence
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-serif text-[#f5ebd8] uppercase tracking-[0.16em] drop-shadow-md">
+                Konfirmasi Kehadiran
+              </h2>
+              <p
+                className="text-2xl text-[#d4af37] font-normal my-1 drop-shadow"
+                style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
+              >
+                Kindly RSVP &amp; Celebrate With Us
+              </p>
+              <img
+                src={LACE10_ASSETS.rundownWavyLine}
+                alt="Divider"
+                className="w-36 h-auto opacity-75 my-2"
+              />
+              <p className="text-xs text-[#e8cfb5]/90 font-sans text-center max-w-xs leading-relaxed mt-1">
+                Mohon konfirmasi kehadiran Anda untuk membantu kami mempersiapkan jamuan terbaik bagi seluruh keluarga &amp; sahabat tercinta.
+              </p>
+            </div>
 
-            {/* RSVP Form */}
-            <form
-              onSubmit={handleRsvpSubmit}
-              className="relative z-10 w-full max-w-xs bg-[#f8f4ed] text-[#42111a] p-6 rounded-3xl shadow-2xl border-2 border-[#caa472] flex flex-col gap-3.5"
-            >
-              {rsvpSubmitted ? (
-                <div className="p-4 text-center">
-                  <p className="text-sm font-serif font-bold text-[#821c2c]">Terima Kasih!</p>
-                  <p className="text-xs text-neutral-600 font-sans mt-1">Konfirmasi kehadiran Anda telah tersimpan.</p>
-                </div>
-              ) : (
-                <>
-                  <div>
-                    <div className="flex items-center justify-between mb-1">
-                      <label className="text-[10px] font-sans uppercase tracking-wider text-neutral-600 block">
-                        Nama Lengkap
-                      </label>
-                      {isNameLocked && (
-                        <span className="text-[9px] font-sans text-neutral-400 italic">
-                          (Sesuai Undangan)
-                        </span>
-                      )}
-                    </div>
-                    <input
-                      type="text"
-                      required
-                      readOnly={isNameLocked}
-                      value={rsvpName}
-                      onChange={(e) => {
-                        if (!isNameLocked) setRsvpName(e.target.value);
-                      }}
-                      className={`w-full px-3.5 py-2 rounded-xl border border-[#c49a6c]/60 text-xs focus:outline-none ${
-                        isNameLocked
-                          ? 'bg-[#ede5da] text-neutral-700 cursor-not-allowed select-none font-semibold'
-                          : 'bg-white text-neutral-800 focus:border-[#821c2c]'
-                      }`}
-                      placeholder="Nama Anda"
-                      title={isNameLocked ? "Nama terkunci sesuai link undangan Anda" : undefined}
+            {/* RSVP Card with Layered Floral Accessories */}
+            <div className="relative z-10 w-full max-w-sm mx-auto my-4">
+              {/* Botanical Floral Accent Top-Right (Behind/Flanking Card) */}
+              <div className="absolute -top-12 -right-8 w-28 sm:w-32 h-auto pointer-events-none z-20 filter drop-shadow-[0_12px_20px_rgba(0,0,0,0.65)] rotate-12">
+                <img
+                  src={LACE10_ASSETS.flowerRoseBouquet}
+                  alt="Floral Accent"
+                  className="w-full h-auto object-contain select-none"
+                />
+              </div>
+
+              {/* Blooming Red Dahlia Bottom-Left (Foreground Layer Over Card Edge) */}
+              <div className="absolute -bottom-8 -left-7 w-24 sm:w-28 h-auto pointer-events-none z-20 filter drop-shadow-[0_10px_22px_rgba(0,0,0,0.7)] -rotate-6">
+                <img
+                  src={LACE10_ASSETS.flowerRedDahlia}
+                  alt="Dahlia Bloom"
+                  className="w-full h-auto object-contain select-none"
+                />
+              </div>
+
+              {/* Main RSVP Card Form */}
+              <form
+                onSubmit={handleRsvpSubmit}
+                className="relative z-10 w-full bg-gradient-to-b from-[#fdfbf7] via-[#f7f2ea] to-[#eee5d8] text-[#42111a] p-6 sm:p-7 rounded-[32px] shadow-[0_22px_55px_rgba(0,0,0,0.55)] border-2 border-[#caa472] ring-1 ring-[#caa472]/40 flex flex-col gap-4 overflow-hidden"
+              >
+                {/* Subtle Luxury Card Header */}
+                <div className="flex flex-col items-center text-center pb-3 border-b border-[#caa472]/35">
+                  <div className="w-11 h-11 mb-2 filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.25)]">
+                    <img
+                      src={LACE10_ASSETS.waxSealMonogram}
+                      alt="Wax Seal"
+                      className="w-full h-full object-contain select-none"
                     />
                   </div>
+                  <span className="text-[10px] uppercase font-serif tracking-[0.28em] text-[#8c1d2e] font-bold">
+                    RESERVASI KEHADIRAN
+                  </span>
+                  <span className="text-[11px] text-neutral-500 font-sans mt-0.5">
+                    Harap mengisi konfirmasi sebelum hari H
+                  </span>
+                </div>
 
-                  <div>
-                    <label className="text-[10px] font-sans uppercase tracking-wider text-neutral-600 block mb-1">
-                      Konfirmasi
-                    </label>
-                    <select
-                      value={rsvpAttendance}
-                      onChange={(e) => setRsvpAttendance(e.target.value)}
-                      className="w-full px-3.5 py-2 rounded-xl border border-[#c49a6c]/60 text-xs text-neutral-800 focus:outline-none focus:border-[#821c2c] bg-white"
-                    >
-                      <option value="hadir">Hadir</option>
-                      <option value="tidak_hadir">Tidak Dapat Hadir</option>
-                      <option value="masih_ragu">Masih Ragu</option>
-                    </select>
+                {rsvpSubmitted ? (
+                  <div className="py-8 px-4 text-center space-y-2">
+                    <div className="w-12 h-12 rounded-full bg-[#821c2c]/10 text-[#821c2c] border border-[#821c2c]/30 flex items-center justify-center mx-auto text-xl font-bold">
+                      ✓
+                    </div>
+                    <p className="text-base font-serif font-bold text-[#821c2c]">
+                      Konfirmasi Berhasil Tersimpan!
+                    </p>
+                    <p className="text-xs text-neutral-600 font-sans max-w-xs mx-auto leading-relaxed">
+                      Terima kasih atas konfirmasinya. Kehadiran dan doa restu Anda adalah berkah terindah bagi kami.
+                    </p>
                   </div>
-
-                  {rsvpAttendance === 'hadir' && (
+                ) : (
+                  <>
+                    {/* Nama Lengkap */}
                     <div>
-                      <label className="text-[10px] font-sans uppercase tracking-wider text-neutral-600 block mb-1">
-                        Jumlah Tamu
+                      <div className="flex items-center justify-between mb-1.5">
+                        <label className="text-[10px] font-sans font-bold uppercase tracking-wider text-[#6b1824]">
+                          Nama Lengkap
+                        </label>
+                        {isNameLocked && (
+                          <span className="text-[9px] font-sans font-semibold text-[#821c2c] bg-[#821c2c]/10 px-2 py-0.5 rounded-full border border-[#821c2c]/20">
+                            Terkunci (Sesuai Undangan)
+                          </span>
+                        )}
+                      </div>
+                      <input
+                        type="text"
+                        required
+                        readOnly={isNameLocked}
+                        value={rsvpName}
+                        onChange={(e) => {
+                          if (!isNameLocked) setRsvpName(e.target.value);
+                        }}
+                        className={`w-full px-4 py-2.5 rounded-xl border border-[#c49a6c]/70 text-xs focus:outline-none transition-all ${
+                          isNameLocked
+                            ? 'bg-[#ede4d6] text-[#42111a] font-semibold cursor-not-allowed select-none shadow-inner'
+                            : 'bg-white text-neutral-800 focus:border-[#821c2c] focus:ring-1 focus:ring-[#821c2c]/30 shadow-sm'
+                        }`}
+                        placeholder="Nama Tamu"
+                        title={isNameLocked ? "Nama terkunci sesuai link undangan Anda" : undefined}
+                      />
+                    </div>
+
+                    {/* Konfirmasi Kehadiran */}
+                    <div>
+                      <label className="text-[10px] font-sans font-bold uppercase tracking-wider text-[#6b1824] block mb-1.5">
+                        Konfirmasi Kehadiran
                       </label>
                       <select
-                        value={rsvpPax}
-                        onChange={(e) => setRsvpPax(Number(e.target.value))}
-                        className="w-full px-3.5 py-2 rounded-xl border border-[#c49a6c]/60 text-xs text-neutral-800 focus:outline-none focus:border-[#821c2c] bg-white"
+                        value={rsvpAttendance}
+                        onChange={(e) => setRsvpAttendance(e.target.value)}
+                        className="w-full px-4 py-2.5 rounded-xl border border-[#c49a6c]/70 text-xs text-neutral-800 bg-white font-medium focus:outline-none focus:border-[#821c2c] focus:ring-1 focus:ring-[#821c2c]/30 shadow-sm cursor-pointer"
                       >
-                        <option value={1}>1 Orang</option>
-                        <option value={2}>2 Orang</option>
-                        <option value={3}>3 Orang</option>
+                        <option value="hadir">Hadir</option>
+                        <option value="tidak_hadir">Tidak Dapat Hadir</option>
+                        <option value="masih_ragu">Masih Ragu</option>
                       </select>
                     </div>
-                  )}
 
-                  <button
-                    type="submit"
-                    disabled={isSubmittingRsvp}
-                    className="w-full py-2.5 mt-2 rounded-xl bg-[#821c2c] text-white text-xs font-sans uppercase tracking-widest font-semibold hover:bg-[#5c1320] transition-colors shadow cursor-pointer border border-[#caa472]/60"
-                  >
-                    {isSubmittingRsvp ? 'Mengirim...' : 'Kirim Konfirmasi'}
-                  </button>
-                </>
-              )}
-            </form>
+                    {/* Jumlah Tamu Hadir (Maksimal 10) */}
+                    {rsvpAttendance === 'hadir' && (
+                      <div className="animate-fadeIn">
+                        <div className="flex items-center justify-between mb-1.5">
+                          <label className="text-[10px] font-sans font-bold uppercase tracking-wider text-[#6b1824]">
+                            Jumlah Tamu
+                          </label>
+                          <span className="text-[9px] text-neutral-500 font-sans italic">
+                            (Maksimal 10 Orang)
+                          </span>
+                        </div>
+                        <select
+                          value={rsvpPax}
+                          onChange={(e) => setRsvpPax(Number(e.target.value))}
+                          className="w-full px-4 py-2.5 rounded-xl border border-[#c49a6c]/70 text-xs text-neutral-800 bg-white font-medium focus:outline-none focus:border-[#821c2c] focus:ring-1 focus:ring-[#821c2c]/30 shadow-sm cursor-pointer"
+                        >
+                          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+                            <option key={num} value={num}>
+                              {num} Orang
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
 
-            {/* Wishes & Greetings Wall */}
-            <div className="relative z-10 w-full max-w-xs mt-10">
-              <h3 className="text-2xl font-serif text-[#f5ebd8] uppercase tracking-wider text-center mb-4">
+                    {/* Tombol Kirim Konfirmasi */}
+                    <button
+                      type="submit"
+                      disabled={isSubmittingRsvp}
+                      className="w-full py-3 mt-1.5 rounded-xl bg-gradient-to-r from-[#6b1420] via-[#8c1d2e] to-[#6b1420] text-white text-xs font-serif uppercase tracking-[0.2em] font-bold hover:brightness-110 active:scale-[0.98] transition-all shadow-lg cursor-pointer border border-[#caa472]/70 flex items-center justify-center gap-2"
+                    >
+                      {isSubmittingRsvp ? 'Mengirim...' : 'Kirim Konfirmasi'}
+                    </button>
+                  </>
+                )}
+              </form>
+            </div>
+
+            {/* Wishes & Greetings Wall (Doa & Ucapan) */}
+            <div className="relative z-10 w-full max-w-sm mt-12 flex flex-col items-center">
+              <span className="text-[10px] tracking-[0.3em] text-[#caa472] uppercase font-serif font-bold mb-1">
+                Warmest Wishes
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-serif text-[#f5ebd8] uppercase tracking-[0.16em] text-center drop-shadow">
                 Doa &amp; Ucapan
               </h3>
+              <p
+                className="text-xl text-[#d4af37] font-normal mb-5 drop-shadow"
+                style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
+              >
+                Prayers &amp; Blessings For The Couple
+              </p>
 
-              <form onSubmit={handleWishSubmit} className="flex flex-col gap-2 mb-6">
+              {/* Wishes Form Container */}
+              <form
+                onSubmit={handleWishSubmit}
+                className="w-full bg-[#220409]/90 backdrop-blur-md p-5 sm:p-6 rounded-3xl border border-[#caa472]/50 shadow-[0_18px_45px_rgba(0,0,0,0.5)] flex flex-col gap-3 relative overflow-hidden"
+              >
                 <div className="relative">
                   <input
                     type="text"
@@ -2147,53 +2234,74 @@ export default function RightSidebar({
                       if (!isNameLocked) setWishName(e.target.value);
                     }}
                     placeholder="Nama Pengirim"
-                    className={`w-full px-3.5 py-2.5 rounded-xl border border-[#caa472]/50 text-xs text-[#f8f4ed] focus:outline-none ${
+                    className={`w-full px-4 py-2.5 rounded-xl border border-[#caa472]/50 text-xs focus:outline-none transition-all ${
                       isNameLocked
-                        ? 'bg-[#1b0307]/90 text-[#f8f4ed]/90 cursor-not-allowed select-none font-semibold'
-                        : 'bg-[#2b040a]/90'
+                        ? 'bg-[#150205] text-[#f8f4ed]/90 cursor-not-allowed select-none font-semibold'
+                        : 'bg-[#2b040a]/90 text-[#f8f4ed]'
                     }`}
                     title={isNameLocked ? "Nama terkunci sesuai link undangan Anda" : undefined}
                   />
                   {isNameLocked && (
-                    <span className="absolute right-3 top-2.5 text-[9px] text-[#caa472]/70 font-sans italic">
+                    <span className="absolute right-3 top-2.5 text-[9px] text-[#caa472]/80 font-sans italic">
                       Terkunci
                     </span>
                   )}
                 </div>
+
                 <textarea
                   rows={3}
                   value={wishMessage}
                   onChange={(e) => setWishMessage(e.target.value)}
                   placeholder="Tuliskan ucapan dan doa terbaik Anda..."
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#2b040a]/90 border border-[#caa472]/50 text-xs text-[#f8f4ed] focus:outline-none"
+                  className="w-full px-4 py-3 rounded-xl bg-[#140205]/95 border border-[#caa472]/45 text-xs text-[#f8f4ed] placeholder-neutral-400 focus:outline-none focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37]/30 resize-none transition-all"
                 />
+
                 <button
                   type="submit"
                   disabled={isSubmittingWish}
-                  className="py-2.5 rounded-xl bg-[#821c2c] text-white text-xs font-sans uppercase tracking-wider font-semibold hover:bg-[#5c1320] transition-colors cursor-pointer border border-[#caa472]/60"
+                  className="w-full py-2.5 mt-1 rounded-xl bg-gradient-to-r from-[#7a1827] via-[#9e2034] to-[#7a1827] text-white text-xs font-serif uppercase tracking-wider font-semibold hover:brightness-110 active:scale-[0.98] transition-all cursor-pointer border border-[#caa472]/70 shadow-md"
                 >
                   {isSubmittingWish ? 'Mengirim...' : 'Kirim Ucapan'}
                 </button>
               </form>
 
-              {/* Wishes List */}
-              <div className="max-h-80 overflow-y-auto flex flex-col gap-2.5 pr-1">
+              {/* Wishes List Cards */}
+              <div className="w-full max-h-84 overflow-y-auto flex flex-col gap-3 mt-6 pr-1">
                 {wishesList.length === 0 ? (
-                  <p className="text-center text-xs text-neutral-400 italic py-4">
-                    Belum ada ucapan. Jadilah yang pertama memberikan doa restu!
-                  </p>
+                  <div className="p-6 rounded-2xl bg-[#200307]/75 border border-[#caa472]/25 text-center">
+                    <p className="text-xs text-neutral-300 italic">
+                      Belum ada ucapan. Jadilah yang pertama memberikan doa restu!
+                    </p>
+                  </div>
                 ) : (
-                  wishesList.map((wish: any, i: number) => (
-                    <div
-                      key={wish.id || i}
-                      className="p-3.5 rounded-2xl bg-[#2b040a]/85 border border-[#caa472]/40 text-left text-xs shadow-md"
-                    >
-                      <p className="font-serif font-bold text-[#f5ebd8]">{wish.name}</p>
-                      <p className="text-neutral-300 font-sans mt-0.5 whitespace-pre-line leading-relaxed">
-                        {wish.message}
-                      </p>
-                    </div>
-                  ))
+                  wishesList.map((wish: any, i: number) => {
+                    const initials = (wish.name || 'G')
+                      .trim()
+                      .split(' ')
+                      .slice(0, 2)
+                      .map((w: string) => w.charAt(0))
+                      .join('')
+                      .toUpperCase();
+
+                    return (
+                      <div
+                        key={wish.id || i}
+                        className="p-4 rounded-2xl bg-[#200307]/90 border border-[#caa472]/35 text-left text-xs shadow-md flex items-start gap-3"
+                      >
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#7a1827] to-[#42111a] border border-[#caa472]/60 flex items-center justify-center text-[10px] font-bold text-[#f5ebd8] uppercase shrink-0 shadow">
+                          {initials}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-serif font-bold text-sm text-[#f5ebd8] truncate">
+                            {wish.name}
+                          </p>
+                          <p className="text-neutral-300 font-sans mt-1 whitespace-pre-line leading-relaxed">
+                            {wish.message}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })
                 )}
               </div>
             </div>
