@@ -747,31 +747,39 @@ export default function RightSidebar({
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="absolute left-[34%] top-[3%] w-[52%] h-[42%] z-15 flex items-center justify-center cursor-pointer group"
+                className="absolute left-[34%] top-[1%] w-[58%] h-[46%] z-15 flex items-center justify-center cursor-pointer group"
                 onClick={() => setLightboxImg(rawGallery[0] || LACE10_ASSETS.defaultPhotos.heroEnvelope)}
               >
-                {/* Envelope Backdrop */}
+                {/* Envelope Backdrop (Shows top open flap and side wings) */}
                 <img
                   src={LACE10_ASSETS.envelopeOpen}
                   alt="Open Envelope"
-                  className="absolute inset-0 w-full h-full object-contain filter drop-shadow-md pointer-events-none z-0 opacity-90 scale-95"
+                  className="absolute inset-0 w-full h-full object-contain filter drop-shadow-xl pointer-events-none z-0"
                 />
 
-                {/* Prominent, Elevated Couple Photo Frame (Full visibility, clean border) */}
-                <div className="absolute -top-[12%] left-[8%] w-[84%] h-[90%] bg-white p-1.5 shadow-[0_12px_28px_rgba(0,0,0,0.55)] rounded-xs overflow-hidden z-10 border border-[#e8d7c3]">
+                {/* Couple Photo (Elevated, centered, full faces visible inside white print frame) */}
+                <div className="absolute top-[4%] left-[20%] w-[60%] h-[74%] bg-white p-1 shadow-[0_8px_20px_rgba(0,0,0,0.5)] rounded-xs overflow-hidden z-10 border border-[#e8d7c3]">
                   <img
                     src={rawGallery[0] || LACE10_ASSETS.defaultPhotos.heroEnvelope}
                     alt="Couple Hero"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    style={{ objectPosition: "center 20%" }}
+                    style={{ objectPosition: "center 18%" }}
                   />
+                </div>
+
+                {/* Envelope Lower Pocket Overlay (Holds bottom of photo neatly) */}
+                <div 
+                  className="absolute bottom-[4%] left-[16%] w-[68%] h-[40%] pointer-events-none z-20 overflow-hidden"
+                  style={{ clipPath: "polygon(0% 45%, 50% 100%, 100% 45%, 100% 100%, 0% 100%)" }}
+                >
+                  <div className="w-full h-full bg-gradient-to-t from-[#5a121d] via-[#731826] to-[#8a1d2e] border-t border-[#caa472]/40 shadow-inner" />
                 </div>
 
                 {/* Dark Red Flower Bouquet on Top-Right */}
                 <img
                   src={LACE10_ASSETS.flowerRoseBouquet}
                   alt="Rose"
-                  className="absolute -top-[18%] -right-[8%] w-[38%] h-auto object-contain pointer-events-none z-20"
+                  className="absolute -top-[10%] -right-[4%] w-[34%] h-auto object-contain pointer-events-none z-30"
                 />
               </motion.div>
 
@@ -816,7 +824,7 @@ export default function RightSidebar({
                 initial={{ opacity: 0, scale: 0.92 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="absolute left-[52%] top-[19%] w-[42%] h-[50%] z-20 bg-gradient-to-b from-[#8f2132] via-[#6b1523] to-[#4a0d18] p-[2.5px] rounded-t-[54px] rounded-b-2xl shadow-[0_14px_35px_rgba(0,0,0,0.6)]"
+                className="absolute left-[52%] top-[23%] w-[42%] h-[49%] z-20 bg-gradient-to-b from-[#8f2132] via-[#6b1523] to-[#4a0d18] p-[2.5px] rounded-t-[54px] rounded-b-2xl shadow-[0_14px_35px_rgba(0,0,0,0.6)]"
               >
                 <div className="w-full h-full bg-[#fdfaf5] rounded-t-[51px] rounded-b-xl border border-[#caa472]/60 p-2 flex flex-col items-center justify-between text-center relative overflow-hidden py-2 sm:py-3">
                   {/* Subtle inner vintage dashed border */}
@@ -995,16 +1003,24 @@ export default function RightSidebar({
 
                 return (
                   <motion.div
+                    drag
+                    dragConstraints={{ left: -140, right: 140, top: -160, bottom: 160 }}
+                    dragElastic={0.15}
+                    whileDrag={{ scale: 1.05, zIndex: 60, cursor: "grabbing" }}
+                    whileHover={{ scale: 1.02 }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="absolute left-[33%] top-[53%] w-[35%] min-h-[25%] z-30 bg-[#fdfbf7] p-2 rounded-xl border border-[#caa472]/80 shadow-[0_12px_30px_rgba(0,0,0,0.55)] flex flex-col items-center justify-center text-center"
+                    className="absolute left-[33%] top-[54%] w-[36%] min-h-[25%] z-30 bg-[#fdfbf7] p-2 rounded-xl border border-[#caa472]/90 shadow-[0_14px_35px_rgba(0,0,0,0.6)] flex flex-col items-center justify-center text-center cursor-grab active:cursor-grabbing select-none touch-none"
                     style={{ rotate: "1.5deg" }}
                   >
-                    {/* Header Label */}
-                    <div className="w-full pb-0.5 mb-1 border-b border-[#caa472]/40 flex items-center justify-center">
+                    {/* Header Label with Drag Indicator */}
+                    <div className="w-full pb-0.5 mb-1 border-b border-[#caa472]/40 flex items-center justify-between px-0.5">
                       <span className="text-[7px] font-serif uppercase tracking-[0.16em] text-[#7a1827] font-bold">
                         Rangkaian Acara
+                      </span>
+                      <span className="text-[6px] text-[#caa472] font-mono flex items-center gap-0.5 font-bold" title="Bisa digeser">
+                        <span className="text-[7.5px] leading-none">⠿</span> geser
                       </span>
                     </div>
 
