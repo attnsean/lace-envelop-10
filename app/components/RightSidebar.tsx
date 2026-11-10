@@ -747,38 +747,40 @@ export default function RightSidebar({
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="absolute left-[36%] top-[2%] w-[48%] h-[38%] z-10 flex items-center justify-center cursor-pointer group"
+                className="absolute left-[34%] top-[3%] w-[52%] h-[42%] z-15 flex items-center justify-center cursor-pointer group"
                 onClick={() => setLightboxImg(rawGallery[0] || LACE10_ASSETS.defaultPhotos.heroEnvelope)}
               >
-                {/* Couple Photo peaking inside the open flap */}
-                <div className="absolute top-[0%] left-[17%] w-[66%] h-[72%] bg-white p-1 shadow-md rounded-xs overflow-hidden">
+                {/* Envelope Backdrop */}
+                <img
+                  src={LACE10_ASSETS.envelopeOpen}
+                  alt="Open Envelope"
+                  className="absolute inset-0 w-full h-full object-contain filter drop-shadow-md pointer-events-none z-0 opacity-90 scale-95"
+                />
+
+                {/* Prominent, Elevated Couple Photo Frame (Full visibility, clean border) */}
+                <div className="absolute -top-[12%] left-[8%] w-[84%] h-[90%] bg-white p-1.5 shadow-[0_12px_28px_rgba(0,0,0,0.55)] rounded-xs overflow-hidden z-10 border border-[#e8d7c3]">
                   <img
                     src={rawGallery[0] || LACE10_ASSETS.defaultPhotos.heroEnvelope}
                     alt="Couple Hero"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    style={{ objectPosition: "center 26%" }}
+                    style={{ objectPosition: "center 20%" }}
                   />
                 </div>
-                {/* Open Envelope Front & Flap */}
-                <img
-                  src={LACE10_ASSETS.envelopeOpen}
-                  alt="Open Envelope"
-                  className="absolute inset-0 w-full h-full object-contain filter drop-shadow-lg pointer-events-none"
-                />
+
                 {/* Dark Red Flower Bouquet on Top-Right */}
                 <img
                   src={LACE10_ASSETS.flowerRoseBouquet}
                   alt="Rose"
-                  className="absolute -top-[7%] -right-[8%] w-[36%] h-auto object-contain pointer-events-none z-20"
+                  className="absolute -top-[18%] -right-[8%] w-[38%] h-auto object-contain pointer-events-none z-20"
                 />
               </motion.div>
 
-              {/* 4. Mini RSVP Envelope on the Left (Natural resting position on pleated fan) */}
+              {/* 4. Mini RSVP Envelope on the Left (Natural resting position on pleated fan, no overlap on couple photo) */}
               <motion.a
                 href="#rsvp-section"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.96 }}
-                className="absolute left-[8%] top-[14%] w-[33%] aspect-[2400/1743] z-20 flex items-center justify-center cursor-pointer filter drop-shadow-xl"
+                className="absolute left-[3%] top-[14%] w-[30%] aspect-[2400/1743] z-10 flex items-center justify-center cursor-pointer filter drop-shadow-xl"
                 style={{ rotate: "-5deg" }}
               >
                 {/* White lace insert card */}
@@ -809,12 +811,12 @@ export default function RightSidebar({
                 />
               </motion.a>
 
-              {/* 5. Right Arched Plaque ("The Wedding Of Syipa & Hawasyi") */}
+              {/* 5. Right Arched Plaque */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.92 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="absolute left-[54%] top-[16%] w-[39%] h-[51%] z-20 bg-gradient-to-b from-[#8f2132] via-[#6b1523] to-[#4a0d18] p-[2.5px] rounded-t-[54px] rounded-b-2xl shadow-[0_14px_35px_rgba(0,0,0,0.6)]"
+                className="absolute left-[52%] top-[19%] w-[42%] h-[50%] z-20 bg-gradient-to-b from-[#8f2132] via-[#6b1523] to-[#4a0d18] p-[2.5px] rounded-t-[54px] rounded-b-2xl shadow-[0_14px_35px_rgba(0,0,0,0.6)]"
               >
                 <div className="w-full h-full bg-[#fdfaf5] rounded-t-[51px] rounded-b-xl border border-[#caa472]/60 p-2 flex flex-col items-center justify-between text-center relative overflow-hidden py-2 sm:py-3">
                   {/* Subtle inner vintage dashed border */}
