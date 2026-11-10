@@ -353,7 +353,7 @@ export default function RightSidebar({
       ref={scrollContainerRef}
       className={`relative w-full md:w-[42%] lg:w-[38%] xl:w-[35%] h-[100dvh] ${
         hasOpened ? "overflow-y-auto" : "overflow-hidden"
-      } no-scrollbar bg-[#611220] text-[#f7f2ea] font-serif select-none flex-shrink-0`}
+      } no-scrollbar bg-[#180205] text-[#f7f2ea] font-serif select-none flex-shrink-0`}
     >
       {/* Background Audio */}
       <audio
@@ -636,7 +636,7 @@ export default function RightSidebar({
       {/* PART 2: MAIN WEDDING INVITATION WEBSITE                                   */}
       {/* ========================================================================= */}
       {hasOpened && (
-        <main className="relative w-full min-h-screen bg-[#611220] overflow-hidden pb-16">
+        <main className="relative w-full min-h-screen bg-[#180205] overflow-hidden">
           {/* --------------------------------------------------------------------- */}
           {/* SECTION 0: HERO FLATLAY COLLAGE (Full Width Background)               */}
           {/* --------------------------------------------------------------------- */}
