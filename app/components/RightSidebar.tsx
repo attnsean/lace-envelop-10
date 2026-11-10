@@ -125,6 +125,20 @@ export default function RightSidebar({
     ? project.gallery_photos 
     : (Array.isArray(project?.photo_urls) && project.photo_urls.length > 0 ? project.photo_urls : LACE10_ASSETS.defaultPhotos.gallery);
 
+  // Candid / Polaroid moments (Prioritize real uploaded photos)
+  const candidPhotos = (rawGallery && rawGallery.length > 0)
+    ? (rawGallery.length >= 5 
+        ? (rawGallery.length >= 10 ? rawGallery.slice(5, 10) : rawGallery.slice(0, 5))
+        : rawGallery)
+    : LACE10_ASSETS.defaultPhotos.casualMoments;
+
+  const getCandidPhoto = (idx: number) => {
+    if (candidPhotos && candidPhotos.length > 0) {
+      return candidPhotos[idx % candidPhotos.length];
+    }
+    return LACE10_ASSETS.defaultPhotos.casualMoments[idx] || rawGallery[0];
+  };
+
   // Love Story data from Supabase / Project
   let loveStoryData: StoryEvent[] | null = null;
   if (Array.isArray(project?.love_story_items) && project.love_story_items.length > 0) {
@@ -495,25 +509,28 @@ export default function RightSidebar({
                       }}
                       className="w-full bg-[#751727] p-2.5 pt-3 pb-3 border-2 border-[#caa472] shadow-[0_12px_28px_rgba(0,0,0,0.7)] rounded-sm flex flex-col gap-2.5 pointer-events-auto"
                     >
-                      <div className="w-full h-24 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40 shadow-inner">
+                      <div className="w-full h-26 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40 shadow-inner">
                         <img
                           src={rawGallery[0] || LACE10_ASSETS.defaultPhotos.photostrip1}
                           alt="Couple Photo 1"
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover object-[center_18%]"
+                          style={{ objectPosition: 'center 18%' }}
                         />
                       </div>
-                      <div className="w-full h-24 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40 shadow-inner">
+                      <div className="w-full h-26 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40 shadow-inner">
                         <img
                           src={rawGallery[1] || LACE10_ASSETS.defaultPhotos.photostrip2}
                           alt="Couple Photo 2"
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover object-[center_18%]"
+                          style={{ objectPosition: 'center 18%' }}
                         />
                       </div>
-                      <div className="w-full h-24 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40 shadow-inner">
+                      <div className="w-full h-26 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40 shadow-inner">
                         <img
                           src={rawGallery[2] || LACE10_ASSETS.defaultPhotos.photostrip3}
                           alt="Couple Photo 3"
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover object-[center_18%]"
+                          style={{ objectPosition: 'center 18%' }}
                         />
                       </div>
                     </motion.div>
@@ -628,7 +645,8 @@ export default function RightSidebar({
                   <img
                     src={rawGallery[0] || LACE10_ASSETS.defaultPhotos.heroEnvelope}
                     alt="Couple Hero"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-500"
+                    style={{ objectPosition: 'center 20%' }}
                   />
                 </div>
                 {/* Open Envelope Front & Flap */}
@@ -981,9 +999,9 @@ export default function RightSidebar({
                 alt="Lace Arch Frame"
                 className="absolute inset-0 w-full h-full object-contain pointer-events-none z-10"
               />
-              <div className="relative z-20 w-full h-full pt-[13%] pb-[11%] px-[14%] flex flex-col items-center justify-between text-center select-none">
+              <div className="relative z-20 w-full h-full pt-[12%] pb-[17%] px-[13%] flex flex-col items-center justify-evenly text-center select-none">
                 {/* Bismillah Calligraphy */}
-                <div className="w-[80%] max-w-[190px]">
+                <div className="w-[75%] max-w-[170px]">
                   <svg viewBox="0 0 300 80" className="w-full h-auto fill-[#7a1827]">
                     <text
                       x="150"
@@ -997,50 +1015,50 @@ export default function RightSidebar({
                 </div>
 
                 {/* Greeting */}
-                <div className="my-0.5">
+                <div className="my-0">
                   <p className="text-[10px] sm:text-[11px] font-serif text-[#2a2a2a] leading-tight font-bold">
                     Assalamualaikum Warahmatullahi Wabarakatuh
                   </p>
-                  <p className="text-[8px] sm:text-[9px] text-[#4a4a4a] font-sans leading-tight mt-1 max-w-[240px] mx-auto">
+                  <p className="text-[8px] sm:text-[8.5px] text-[#4a4a4a] font-sans leading-tight mt-0.5 max-w-[230px] mx-auto">
                     Tanpa mengurangi rasa hormat kami, dengan memohon Rahmat dan Ridho Allah SWT, kami mengundang Anda untuk menjadi bagian dari hari bahagia kami:
                   </p>
                 </div>
 
                 {/* Bride Profile */}
-                <div className="my-0.5">
+                <div className="my-0">
                   <h2
-                    className="text-2xl sm:text-3xl text-[#7a1827] tracking-wide"
+                    className="text-2xl sm:text-[26px] text-[#7a1827] tracking-wide leading-tight"
                     style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
                   >
                     {brideName}
                   </h2>
                   {Boolean(brideFather || brideMother) && (
-                    <p className="text-[8.5px] sm:text-[9.5px] text-[#555] font-sans mt-0.5">
+                    <p className="text-[8px] sm:text-[8.5px] text-[#555] font-sans mt-0.5">
                       Putri dari {brideFather}{Boolean(brideFather && brideMother) ? " dan " : ""}{brideMother}
                     </p>
                   )}
                 </div>
 
                 {/* Ampersand Divider */}
-                <span className="text-sm sm:text-base text-[#7a1827] font-serif italic my-0.5">&amp;</span>
+                <span className="text-sm text-[#7a1827] font-serif italic my-0 leading-none">&amp;</span>
 
                 {/* Groom Profile */}
-                <div className="my-0.5">
+                <div className="my-0">
                   <h2
-                    className="text-2xl sm:text-3xl text-[#7a1827] tracking-wide"
+                    className="text-2xl sm:text-[26px] text-[#7a1827] tracking-wide leading-tight"
                     style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
                   >
                     {groomName}
                   </h2>
                   {Boolean(groomFather || groomMother) && (
-                    <p className="text-[8.5px] sm:text-[9.5px] text-[#555] font-sans mt-0.5">
+                    <p className="text-[8px] sm:text-[8.5px] text-[#555] font-sans mt-0.5">
                       Putra dari {groomFather}{Boolean(groomFather && groomMother) ? " dan " : ""}{groomMother}
                     </p>
                   )}
                 </div>
 
-                {/* Closing blessing text */}
-                <p className="text-[8px] sm:text-[9px] text-[#555] font-sans leading-tight italic max-w-[230px] mx-auto">
+                {/* Closing blessing text (Safely inside inner cream area, above lace bottom) */}
+                <p className="text-[8px] sm:text-[8.5px] text-[#555] font-sans leading-tight italic max-w-[220px] mx-auto pb-1">
                   Kehadiran serta doa restu Anda akan sangat berarti bagi perjalanan kami
                 </p>
               </div>
@@ -1169,17 +1187,22 @@ export default function RightSidebar({
             className="relative w-full px-5 py-14 flex flex-col items-center overflow-hidden"
             style={{
               backgroundImage: `url(${LACE10_ASSETS.bgRedVelvet})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
           >
             {/* Title */}
-            <h2
-              className="text-4xl sm:text-5xl text-[#f5ebd8] text-center mb-2"
-              style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
-            >
-              The Bride
-            </h2>
+            <div className="text-center mb-1 z-10">
+              <h2
+                className="text-4xl sm:text-5xl text-[#f5ebd8] text-center"
+                style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
+              >
+                The Bride &amp; Groom
+              </h2>
+              <p className="text-[10px] uppercase tracking-[0.25em] text-[#caa472] mt-1 font-serif">
+                Pasangan Mempelai
+              </p>
+            </div>
 
             {/* Pearl Rope Bow Divider */}
             <img
@@ -1188,56 +1211,116 @@ export default function RightSidebar({
               className="w-36 h-auto object-contain my-3 opacity-90"
             />
 
-            {/* 2 Portrait Cards with Scalloped Lace Frame */}
-            <div className="w-full flex flex-col items-center gap-8 mt-4">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                className="relative w-64 h-88 rounded-3xl p-3 bg-[#fdfaf5] shadow-2xl flex items-center justify-center cursor-pointer group overflow-hidden border border-[#e8d7c3]"
-                onClick={() => setLightboxImg(project?.bride_photo_url || rawGallery[4] || LACE10_ASSETS.defaultPhotos.bridePortrait1)}
-              >
-                <div className="w-full h-full rounded-2xl overflow-hidden bg-neutral-900">
+            {/* 2 Portrait Cards with Scalloped Lace Frame & Details */}
+            <div className="w-full flex flex-col items-center gap-10 mt-4 z-10">
+              {/* Mempelai Wanita */}
+              <div className="flex flex-col items-center">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  className="relative w-64 h-88 rounded-3xl p-3 bg-[#fdfaf5] shadow-2xl flex items-center justify-center cursor-pointer group overflow-hidden border border-[#e8d7c3]"
+                  onClick={() => setLightboxImg(project?.bride_photo_url || rawGallery[4] || LACE10_ASSETS.defaultPhotos.bridePortrait1)}
+                >
+                  <div className="w-full h-full rounded-2xl overflow-hidden bg-neutral-900">
+                    <img
+                      src={project?.bride_photo_url || rawGallery[4] || LACE10_ASSETS.defaultPhotos.bridePortrait1}
+                      alt="Bride Portrait"
+                      className="w-full h-full object-cover object-[center_20%] group-hover:scale-[1.03] transition-transform duration-500"
+                      style={{ objectPosition: "center 20%" }}
+                    />
+                  </div>
                   <img
-                    src={project?.bride_photo_url || rawGallery[4] || LACE10_ASSETS.defaultPhotos.bridePortrait1}
-                    alt="Bride Portrait 1"
-                    className="w-full h-full object-cover object-[center_25%] group-hover:scale-[1.03] transition-transform duration-500"
+                    src={LACE10_ASSETS.laceScallopFrame}
+                    alt="Lace Border"
+                    className="absolute inset-0 w-full h-full object-fill pointer-events-none z-10 filter drop-shadow-sm"
                   />
+                </motion.div>
+                <div className="text-center mt-3 max-w-xs">
+                  <span className="text-[10px] uppercase font-serif tracking-[0.25em] text-[#d4af37] font-semibold block">
+                    The Bride
+                  </span>
+                  <h3
+                    className="text-2xl sm:text-3xl text-[#f5ebd8] tracking-wide mt-0.5"
+                    style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
+                  >
+                    {brideName}
+                  </h3>
+                  {Boolean(brideFather || brideMother) && (
+                    <p className="text-[11px] text-[#e5c7a9] font-sans mt-1">
+                      Putri dari {brideFather}{Boolean(brideFather && brideMother) ? " & " : ""}{brideMother}
+                    </p>
+                  )}
+                  {project?.bride_instagram && (
+                    <a
+                      href={`https://instagram.com/${project.bride_instagram.replace(/^@/, "")}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-[11px] text-[#caa472] hover:underline mt-1.5 font-sans"
+                    >
+                      <span>@{project.bride_instagram.replace(/^@/, "")}</span>
+                    </a>
+                  )}
                 </div>
-                <img
-                  src={LACE10_ASSETS.laceScallopFrame}
-                  alt="Lace Border"
-                  className="absolute inset-0 w-full h-full object-fill pointer-events-none z-10 filter drop-shadow-sm"
-                />
-              </motion.div>
+              </div>
 
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                className="relative w-64 h-88 rounded-3xl p-3 bg-[#fdfaf5] shadow-2xl flex items-center justify-center cursor-pointer group overflow-hidden border border-[#e8d7c3]"
-                onClick={() => setLightboxImg(project?.groom_photo_url || rawGallery[5] || LACE10_ASSETS.defaultPhotos.bridePortrait2)}
-              >
-                <div className="w-full h-full rounded-2xl overflow-hidden bg-neutral-900">
+              {/* Mempelai Pria */}
+              <div className="flex flex-col items-center">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  className="relative w-64 h-88 rounded-3xl p-3 bg-[#fdfaf5] shadow-2xl flex items-center justify-center cursor-pointer group overflow-hidden border border-[#e8d7c3]"
+                  onClick={() => setLightboxImg(project?.groom_photo_url || rawGallery[5] || LACE10_ASSETS.defaultPhotos.bridePortrait2)}
+                >
+                  <div className="w-full h-full rounded-2xl overflow-hidden bg-neutral-900">
+                    <img
+                      src={project?.groom_photo_url || rawGallery[5] || LACE10_ASSETS.defaultPhotos.bridePortrait2}
+                      alt="Groom Portrait"
+                      className="w-full h-full object-cover object-[center_20%] group-hover:scale-[1.03] transition-transform duration-500"
+                      style={{ objectPosition: "center 20%" }}
+                    />
+                  </div>
                   <img
-                    src={project?.groom_photo_url || rawGallery[5] || LACE10_ASSETS.defaultPhotos.bridePortrait2}
-                    alt="Bride Portrait 2"
-                    className="w-full h-full object-cover object-[center_30%] group-hover:scale-[1.03] transition-transform duration-500"
+                    src={LACE10_ASSETS.laceScallopFrame}
+                    alt="Lace Border"
+                    className="absolute inset-0 w-full h-full object-fill pointer-events-none z-10 filter drop-shadow-sm"
                   />
+                </motion.div>
+                <div className="text-center mt-3 max-w-xs">
+                  <span className="text-[10px] uppercase font-serif tracking-[0.25em] text-[#d4af37] font-semibold block">
+                    The Groom
+                  </span>
+                  <h3
+                    className="text-2xl sm:text-3xl text-[#f5ebd8] tracking-wide mt-0.5"
+                    style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
+                  >
+                    {groomName}
+                  </h3>
+                  {Boolean(groomFather || groomMother) && (
+                    <p className="text-[11px] text-[#e5c7a9] font-sans mt-1">
+                      Putra dari {groomFather}{Boolean(groomFather && groomMother) ? " & " : ""}{groomMother}
+                    </p>
+                  )}
+                  {project?.groom_instagram && (
+                    <a
+                      href={`https://instagram.com/${project.groom_instagram.replace(/^@/, "")}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-[11px] text-[#caa472] hover:underline mt-1.5 font-sans"
+                    >
+                      <span>@{project.groom_instagram.replace(/^@/, "")}</span>
+                    </a>
+                  )}
                 </div>
-                <img
-                  src={LACE10_ASSETS.laceScallopFrame}
-                  alt="Lace Border"
-                  className="absolute inset-0 w-full h-full object-fill pointer-events-none z-10 filter drop-shadow-sm"
-                />
-              </motion.div>
+              </div>
             </div>
 
             {/* Pearl Rope Bow Divider bottom */}
             <img
               src={LACE10_ASSETS.pearlBeadBow}
               alt="Pearl Bow"
-              className="w-36 h-auto object-contain mt-6 opacity-90"
+              className="w-36 h-auto object-contain mt-8 opacity-90"
             />
           </section>
 
@@ -1298,13 +1381,14 @@ export default function RightSidebar({
                     viewport={{ once: true }}
                     onClick={() => setLightboxImg(photo)}
                     className={`relative rounded-lg overflow-hidden border border-[#d6b797]/60 shadow-md cursor-pointer group ${
-                      isSpan2 ? 'col-span-2 h-44' : 'col-span-1 h-32'
+                      isSpan2 ? 'col-span-2 h-44 sm:h-48' : 'col-span-1 h-32 sm:h-36'
                     }`}
                   >
                     <img
                       src={photo}
                       alt={`Gallery ${idx + 1}`}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover object-[center_18%] group-hover:scale-105 transition-transform duration-500"
+                      style={{ objectPosition: 'center 18%' }}
                     />
                   </motion.div>
                 );
@@ -1334,22 +1418,23 @@ export default function RightSidebar({
               Our Moment
             </h2>
 
-            {/* Casual Polaroids / Candids Collage (5 Photos matching Canva) */}
+            {/* Casual Polaroids / Candids Collage (5 Photos prioritized from user's gallery) */}
             <div className="relative z-10 w-full max-w-sm flex flex-col items-center gap-3 my-4">
               {/* Photo 1: Top Wide Polaroid */}
-              {LACE10_ASSETS.defaultPhotos.casualMoments[0] && (
+              {getCandidPhoto(0) && (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  onClick={() => setLightboxImg(LACE10_ASSETS.defaultPhotos.casualMoments[0])}
+                  onClick={() => setLightboxImg(getCandidPhoto(0))}
                   className="w-[82%] bg-[#f8f4ed] p-2 pb-6 shadow-2xl rounded-xs border border-[#caa472]/40 transform rotate-[1deg] hover:scale-105 transition-transform cursor-pointer"
                 >
-                  <div className="w-full aspect-[4/3] overflow-hidden rounded-xs">
+                  <div className="w-full aspect-[4/3] overflow-hidden rounded-xs bg-neutral-900">
                     <img
-                      src={LACE10_ASSETS.defaultPhotos.casualMoments[0]}
+                      src={getCandidPhoto(0)}
                       alt="Moment 1"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover object-[center_18%]"
+                      style={{ objectPosition: 'center 18%' }}
                     />
                   </div>
                 </motion.div>
@@ -1357,36 +1442,38 @@ export default function RightSidebar({
 
               {/* Row 2: Two Polaroids */}
               <div className="w-full flex items-center justify-center gap-3">
-                {LACE10_ASSETS.defaultPhotos.casualMoments[1] && (
+                {getCandidPhoto(1) && (
                   <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    onClick={() => setLightboxImg(LACE10_ASSETS.defaultPhotos.casualMoments[1])}
+                    onClick={() => setLightboxImg(getCandidPhoto(1))}
                     className="w-[46%] bg-[#f8f4ed] p-1.5 pb-5 shadow-xl rounded-xs border border-[#caa472]/40 transform -rotate-[4deg] hover:scale-105 transition-transform cursor-pointer"
                   >
-                    <div className="w-full aspect-[3/4] overflow-hidden rounded-xs">
+                    <div className="w-full aspect-[3/4] overflow-hidden rounded-xs bg-neutral-900">
                       <img
-                        src={LACE10_ASSETS.defaultPhotos.casualMoments[1]}
+                        src={getCandidPhoto(1)}
                         alt="Moment 2"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover object-[center_18%]"
+                        style={{ objectPosition: 'center 18%' }}
                       />
                     </div>
                   </motion.div>
                 )}
-                {LACE10_ASSETS.defaultPhotos.casualMoments[2] && (
+                {getCandidPhoto(2) && (
                   <motion.div
                     initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    onClick={() => setLightboxImg(LACE10_ASSETS.defaultPhotos.casualMoments[2])}
+                    onClick={() => setLightboxImg(getCandidPhoto(2))}
                     className="w-[46%] bg-[#f8f4ed] p-1.5 pb-5 shadow-xl rounded-xs border border-[#caa472]/40 transform rotate-[3deg] hover:scale-105 transition-transform cursor-pointer"
                   >
-                    <div className="w-full aspect-[4/3] overflow-hidden rounded-xs">
+                    <div className="w-full aspect-[4/3] overflow-hidden rounded-xs bg-neutral-900">
                       <img
-                        src={LACE10_ASSETS.defaultPhotos.casualMoments[2]}
+                        src={getCandidPhoto(2)}
                         alt="Moment 3"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover object-[center_18%]"
+                        style={{ objectPosition: 'center 18%' }}
                       />
                     </div>
                   </motion.div>
@@ -1395,36 +1482,38 @@ export default function RightSidebar({
 
               {/* Row 3: Two Polaroids overlapping */}
               <div className="w-full flex items-center justify-center -space-x-4 mt-1">
-                {LACE10_ASSETS.defaultPhotos.casualMoments[3] && (
+                {getCandidPhoto(3) && (
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    onClick={() => setLightboxImg(LACE10_ASSETS.defaultPhotos.casualMoments[3])}
+                    onClick={() => setLightboxImg(getCandidPhoto(3))}
                     className="w-[48%] bg-[#f8f4ed] p-1.5 pb-5 shadow-xl rounded-xs border border-[#caa472]/40 transform rotate-[2deg] hover:scale-105 transition-transform cursor-pointer z-10"
                   >
-                    <div className="w-full aspect-[3/4] overflow-hidden rounded-xs">
+                    <div className="w-full aspect-[3/4] overflow-hidden rounded-xs bg-neutral-900">
                       <img
-                        src={LACE10_ASSETS.defaultPhotos.casualMoments[3]}
+                        src={getCandidPhoto(3)}
                         alt="Moment 4"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover object-[center_18%]"
+                        style={{ objectPosition: 'center 18%' }}
                       />
                     </div>
                   </motion.div>
                 )}
-                {LACE10_ASSETS.defaultPhotos.casualMoments[4] && (
+                {getCandidPhoto(4) && (
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    onClick={() => setLightboxImg(LACE10_ASSETS.defaultPhotos.casualMoments[4])}
+                    onClick={() => setLightboxImg(getCandidPhoto(4))}
                     className="w-[48%] bg-[#f8f4ed] p-1.5 pb-5 shadow-xl rounded-xs border border-[#caa472]/40 transform -rotate-[3deg] hover:scale-105 transition-transform cursor-pointer z-20"
                   >
-                    <div className="w-full aspect-[3/4] overflow-hidden rounded-xs">
+                    <div className="w-full aspect-[3/4] overflow-hidden rounded-xs bg-neutral-900">
                       <img
-                        src={LACE10_ASSETS.defaultPhotos.casualMoments[4]}
+                        src={getCandidPhoto(4)}
                         alt="Moment 5"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover object-[center_18%]"
+                        style={{ objectPosition: 'center 18%' }}
                       />
                     </div>
                   </motion.div>
@@ -1661,53 +1750,101 @@ export default function RightSidebar({
               Bagi keluarga dan rekan yang ingin memberikan tanda kasih untuk kami, dapat menyalurkannya melalui rekening / e-wallet di bawah ini:
             </p>
 
-            {/* ATM / Bank Cards */}
-            <div className="relative z-10 w-full max-w-xs flex flex-col gap-4">
-              {bankAccounts.map((acc: any, idx: number) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="relative w-full h-44 rounded-2xl bg-gradient-to-br from-[#fdfaf5] via-[#f7eedf] to-[#e8d5be] text-[#3d1017] p-5 shadow-2xl border-2 border-[#caa472] flex flex-col justify-between text-left overflow-hidden"
-                >
-                  {/* Header: Chip & Bank Name */}
-                  <div className="flex items-center justify-between">
-                    <img
-                      src={LACE10_ASSETS.atmCardChipPattern}
-                      alt="Chip"
-                      className="w-10 h-auto object-contain"
-                    />
-                    <span className="font-serif font-bold text-lg text-[#5c1320] tracking-wider uppercase">
-                      {acc.bank_name}
-                    </span>
-                  </div>
+            {/* ATM / Bank Cards Redesigned Luxury Royal Card */}
+            <div className="relative z-10 w-full max-w-xs flex flex-col gap-5">
+              {bankAccounts.map((acc: any, idx: number) => {
+                const isCopied = copiedBank === (acc.bank_name || `bank-${idx}`);
+                const isEwallet = acc.type === 'ewallet' || ['dana', 'gopay', 'ovo', 'shopeepay', 'linkaja'].includes((acc.bank_name || '').toLowerCase());
 
-                  {/* Card Number & Holder */}
-                  <div className="mt-2">
-                    <p className="text-[9px] uppercase tracking-wider text-neutral-600 font-sans">
-                      {acc.type === 'ewallet' ? 'No. e-Wallet' : 'No. Rekening'}
-                    </p>
-                    <p className="font-mono text-base font-bold text-[#42111a] tracking-wider my-0.5">
-                      {acc.account_number}
-                    </p>
-                    <p className="text-[11px] font-sans font-semibold text-[#661b27]">
-                      a/n {acc.account_holder}
-                    </p>
-                  </div>
+                return (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="relative w-full rounded-2xl bg-gradient-to-br from-[#2a060d] via-[#1a0307] to-[#120104] text-[#f7eee1] p-5 shadow-[0_15px_30px_rgba(0,0,0,0.7)] border border-[#caa472]/60 overflow-hidden text-left"
+                  >
+                    {/* Metallic Gold Sheen & Watermark Background */}
+                    <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-gradient-to-br from-[#caa472]/15 to-transparent blur-xl pointer-events-none" />
+                    <div className="absolute inset-0 bg-[radial-gradient(#caa472_0.5px,transparent_0.5px)] [background-size:12px_12px] opacity-10 pointer-events-none" />
 
-                  {/* Copy Button */}
-                  <div className="flex justify-end pt-1">
-                    <button
-                      type="button"
-                      onClick={() => copyToClipboard(acc.account_number, acc.bank_name)}
-                      className="px-3.5 py-1 rounded-full bg-[#821c2c] text-white text-[10px] font-sans uppercase tracking-wider hover:bg-[#5c1320] transition-colors shadow cursor-pointer"
-                    >
-                      {copiedBank === acc.bank_name ? 'Tersalin ✓' : 'Salin'}
-                    </button>
-                  </div>
-                </motion.div>
-              ))}
+                    {/* Header: Chip, Contactless Wave, and Bank/Wallet Badge */}
+                    <div className="flex items-center justify-between relative z-10">
+                      <div className="flex items-center gap-2.5">
+                        {/* Realistic Gold EMV Chip */}
+                        <div className="w-10 h-7 rounded bg-gradient-to-br from-[#edd59e] via-[#d4af37] to-[#997328] p-0.5 shadow-md border border-[#fff2c6]/60 flex items-center justify-center relative overflow-hidden">
+                          <div className="w-full h-full border border-amber-900/35 rounded-xs flex flex-col justify-between p-0.5">
+                            <div className="h-px bg-amber-900/30 w-full" />
+                            <div className="h-px bg-amber-900/30 w-full" />
+                          </div>
+                          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent pointer-events-none" />
+                        </div>
+
+                        {/* Contactless Waves Icon */}
+                        <svg className="w-4 h-4 text-[#caa472]/80 rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M5 12.55a11 11 0 0 1 14.08 0" strokeLinecap="round" />
+                          <path d="M8.5 15.5a6 6 0 0 1 7 0" strokeLinecap="round" />
+                          <path d="M11.5 18.5a1.5 1.5 0 0 1 1 0" strokeLinecap="round" />
+                        </svg>
+                      </div>
+
+                      {/* Bank / Wallet Name Badge */}
+                      <span className="font-serif font-black text-lg sm:text-xl text-transparent bg-clip-text bg-gradient-to-r from-[#f5ebd8] via-[#e8cfb5] to-[#caa472] tracking-wider uppercase drop-shadow">
+                        {acc.bank_name}
+                      </span>
+                    </div>
+
+                    {/* Middle: Number */}
+                    <div className="my-4 relative z-10">
+                      <span className="text-[9px] uppercase tracking-[0.2em] text-[#caa472] font-serif block mb-1">
+                        {isEwallet ? 'No. e-Wallet' : 'No. Rekening'}
+                      </span>
+                      <p className="font-mono text-lg sm:text-xl font-bold text-[#fff7eb] tracking-[0.14em] drop-shadow-sm select-all">
+                        {acc.account_number}
+                      </p>
+                    </div>
+
+                    {/* Footer: Cardholder Name & Copy Button */}
+                    <div className="flex items-end justify-between relative z-10 pt-2 border-t border-[#caa472]/20">
+                      <div>
+                        <span className="text-[8px] uppercase tracking-[0.2em] text-[#caa472]/80 font-serif block">
+                          Atas Nama
+                        </span>
+                        <p className="text-xs sm:text-sm font-serif font-semibold text-[#f5ebd8] tracking-wide mt-0.5">
+                          {acc.account_holder}
+                        </p>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => copyToClipboard(acc.account_number, acc.bank_name || `bank-${idx}`)}
+                        className={`px-4 py-1.5 rounded-full text-[10px] font-sans font-bold uppercase tracking-wider transition-all duration-300 shadow-md flex items-center gap-1.5 cursor-pointer ${
+                          isCopied
+                            ? 'bg-emerald-600 text-white border border-emerald-400'
+                            : 'bg-gradient-to-r from-[#d4af37] via-[#edd59e] to-[#caa472] text-[#200408] hover:brightness-110 active:scale-95'
+                        }`}
+                      >
+                        {isCopied ? (
+                          <>
+                            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                              <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            <span>Tersalin ✓</span>
+                          </>
+                        ) : (
+                          <>
+                            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                            </svg>
+                            <span>Salin</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
           </section>
 
