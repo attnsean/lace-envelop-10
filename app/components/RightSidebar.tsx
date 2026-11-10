@@ -113,30 +113,60 @@ export default function RightSidebar({
   const groomFather = isDemo ? "Bapak Atep Sumardi" : (project?.groom_father?.trim() || "");
   const groomMother = isDemo ? "Ibu Ai Karina" : (project?.groom_mother?.trim() || "");
 
-  const weddingDateStr = project?.wedding_date || "2026-11-09";
-  const weddingDate = new Date(weddingDateStr);
-  const formattedDayName = weddingDate.toLocaleDateString("id-ID", { weekday: "long" }) || "Senin";
-  const formattedDateNum = String(weddingDate.getDate()).padStart(2, "0") || "09";
+  // Event parsing
+  const akadEvent = events.find(e => e.event_type?.toLowerCase().includes('akad')) || events[0] || {
+    custom_label: 'Akad Nikah',
+    event_date: '2026-11-27',
+    event_time: '07.00 WIB',
+    venue_name: 'Kediaman Mempelai Wanita',
+    venue_address: 'Kp. Koleberes, RT/RW 02/03, Desa Talaga, Kec. Cugenang, Kab. Cianjur',
+    venue_maps_url: 'https://maps.google.com/?q=Kp.+Koleberes,+Desa+Talaga,+Kec.+Cugenang,+Kab.+Cianjur'
+  };
+
+  const resepsiEvent = events.find(e => e.event_type?.toLowerCase().includes('resepsi')) || events[1] || {
+    custom_label: 'Resepsi Pernikahan',
+    event_date: '2026-11-28',
+    event_time: '08.30 WIB',
+    venue_name: 'Kediaman Mempelai Wanita',
+    venue_address: 'Kp. Koleberes, RT/RW 02/03, Desa Talaga, Kec. Cugenang, Kab. Cianjur',
+    venue_maps_url: 'https://maps.google.com/?q=Kp.+Koleberes,+Desa+Talaga,+Kec.+Cugenang,+Kab.+Cianjur'
+  };
+
+  const parseSafeLocalDate = (dateStr?: string | null, fallback = "2026-11-27"): Date => {
+    const raw = (dateStr && dateStr.trim()) || fallback;
+    const clean = raw.split("T")[0];
+    const parts = clean.split("-");
+    if (parts.length === 3) {
+      const y = parseInt(parts[0], 10);
+      const m = parseInt(parts[1], 10) - 1;
+      const d = parseInt(parts[2], 10);
+      return new Date(y, m, d);
+    }
+    return new Date(raw);
+  };
+
+  const weddingDateStr = akadEvent?.event_date || events[0]?.event_date || project?.wedding_date || "2026-11-27";
+  const weddingDate = parseSafeLocalDate(weddingDateStr);
+  const formattedDayName = weddingDate.toLocaleDateString("id-ID", { weekday: "long" }) || "Jumat";
+  const formattedDateNum = String(weddingDate.getDate()).padStart(2, "0") || "27";
   const formattedMonthNum = String(weddingDate.getMonth() + 1).padStart(2, "0") || "11";
   const formattedYear = String(weddingDate.getFullYear()) || "2026";
   const formattedMonthLong = weddingDate.toLocaleDateString("id-ID", { month: "long" }) || "November";
 
-  // Event parsing
-  const akadEvent = events.find(e => e.event_type?.toLowerCase().includes('akad')) || events[0] || {
-    custom_label: 'Akad Nikah',
-    event_time: '09.00 WIB',
-    venue_name: 'Belakang Aula Desa Batulawang',
-    venue_address: 'Jl. Cisereuh, Des. Batulawang, Kec. Cipanas, Kab. Cianjur',
-    venue_maps_url: 'https://maps.google.com/?q=Aula+Desa+Batulawang'
+  const formatEventDate = (rawDate?: string | null, fallbackDate?: Date) => {
+    const dt = parseSafeLocalDate(rawDate, fallbackDate ? `${fallbackDate.getFullYear()}-${String(fallbackDate.getMonth() + 1).padStart(2, '0')}-${String(fallbackDate.getDate()).padStart(2, '0')}` : undefined);
+    return {
+      dayName: dt.toLocaleDateString("id-ID", { weekday: "long" }),
+      dateNum: String(dt.getDate()).padStart(2, "0"),
+      monthNum: String(dt.getMonth() + 1).padStart(2, "0"),
+      monthLong: dt.toLocaleDateString("id-ID", { month: "long" }),
+      year: String(dt.getFullYear()),
+      fullText: `${dt.toLocaleDateString("id-ID", { weekday: "long" })}, ${String(dt.getDate()).padStart(2, "0")} ${dt.toLocaleDateString("id-ID", { month: "long" })} ${dt.getFullYear()}`
+    };
   };
 
-  const resepsiEvent = events.find(e => e.event_type?.toLowerCase().includes('resepsi')) || events[1] || {
-    custom_label: 'Resepsi',
-    event_time: '12.00 - 16.00 WIB',
-    venue_name: 'Belakang Aula Desa Batulawang',
-    venue_address: 'Jl. Cisereuh, Des. Batulawang, Kec. Cipanas, Kab. Cianjur',
-    venue_maps_url: 'https://maps.google.com/?q=Aula+Desa+Batulawang'
-  };
+  const akadDateFormatted = formatEventDate(akadEvent?.event_date, weddingDate);
+  const resepsiDateFormatted = formatEventDate(resepsiEvent?.event_date, weddingDate);
 
   // Gallery Photos
   const rawGallery = Array.isArray(project?.gallery_photos) && project.gallery_photos.length > 0 
@@ -816,6 +846,7 @@ export default function RightSidebar({
                   akadEvent.venue_name && 
                   resepsiEvent.venue_name.trim().toLowerCase() !== akadEvent.venue_name.trim().toLowerCase()
                 );
+                const isSeparateDates = akadDateFormatted.dateNum !== resepsiDateFormatted.dateNum;
 
                 return (
                   <motion.div
@@ -845,6 +876,25 @@ export default function RightSidebar({
                             {resepsiEvent.venue_name}
                           </p>
                         </div>
+                      </div>
+                    ) : isSeparateDates ? (
+                      <div className="flex flex-col gap-0.5 w-full text-center">
+                        <span className="text-[6.5px] font-serif uppercase tracking-[0.15em] text-[#7a1827] font-bold border-b border-[#caa472]/30 pb-0.5 mb-0.5 block w-full">
+                          Akad &amp; Resepsi
+                        </span>
+                        <div className="border-b border-[#caa472]/20 pb-0.5">
+                          <span className="text-[6.5px] font-serif uppercase tracking-[0.08em] text-[#7a1827] font-bold block leading-tight">
+                            Akad: {akadDateFormatted.dayName.slice(0, 3)}, {akadDateFormatted.dateNum} {akadDateFormatted.monthLong.slice(0, 3)} ({akadEvent.event_time || "07.00 WIB"})
+                          </span>
+                        </div>
+                        <div className="border-b border-[#caa472]/20 pb-0.5">
+                          <span className="text-[6.5px] font-serif uppercase tracking-[0.08em] text-[#7a1827] font-bold block leading-tight">
+                            Resepsi: {resepsiDateFormatted.dayName.slice(0, 3)}, {resepsiDateFormatted.dateNum} {resepsiDateFormatted.monthLong.slice(0, 3)} ({resepsiEvent.event_time || "08.30 WIB"})
+                          </span>
+                        </div>
+                        <p className="text-[7.5px] font-serif font-bold text-[#222] leading-tight truncate mt-0.5">
+                          {akadEvent.venue_name || "Kediaman Mempelai Wanita"}
+                        </p>
                       </div>
                     ) : (
                       <>
@@ -995,7 +1045,7 @@ export default function RightSidebar({
                   if (day === null) {
                     return <div key={`empty-${idx}`} className="h-8" />;
                   }
-                  const isWeddingDay = day === weddingDayNum;
+                  const isWeddingDay = day === parseInt(akadDateFormatted.dateNum, 10) || day === parseInt(resepsiDateFormatted.dateNum, 10);
                   return (
                     <div
                       key={`day-${day}`}
@@ -1181,7 +1231,7 @@ export default function RightSidebar({
               </div>
 
               <p className="text-sm font-serif text-[#42111a] font-semibold">
-                {formattedDayName}, {formattedDateNum} {formattedMonthLong} {formattedYear}
+                {akadDateFormatted.fullText}
               </p>
               <p className="text-xs font-sans text-[#7a1827] font-bold mt-1 mb-2">
                 {akadEvent.event_time || '09.00 WIB'}
@@ -1239,10 +1289,10 @@ export default function RightSidebar({
 
                 <div>
                   <p className="text-[11px] font-serif font-semibold text-[#42111a]">
-                    {formattedDayName}, {formattedDateNum} {formattedMonthLong} {formattedYear}
+                    {resepsiDateFormatted.fullText}
                   </p>
                   <p className="text-[10px] font-sans text-[#7a1827] font-bold my-0.5">
-                    {resepsiEvent.event_time || '12.00 - 16.00 WIB'}
+                    {resepsiEvent.event_time || '08.30 WIB - Selesai'}
                   </p>
                   <p className="text-[10px] text-neutral-600 font-sans leading-tight">
                     {resepsiEvent.venue_name}
