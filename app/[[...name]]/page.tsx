@@ -160,36 +160,36 @@ export default async function Home({ params, searchParams }: Props) {
         <div className="absolute inset-0 bg-[#35050c]/40 backdrop-blur-[1px]" />
 
         {/* Center Card / Typography Showcase */}
-        <div className="relative z-10 text-center px-10 py-12 rounded-3xl bg-[#260408]/85 backdrop-blur-md border border-[#c49a6c]/40 shadow-2xl max-w-lg mx-6 flex flex-col items-center">
+        <div className="relative z-10 text-center px-6 sm:px-10 py-7 lg:py-10 rounded-3xl bg-[#260408]/85 backdrop-blur-md border border-[#c49a6c]/40 shadow-2xl max-w-lg mx-6 flex flex-col items-center my-auto">
           {/* Wax Seal Medallion */}
-          <div className="w-18 h-18 mb-4 filter drop-shadow-[0_6px_14px_rgba(0,0,0,0.5)]">
+          <div className="w-14 h-14 sm:w-16 sm:h-16 mb-3 filter drop-shadow-[0_6px_14px_rgba(0,0,0,0.5)]">
             <img src={LACE10_ASSETS.waxSealMonogram} alt="Seal" className="w-full h-full object-contain" />
           </div>
 
-          <p className="text-xs uppercase font-serif font-semibold tracking-[0.35em] text-[#caa472] mb-3">
+          <p className="text-[11px] sm:text-xs uppercase font-serif font-semibold tracking-[0.35em] text-[#caa472] mb-2 sm:mb-3">
             The Wedding Celebration Of
           </p>
 
           <h1
-            className="text-6xl lg:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-[#fdfaf6] via-[#f5e4bc] to-[#caa472] leading-tight mb-2"
+            className="text-5xl lg:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-[#fdfaf6] via-[#f5e4bc] to-[#caa472] leading-tight mb-2"
             style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
           >
             {brideName} <br />
-            <span className="text-[#caa472] text-4xl lg:text-5xl font-serif">&amp;</span> <br />
+            <span className="text-[#caa472] text-3xl sm:text-4xl lg:text-5xl font-serif">&amp;</span> <br />
             {groomName}
           </h1>
 
-          <p className="font-serif text-sm text-neutral-300 tracking-wider mb-4">
+          <p className="font-serif text-xs sm:text-sm text-neutral-300 tracking-wider mb-3 sm:mb-4">
             {brideFull} &amp; {groomFull}
           </p>
 
-          <div className="h-[1px] w-24 bg-gradient-to-r from-transparent via-[#caa472] to-transparent my-2" />
+          <div className="h-[1px] w-20 sm:w-24 bg-gradient-to-r from-transparent via-[#caa472] to-transparent my-1 sm:my-2" />
 
-          <p className="text-sm font-serif tracking-[0.3em] text-[#caa472] uppercase font-bold mt-2">
+          <p className="text-xs sm:text-sm font-serif tracking-[0.3em] text-[#caa472] uppercase font-bold mt-1 sm:mt-2">
             {formattedDate}
           </p>
 
-          <p className="text-xs text-neutral-400 font-serif italic mt-6">
+          <p className="text-[11px] sm:text-xs text-neutral-400 font-serif italic mt-4 sm:mt-6">
             Silakan buka undangan di panel sebelah kanan untuk melihat detail acara.
           </p>
         </div>

@@ -94,6 +94,26 @@ export default function RightSidebar({
     }
   }, [guestName]);
 
+  // Dynamic scale calculation to guarantee the cover stages fit completely inside any screen height
+  const [coverScale, setCoverScale] = useState(1);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const vh = window.innerHeight;
+      const targetHeight = photoStep ? 530 : 420;
+      if (vh < targetHeight + 24) {
+        const computed = Math.min(1, Math.max(0.62, (vh - 24) / targetHeight));
+        setCoverScale(computed);
+      } else {
+        setCoverScale(1);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [photoStep]);
+
   // Map Tab State (for separate venues)
   const [activeMapTab, setActiveMapTab] = useState<'akad' | 'resepsi'>('akad');
   const [copiedBank, setCopiedBank] = useState<string | null>(null);
@@ -432,21 +452,25 @@ export default function RightSidebar({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.5 } }}
                 transition={{ duration: 0.8 }}
-                className="relative z-30 flex flex-col items-center max-w-sm w-full mx-auto"
+                style={{
+                  transform: coverScale < 1 ? `scale(${coverScale})` : undefined,
+                  transformOrigin: 'center center',
+                }}
+                className="relative z-30 flex flex-col items-center max-w-sm w-full mx-auto my-auto"
               >
                 {/* Title */}
                 <motion.h2
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
-                  className="text-4xl sm:text-5xl text-[#f5ebe1] tracking-wide mb-8 text-center drop-shadow-md"
+                  className="text-3xl sm:text-4xl md:text-5xl text-[#f5ebe1] tracking-wide mb-5 sm:mb-8 text-center drop-shadow-md"
                   style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
                 >
                   You Are Invited !!
                 </motion.h2>
 
                 {/* Envelope Container */}
-                <div className="relative w-[340px] sm:w-[370px] h-[240px] sm:h-[260px] flex items-center justify-center">
+                <div className="relative w-[320px] sm:w-[370px] h-[225px] sm:h-[260px] flex items-center justify-center">
                   {/* Closed Envelope Artwork */}
                   <img
                     src={LACE10_ASSETS.envelopeClosed}
@@ -458,14 +482,14 @@ export default function RightSidebar({
                   <img
                     src={LACE10_ASSETS.flowerRoseBouquet}
                     alt="Rose Bouquet"
-                    className="absolute -top-8 -right-6 w-24 sm:w-28 h-auto object-contain pointer-events-none filter drop-shadow-md"
+                    className="absolute -top-7 -right-5 sm:-top-8 sm:-right-6 w-22 sm:w-28 h-auto object-contain pointer-events-none filter drop-shadow-md"
                   />
 
                   {/* Bottom-Left Velvet Dahlia */}
                   <img
                     src={LACE10_ASSETS.flowerRedDahlia}
                     alt="Velvet Dahlia"
-                    className="absolute -bottom-6 -left-6 w-20 sm:w-24 h-auto object-contain pointer-events-none filter drop-shadow-md"
+                    className="absolute -bottom-5 -left-5 sm:-bottom-6 sm:-left-6 w-18 sm:w-24 h-auto object-contain pointer-events-none filter drop-shadow-md"
                   />
 
                   {/* Guest Name Plaque */}
@@ -499,7 +523,7 @@ export default function RightSidebar({
                   animate={{ y: [0, 4, 0] }}
                   transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
                   onClick={handleOpenEnvelope}
-                  className="mt-8 cursor-pointer text-center group"
+                  className="mt-5 sm:mt-8 cursor-pointer text-center group"
                 >
                   <span className="text-xs sm:text-sm tracking-[0.25em] text-[#e8cfb5] uppercase font-serif border-b border-[#e8cfb5]/50 pb-0.5 group-hover:text-white group-hover:border-white transition-colors">
                     Tap to open
@@ -513,17 +537,21 @@ export default function RightSidebar({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0, y: -20, transition: { duration: 0.6 } }}
-                className="relative z-30 flex flex-col items-center max-w-sm w-full mx-auto px-4 py-4"
+                style={{
+                  transform: coverScale < 1 ? `scale(${coverScale})` : undefined,
+                  transformOrigin: 'center center',
+                }}
+                className="relative z-30 flex flex-col items-center max-w-sm w-full mx-auto my-auto px-2"
               >
                 {/* Floating Orchid Cascades flanking the photobooth */}
-                <div className="absolute -left-4 top-2 w-20 sm:w-24 pointer-events-none select-none z-10 opacity-90">
+                <div className="absolute -left-3 sm:-left-4 top-1 sm:top-2 w-18 sm:w-24 pointer-events-none select-none z-10 opacity-90">
                   <img
                     src={LACE10_ASSETS.orchidCascade}
                     alt="Orchid cascade left"
                     className="w-full h-auto object-contain drop-shadow-md"
                   />
                 </div>
-                <div className="absolute -right-4 top-2 w-20 sm:w-24 pointer-events-none select-none z-10 opacity-90 scale-x-[-1]">
+                <div className="absolute -right-3 sm:-right-4 top-1 sm:top-2 w-18 sm:w-24 pointer-events-none select-none z-10 opacity-90 scale-x-[-1]">
                   <img
                     src={LACE10_ASSETS.orchidCascade}
                     alt="Orchid cascade right"
@@ -536,21 +564,21 @@ export default function RightSidebar({
                   initial={{ opacity: 0, scale: 0.85 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6 }}
-                  className="text-center mb-3 z-20"
+                  className="text-center mb-2 sm:mb-3 z-20"
                 >
                   <span
-                    className="text-5xl text-[#d4af37] font-serif tracking-widest drop-shadow-md block"
+                    className="text-4xl sm:text-5xl text-[#d4af37] font-serif tracking-widest drop-shadow-md block leading-tight"
                     style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
                   >
                     {groomNickname.charAt(0)} &amp; {brideNickname.charAt(0)}
                   </span>
-                  <p className="text-xs uppercase tracking-[0.3em] text-[#e5c7a9] mt-1 font-serif">
+                  <p className="text-[10px] sm:text-xs uppercase tracking-[0.28em] text-[#e5c7a9] mt-0.5 font-serif">
                     Our Getting Married....
                   </p>
                 </motion.div>
 
                 {/* Photobooth Dispenser Slot Machine */}
-                <div className="relative w-[295px] sm:w-[310px] flex flex-col items-center z-20">
+                <div className="relative w-[280px] sm:w-[310px] flex flex-col items-center z-20">
                   {/* Layer 1: Base Full Slot Housing (z-10) with drop shadow */}
                   <div className="relative z-10 w-full select-none pointer-events-none">
                     <img
@@ -563,7 +591,7 @@ export default function RightSidebar({
                   {/* Layer 2: Dispensing Chute & Photostrip (z-20) */}
                   {/* Anchored precisely at slit line. Cuts off anything still inside machine! */}
                   <div 
-                    className="absolute top-[32px] w-[218px] sm:w-[226px] overflow-hidden z-20 pb-4 pt-0 pointer-events-none"
+                    className="absolute top-[30px] sm:top-[32px] w-[208px] sm:w-[226px] overflow-hidden z-20 pb-4 pt-0 pointer-events-none"
                   >
                     {/* Photostrip: slowly emerges from inside slit downwards over bottom bezel */}
                     <motion.div
@@ -574,9 +602,9 @@ export default function RightSidebar({
                         ease: [0.25, 0.1, 0.25, 1],
                         delay: 0.8
                       }}
-                      className="w-full bg-[#751727] p-2.5 pt-4 pb-3 border-2 border-[#caa472] shadow-[0_12px_28px_rgba(0,0,0,0.7)] rounded-sm flex flex-col gap-2.5 pointer-events-auto"
+                      className="w-full bg-[#751727] p-2 sm:p-2.5 pt-3 sm:pt-4 pb-2.5 sm:pb-3 border-2 border-[#caa472] shadow-[0_12px_28px_rgba(0,0,0,0.7)] rounded-sm flex flex-col gap-2 sm:gap-2.5 pointer-events-auto"
                     >
-                      <div className="w-full h-32 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40 shadow-inner">
+                      <div className="w-full h-[105px] sm:h-[125px] bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40 shadow-inner">
                         <img
                           src={rawGallery[0] || LACE10_ASSETS.defaultPhotos.photostrip1}
                           alt="Couple Photo 1"
@@ -584,7 +612,7 @@ export default function RightSidebar({
                           style={{ objectPosition: 'center 28%' }}
                         />
                       </div>
-                      <div className="w-full h-32 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40 shadow-inner">
+                      <div className="w-full h-[105px] sm:h-[125px] bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40 shadow-inner">
                         <img
                           src={rawGallery[1] || LACE10_ASSETS.defaultPhotos.photostrip2}
                           alt="Couple Photo 2"
@@ -592,7 +620,7 @@ export default function RightSidebar({
                           style={{ objectPosition: 'center 26%' }}
                         />
                       </div>
-                      <div className="w-full h-32 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40 shadow-inner">
+                      <div className="w-full h-[105px] sm:h-[125px] bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40 shadow-inner">
                         <img
                           src={rawGallery[2] || LACE10_ASSETS.defaultPhotos.photostrip3}
                           alt="Couple Photo 3"
@@ -606,7 +634,7 @@ export default function RightSidebar({
                   {/* Layer 3: Slot Machine Upper Bezel Lip (z-30) */}
                   {/* Covers only the upper 34px so the emerging strip stays hidden above the slit */}
                   <div 
-                    className="absolute top-0 left-0 right-0 h-[34px] overflow-hidden z-30 pointer-events-none select-none"
+                    className="absolute top-0 left-0 right-0 h-[32px] sm:h-[34px] overflow-hidden z-30 pointer-events-none select-none"
                   >
                     <img
                       src={LACE10_ASSETS.photoboothSlot}
@@ -616,10 +644,10 @@ export default function RightSidebar({
                   </div>
 
                   {/* Layer 4: Deep Shadow inside the slit mouth (z-25) */}
-                  <div className="absolute top-[32px] left-[13%] right-[13%] h-2.5 bg-gradient-to-b from-black/95 via-black/60 to-transparent pointer-events-none z-25 rounded-b-sm" />
+                  <div className="absolute top-[30px] sm:top-[32px] left-[13%] right-[13%] h-2.5 bg-gradient-to-b from-black/95 via-black/60 to-transparent pointer-events-none z-25 rounded-b-sm" />
 
                   {/* Spacer to hold the layout height while the photostrip dispenses */}
-                  <div className="w-[218px] sm:w-[226px] h-[440px] pointer-events-none" />
+                  <div className="w-[208px] sm:w-[226px] h-[375px] sm:h-[430px] pointer-events-none" />
                 </div>
 
                 {/* Continue Button & Heart Swirl Accent */}
@@ -627,20 +655,20 @@ export default function RightSidebar({
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 4.8, duration: 0.6 }}
-                  className="mt-4 flex flex-col items-center gap-2 z-20"
+                  className="mt-2.5 sm:mt-4 flex flex-col items-center gap-1.5 sm:gap-2 z-20"
                 >
                   <button
                     type="button"
                     onClick={handleContinueToMain}
-                    className="px-8 py-2.5 rounded-full bg-[#1f0508]/90 backdrop-blur-md border border-[#c49a6c] text-[#f5ebd8] text-xs font-serif uppercase tracking-[0.25em] hover:bg-[#851c2d] hover:text-white transition-all shadow-xl hover:scale-105 cursor-pointer"
+                    className="px-7 sm:px-8 py-2 sm:py-2.5 rounded-full bg-[#1f0508]/90 backdrop-blur-md border border-[#c49a6c] text-[#f5ebd8] text-[11px] sm:text-xs font-serif uppercase tracking-[0.25em] hover:bg-[#851c2d] hover:text-white transition-all shadow-xl hover:scale-105 cursor-pointer"
                   >
                     Tap to continue
                   </button>
                   {/* Heart Swirl Divider Accent */}
                   <div className="flex items-center gap-2 text-[#c49a6c]/60 mt-0.5 select-none pointer-events-none">
-                    <div className="w-10 h-px bg-gradient-to-r from-transparent to-[#c49a6c]" />
-                    <span className="text-sm leading-none text-[#d4af37]">❦</span>
-                    <div className="w-10 h-px bg-gradient-to-l from-transparent to-[#c49a6c]" />
+                    <div className="w-8 sm:w-10 h-px bg-gradient-to-r from-transparent to-[#c49a6c]" />
+                    <span className="text-xs sm:text-sm leading-none text-[#d4af37]">❦</span>
+                    <div className="w-8 sm:w-10 h-px bg-gradient-to-l from-transparent to-[#c49a6c]" />
                   </div>
                 </motion.div>
               </motion.div>
