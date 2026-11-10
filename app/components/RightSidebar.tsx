@@ -1519,6 +1519,128 @@ export default function RightSidebar({
           </section>
 
           {/* --------------------------------------------------------------------- */}
+          {/* SECTION 8.5: TURUT MENGUNDANG (Full Width Red Curtain & Vintage Card)  */}
+          {/* --------------------------------------------------------------------- */}
+          {(() => {
+            const rawTurut = (project as any)?.turut_mengundang;
+            const brideFamily = Array.isArray(rawTurut?.bride_family)
+              ? rawTurut.bride_family
+              : Array.isArray(rawTurut?.wanita)
+              ? rawTurut.wanita
+              : [];
+            const groomFamily = Array.isArray(rawTurut?.groom_family)
+              ? rawTurut.groom_family
+              : Array.isArray(rawTurut?.pria)
+              ? rawTurut.pria
+              : [];
+            const genericList = Array.isArray(rawTurut) ? rawTurut : [];
+
+            const hasTurutData = brideFamily.length > 0 || groomFamily.length > 0 || genericList.length > 0;
+            if (!hasTurutData) return null;
+
+            return (
+              <section
+                className="relative w-full px-5 py-14 flex flex-col items-center text-center overflow-hidden"
+                style={{
+                  backgroundImage: `url(${LACE10_ASSETS.bgRedCurtain})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              >
+                {/* Dark luxury vignette overlay */}
+                <div className="absolute inset-0 bg-gradient-to-b from-[#1f0307]/80 via-[#26050b]/65 to-[#1f0307]/85 pointer-events-none" />
+
+                <h3
+                  className="relative z-10 text-4xl sm:text-5xl text-[#f5ebd8] mb-1 drop-shadow-md"
+                  style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
+                >
+                  Turut Mengundang
+                </h3>
+                <img
+                  src={LACE10_ASSETS.flourishDivider2}
+                  alt="Divider"
+                  className="relative z-10 w-44 h-auto object-contain my-3 opacity-80"
+                />
+
+                <p className="relative z-10 text-xs text-[#e8cfb5] font-sans max-w-xs leading-relaxed mb-6 italic">
+                  Ungkapan terima kasih yang tulus dari segenap keluarga besar kedua mempelai:
+                </p>
+
+                <div className="relative z-10 w-full max-w-sm flex flex-col gap-4">
+                  {/* Mempelai Wanita Column */}
+                  {brideFamily.length > 0 && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      className="rounded-2xl bg-[#fdfaf5]/95 border-2 border-[#caa472] p-5 shadow-2xl text-left"
+                    >
+                      <div className="flex items-center gap-2 border-b border-[#caa472]/40 pb-2.5 mb-3">
+                        <span className="w-2 h-2 rounded-full bg-[#7a1827]" />
+                        <h4 className="font-serif font-bold text-sm text-[#42111a] uppercase tracking-wider">
+                          Keluarga Mempelai Wanita ({brideNickname})
+                        </h4>
+                      </div>
+                      <ul className="space-y-1.5 text-xs font-serif text-[#3d1017]">
+                        {brideFamily.map((person: string, idx: number) => (
+                          <li key={`bf-${idx}`} className="flex items-start gap-2">
+                            <span className="text-[#caa472] text-[11px] font-bold shrink-0">{idx + 1}.</span>
+                            <span className="font-medium">{person}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  )}
+
+                  {/* Mempelai Pria Column */}
+                  {groomFamily.length > 0 && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      className="rounded-2xl bg-[#fdfaf5]/95 border-2 border-[#caa472] p-5 shadow-2xl text-left"
+                    >
+                      <div className="flex items-center gap-2 border-b border-[#caa472]/40 pb-2.5 mb-3">
+                        <span className="w-2 h-2 rounded-full bg-[#7a1827]" />
+                        <h4 className="font-serif font-bold text-sm text-[#42111a] uppercase tracking-wider">
+                          Keluarga Mempelai Pria ({groomNickname})
+                        </h4>
+                      </div>
+                      <ul className="space-y-1.5 text-xs font-serif text-[#3d1017]">
+                        {groomFamily.map((person: string, idx: number) => (
+                          <li key={`gf-${idx}`} className="flex items-start gap-2">
+                            <span className="text-[#caa472] text-[11px] font-bold shrink-0">{idx + 1}.</span>
+                            <span className="font-medium">{person}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  )}
+
+                  {/* Generic List if flat array */}
+                  {genericList.length > 0 && brideFamily.length === 0 && groomFamily.length === 0 && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      className="rounded-2xl bg-[#fdfaf5]/95 border-2 border-[#caa472] p-5 shadow-2xl text-left"
+                    >
+                      <ul className="space-y-1.5 text-xs font-serif text-[#3d1017]">
+                        {genericList.map((item: any, idx: number) => (
+                          <li key={`gen-${idx}`} className="flex items-start gap-2">
+                            <span className="text-[#caa472] text-[11px] font-bold shrink-0">•</span>
+                            <span className="font-medium">{typeof item === 'string' ? item : item.name || JSON.stringify(item)}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  )}
+                </div>
+              </section>
+            );
+          })()}
+
+          {/* --------------------------------------------------------------------- */}
           {/* SECTION 9: WEDDING GIFT (Full Width Satin Draped BG)                   */}
           {/* --------------------------------------------------------------------- */}
           <section
