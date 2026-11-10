@@ -629,18 +629,18 @@ export default function RightSidebar({
                       </div>
                       <div className="w-full h-[105px] sm:h-[125px] bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40 shadow-inner">
                         <img
-                          src={rawGallery[1] || LACE10_ASSETS.defaultPhotos.photostrip2}
+                          src={rawGallery[2] || LACE10_ASSETS.defaultPhotos.photostrip3}
                           alt="Couple Photo 2"
                           className="w-full h-full object-cover"
-                          style={{ objectPosition: 'center 26%' }}
+                          style={{ objectPosition: 'center 22%' }}
                         />
                       </div>
                       <div className="w-full h-[105px] sm:h-[125px] bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40 shadow-inner">
                         <img
-                          src={rawGallery[2] || LACE10_ASSETS.defaultPhotos.photostrip3}
+                          src={rawGallery[1] || LACE10_ASSETS.defaultPhotos.photostrip2}
                           alt="Couple Photo 3"
                           className="w-full h-full object-cover"
-                          style={{ objectPosition: 'center 22%' }}
+                          style={{ objectPosition: 'center 26%' }}
                         />
                       </div>
                     </motion.div>
