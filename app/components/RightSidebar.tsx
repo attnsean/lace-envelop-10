@@ -784,61 +784,75 @@ export default function RightSidebar({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="absolute left-[8%] top-[42%] w-[32%] h-[50%] z-20 bg-[#6b1523] p-[2px] rounded-t-full rounded-b-xl shadow-2xl"
+                className="absolute left-[7%] top-[40%] w-[33%] h-[53%] z-20 bg-gradient-to-b from-[#8f2132] via-[#6b1523] to-[#4a0d18] p-[2.5px] rounded-t-full rounded-b-2xl shadow-[0_14px_35px_rgba(0,0,0,0.65)]"
               >
-                <div className="w-full h-full bg-[#fdfaf5] rounded-t-full rounded-b-lg border border-[#caa472]/40 p-2 flex flex-col items-center justify-between text-center py-2.5 sm:py-3.5">
-                  {/* Top: Swans icon & subtitle */}
-                  <div className="flex flex-col items-center">
+                <div className="w-full h-full bg-[#fdfaf5] rounded-t-full rounded-b-xl border border-[#caa472]/60 p-2 flex flex-col items-center justify-between text-center py-2.5 sm:py-3.5 relative overflow-hidden">
+                  {/* Subtle inner vintage dashed border */}
+                  <div className="absolute inset-1 rounded-t-full rounded-b-lg border border-dashed border-[#caa472]/30 pointer-events-none" />
+
+                  {/* Top: Swans icon & Luxury Gold Ribbon Badge */}
+                  <div className="relative z-10 flex flex-col items-center mt-0.5">
                     <img
                       src={LACE10_ASSETS.swansHeart}
                       alt="Swans"
-                      className="w-[26px] h-auto object-contain mb-0.5 opacity-90"
+                      className="w-[28px] h-auto object-contain mb-1 opacity-95 filter drop-shadow-xs"
                     />
-                    <p className="text-[7px] font-serif uppercase tracking-[0.2em] text-[#5a4a42]">
-                      Save The Date
-                    </p>
-                  </div>
-
-                  {/* Middle: Day name & Editorial Date Column */}
-                  <div className="flex flex-col items-center my-0.5 leading-none">
-                    <p className="text-[11px] font-serif uppercase tracking-wider text-[#6b1523] font-bold mb-1">
-                      {formattedDayName}
-                    </p>
-                    <div className="flex flex-col items-center leading-none">
-                      <span className="text-[23px] font-serif font-bold text-[#6b1523] leading-none tracking-tight">
-                        {formattedDateNum}
-                      </span>
-                      <span className="text-[9px] text-[#caa472] my-0.5">•</span>
-                      <span className="text-[14px] font-serif font-bold text-[#6b1523] leading-none">
-                        {formattedMonthNum}
-                      </span>
-                      <span className="text-[9px] text-[#caa472] my-0.5">•</span>
-                      <span className="text-[11px] font-serif text-[#6b1523] tracking-widest font-medium">
-                        {formattedYear}
-                      </span>
+                    <div className="px-2.5 py-0.5 rounded-full bg-gradient-to-r from-[#eedcc5] via-[#f9f1e4] to-[#eedcc5] border border-[#c49a6c] shadow-xs">
+                      <p className="text-[7px] font-serif uppercase tracking-[0.24em] text-[#7a1827] font-bold">
+                        Save The Date
+                      </p>
                     </div>
                   </div>
 
-                  {/* Bottom: Luxury Ornamental Divider & Romantic Tagline */}
-                  <div className="flex flex-col items-center w-full px-1">
-                    <div className="w-10 h-[1px] bg-gradient-to-r from-transparent via-[#caa472] to-transparent my-1" />
-                    <p className="text-[7px] font-serif italic text-[#7a1827] tracking-wider leading-tight">
+                  {/* Middle: Day name badge & Editorial Date */}
+                  <div className="relative z-10 flex flex-col items-center my-0.5 leading-none">
+                    <span className="text-[7.5px] font-serif uppercase tracking-[0.2em] text-[#8c6b45] font-bold mb-1">
+                      {formattedDayName}
+                    </span>
+                    <div className="flex flex-col items-center leading-none my-0.5">
+                      <span
+                        className="text-[28px] font-serif font-bold text-[#7a1827] leading-none tracking-tight"
+                        style={{ textShadow: "0 1px 2px rgba(122,24,39,0.15)" }}
+                      >
+                        {formattedDateNum}
+                      </span>
+                      <div className="flex items-center gap-1 mt-1">
+                        <span className="text-[6.5px] text-[#caa472]">✦</span>
+                        <span className="text-[10px] font-serif font-bold text-[#6b1523] uppercase tracking-[0.16em]">
+                          {formattedMonthLong.slice(0, 3)}
+                        </span>
+                        <span className="text-[6px] text-[#caa472]">•</span>
+                        <span className="text-[10px] font-serif font-medium text-[#7a1827] tracking-wider">
+                          {formattedYear}
+                        </span>
+                        <span className="text-[6.5px] text-[#caa472]">✦</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bottom: Luxury Ornamental Divider & Romantic Initials */}
+                  <div className="relative z-10 flex flex-col items-center w-full px-1 pb-0.5">
+                    <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-[#caa472] to-transparent mb-1" />
+                    <p className="text-[6.5px] font-serif italic text-[#7a1827] tracking-wider leading-tight">
                       The Beginning of Forever
                     </p>
-                    <span className="text-[6.5px] font-serif uppercase tracking-[0.25em] text-[#8c6b45] font-semibold mt-0.5">
-                      {groomNickname ? groomNickname[0] : "H"} &amp; {brideNickname ? brideNickname[0] : "S"}
-                    </span>
+                    <div className="inline-flex items-center gap-1 mt-0.5 px-2 py-0.5 rounded-full bg-[#f4e6d2]/80 border border-[#d6b797]">
+                      <span className="text-[6.5px] font-serif uppercase tracking-[0.22em] text-[#6b1523] font-bold">
+                        {groomNickname ? groomNickname[0] : "H"} &amp; {brideNickname ? brideNickname[0] : "S"}
+                      </span>
+                    </div>
                   </div>
                 </div>
-                {/* 3D Red Satin Ribbon Bow attached neatly to the left edge */}
+
+                {/* 3D Red Satin Ribbon Bow attached neatly to the left edge with floral sprig */}
                 <img
                   src={LACE10_ASSETS.redRibbonBow}
                   alt="Red Bow"
-                  className="absolute -left-[14px] top-[32%] w-[30px] h-auto object-contain filter drop-shadow-md z-30 pointer-events-none rotate-[-10deg]"
+                  className="absolute -left-[14px] top-[30%] w-[32px] h-auto object-contain filter drop-shadow-md z-30 pointer-events-none rotate-[-10deg]"
                 />
               </motion.div>
 
-              {/* 7. Center Venue Details Card (Neatly layered without covering names) */}
+              {/* 7. Center Venue & Schedule Details Card */}
               {(() => {
                 const hasSeparateVenues = Boolean(
                   resepsiEvent && 
@@ -846,73 +860,65 @@ export default function RightSidebar({
                   akadEvent.venue_name && 
                   resepsiEvent.venue_name.trim().toLowerCase() !== akadEvent.venue_name.trim().toLowerCase()
                 );
-                const isSeparateDates = akadDateFormatted.dateNum !== resepsiDateFormatted.dateNum;
+                const hasSeparateDates = akadDateFormatted.dateNum !== resepsiDateFormatted.dateNum;
+                const hasSeparateTimes = (akadEvent.event_time || "").trim() !== (resepsiEvent.event_time || "").trim();
 
                 return (
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="absolute left-[36%] top-[54%] w-[30%] min-h-[22%] z-30 bg-[#fdfbf7] p-2 rounded-xl border border-[#caa472]/70 shadow-2xl flex flex-col items-center justify-center text-center"
+                    className="absolute left-[33%] top-[53%] w-[35%] min-h-[25%] z-30 bg-[#fdfbf7] p-2 rounded-xl border border-[#caa472]/80 shadow-[0_12px_30px_rgba(0,0,0,0.55)] flex flex-col items-center justify-center text-center"
                     style={{ rotate: "1.5deg" }}
                   >
-                    {hasSeparateVenues ? (
-                      <div className="flex flex-col gap-1 w-full text-center">
-                        {/* Akad row */}
-                        <div className="border-b border-[#caa472]/30 pb-1">
-                          <span className="text-[6.5px] font-serif uppercase tracking-[0.12em] text-[#7a1827] font-bold block">
-                            Akad ({akadEvent.event_time || "07.00 WIB"})
-                          </span>
-                          <p className="text-[7.5px] font-serif font-bold text-[#222] leading-tight truncate">
-                            {akadEvent.venue_name}
-                          </p>
-                        </div>
-                        {/* Resepsi row */}
-                        <div className="pt-0.5">
-                          <span className="text-[6.5px] font-serif uppercase tracking-[0.12em] text-[#7a1827] font-bold block">
-                            Resepsi ({resepsiEvent.event_time || "11.00 WIB"})
-                          </span>
-                          <p className="text-[7.5px] font-serif font-bold text-[#222] leading-tight truncate">
-                            {resepsiEvent.venue_name}
-                          </p>
-                        </div>
-                      </div>
-                    ) : isSeparateDates ? (
-                      <div className="flex flex-col gap-0.5 w-full text-center">
-                        <span className="text-[6.5px] font-serif uppercase tracking-[0.15em] text-[#7a1827] font-bold border-b border-[#caa472]/30 pb-0.5 mb-0.5 block w-full">
-                          Akad &amp; Resepsi
+                    {/* Header Label */}
+                    <div className="w-full pb-0.5 mb-1 border-b border-[#caa472]/40 flex items-center justify-center">
+                      <span className="text-[7px] font-serif uppercase tracking-[0.16em] text-[#7a1827] font-bold">
+                        Rangkaian Acara
+                      </span>
+                    </div>
+
+                    {/* Akad Nikah Session */}
+                    <div className="w-full bg-[#f8f3ea] rounded-md px-1.5 py-1 border border-[#caa472]/35 mb-1 text-left">
+                      <div className="flex items-center justify-between gap-0.5">
+                        <span className="text-[6.8px] font-serif uppercase tracking-[0.08em] text-[#7a1827] font-bold">
+                          {akadEvent.custom_label || "Akad Nikah"}
                         </span>
-                        <div className="border-b border-[#caa472]/20 pb-0.5">
-                          <span className="text-[6.5px] font-serif uppercase tracking-[0.08em] text-[#7a1827] font-bold block leading-tight">
-                            Akad: {akadDateFormatted.dayName.slice(0, 3)}, {akadDateFormatted.dateNum} {akadDateFormatted.monthLong.slice(0, 3)} ({akadEvent.event_time || "07.00 WIB"})
-                          </span>
-                        </div>
-                        <div className="border-b border-[#caa472]/20 pb-0.5">
-                          <span className="text-[6.5px] font-serif uppercase tracking-[0.08em] text-[#7a1827] font-bold block leading-tight">
-                            Resepsi: {resepsiDateFormatted.dayName.slice(0, 3)}, {resepsiDateFormatted.dateNum} {resepsiDateFormatted.monthLong.slice(0, 3)} ({resepsiEvent.event_time || "08.30 WIB"})
-                          </span>
-                        </div>
-                        <p className="text-[7.5px] font-serif font-bold text-[#222] leading-tight truncate mt-0.5">
-                          {akadEvent.venue_name || "Kediaman Mempelai Wanita"}
-                        </p>
-                      </div>
-                    ) : (
-                      <>
-                        {/* Header label */}
-                        <span className="text-[6.5px] font-serif uppercase tracking-[0.15em] text-[#7a1827] font-bold border-b border-[#caa472]/30 pb-0.5 mb-1 block w-full">
-                          Akad &amp; Resepsi
+                        <span className="text-[6.2px] font-sans font-bold text-[#6b1523] bg-[#eedbc5] px-1 py-0.2 rounded shrink-0">
+                          {akadEvent.event_time || "07.00 WIB"}
                         </span>
-                        <p className="text-[7.5px] font-serif font-bold text-[#7a1827] leading-tight mb-0.5">
-                          {akadEvent.event_time ? `Pukul ${akadEvent.event_time}` : "07.00 WIB - Selesai"}
-                        </p>
-                        <p className="text-[8px] font-serif font-semibold text-[#222] leading-tight mb-0.5 line-clamp-1">
-                          {akadEvent.venue_name || "Kediaman Mempelai Wanita"}
-                        </p>
-                        <p className="text-[6.5px] text-[#555] font-sans leading-tight line-clamp-2">
-                          {akadEvent.venue_address || "Kp. Koleberes, Cianjur"}
-                        </p>
-                      </>
-                    )}
+                      </div>
+                      <p className="text-[6.2px] font-serif text-[#665044] leading-tight mt-0.5">
+                        {akadDateFormatted.dayName}, {akadDateFormatted.dateNum} {akadDateFormatted.monthLong.slice(0, 3)} {akadDateFormatted.year}
+                      </p>
+                    </div>
+
+                    {/* Resepsi Pernikahan Session */}
+                    <div className="w-full bg-[#f8f3ea] rounded-md px-1.5 py-1 border border-[#caa472]/35 mb-1 text-left">
+                      <div className="flex items-center justify-between gap-0.5">
+                        <span className="text-[6.8px] font-serif uppercase tracking-[0.08em] text-[#7a1827] font-bold">
+                          {resepsiEvent.custom_label || "Resepsi Pernikahan"}
+                        </span>
+                        <span className="text-[6.2px] font-sans font-bold text-[#6b1523] bg-[#eedbc5] px-1 py-0.2 rounded shrink-0">
+                          {resepsiEvent.event_time || "08.30 WIB"}
+                        </span>
+                      </div>
+                      <p className="text-[6.2px] font-serif text-[#665044] leading-tight mt-0.5">
+                        {resepsiDateFormatted.dayName}, {resepsiDateFormatted.dateNum} {resepsiDateFormatted.monthLong.slice(0, 3)} {resepsiDateFormatted.year}
+                      </p>
+                    </div>
+
+                    {/* Venue Location */}
+                    <div className="w-full text-center pt-0.5 border-t border-[#caa472]/25 mt-0.5">
+                      <p className="text-[7.5px] font-serif font-bold text-[#222] truncate leading-tight">
+                        {hasSeparateVenues 
+                          ? `${akadEvent.venue_name} & ${resepsiEvent.venue_name}`
+                          : (akadEvent.venue_name || "Kediaman Mempelai Wanita")}
+                      </p>
+                      <p className="text-[6px] text-neutral-600 font-sans leading-tight line-clamp-1 mt-0.5">
+                        {akadEvent.venue_address}
+                      </p>
+                    </div>
                   </motion.div>
                 );
               })()}
@@ -920,7 +926,7 @@ export default function RightSidebar({
               {/* 8. Spinning Vinyl Record Music Player below venue card */}
               <div
                 onClick={toggleAudio}
-                className="absolute left-[39%] top-[74%] w-[21%] aspect-square z-30 flex items-center justify-center cursor-pointer group"
+                className="absolute left-[40%] top-[79%] w-[21%] aspect-square z-30 flex items-center justify-center cursor-pointer group"
                 title={isPlaying ? "Pause Musik" : "Putar Musik"}
               >
                 <motion.div
@@ -2484,10 +2490,86 @@ export default function RightSidebar({
             </motion.div>
           </section>
 
-          {/* Footer */}
-          <footer className="w-full text-center py-8 text-[#caa472]/70 text-[10px] tracking-widest uppercase font-sans border-t border-[#caa472]/20 mt-6">
-            <p>The Wedding of {brideNickname} &amp; {groomNickname}</p>
-            <p className="mt-1">Crafted with ♥ by SERASTORY</p>
+          {/* Footer / Outro Section with Luxury Botanical Floral & Wax Seal Accessories */}
+          <footer className="relative w-full text-center pt-14 pb-28 px-5 bg-gradient-to-b from-[#1b0307] via-[#240409] to-[#140103] text-[#f5ebd8] border-t border-[#caa472]/40 overflow-hidden select-none">
+            {/* Top Ornamental Garland Divider */}
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#caa472] to-transparent" />
+            
+            {/* Corner Floral Bouquet Accents */}
+            <img
+              src={LACE10_ASSETS.flowerRoseBouquet}
+              alt="Rose"
+              className="absolute -top-6 -left-6 w-20 h-auto object-contain opacity-70 pointer-events-none filter drop-shadow-md rotate-[15deg]"
+            />
+            <img
+              src={LACE10_ASSETS.flowerRedDahlia}
+              alt="Dahlia"
+              className="absolute -top-5 -right-5 w-16 h-auto object-contain opacity-70 pointer-events-none filter drop-shadow-md rotate-[-20deg]"
+            />
+
+            {/* Central Wax Seal Medallion with soft golden halo */}
+            <div className="relative z-10 flex flex-col items-center">
+              <div className="relative w-16 h-16 mb-4 filter drop-shadow-[0_8px_20px_rgba(0,0,0,0.65)]">
+                <img
+                  src={LACE10_ASSETS.waxSealMonogram}
+                  alt="Wax Seal Monogram"
+                  className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+
+              {/* Calligraphy Names */}
+              <p className="text-[10px] uppercase font-serif tracking-[0.35em] text-[#caa472] font-semibold mb-1">
+                The Wedding Celebration Of
+              </p>
+              <h2
+                className="text-4xl sm:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-[#fff7ef] via-[#f5e4bd] to-[#caa472] tracking-wide my-1 drop-shadow-md leading-tight"
+                style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
+              >
+                {brideNickname} &amp; {groomNickname}
+              </h2>
+              <p className="font-serif text-xs text-[#d6b797] tracking-wider mb-3">
+                {brideName} &amp; {groomName}
+              </p>
+
+              {/* Ornamental Flourish Divider */}
+              <div className="flex items-center justify-center gap-2.5 my-3 w-48 mx-auto">
+                <div className="flex-1 h-[1px] bg-gradient-to-r from-transparent via-[#caa472]/70 to-transparent" />
+                <span className="text-[#caa472] text-xs">❦</span>
+                <div className="flex-1 h-[1px] bg-gradient-to-r from-transparent via-[#caa472]/70 to-transparent" />
+              </div>
+
+              {/* Sincere Thank You / Closing Wish */}
+              <p className="text-xs font-serif italic text-neutral-300 max-w-sm mx-auto leading-relaxed px-4 my-2">
+                “Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu bagi kami berdua.”
+              </p>
+
+              {/* Date Badge */}
+              <div className="mt-4 px-3.5 py-1 rounded-full bg-[#1b0307]/90 border border-[#caa472]/45 shadow-sm">
+                <span className="text-[9.5px] font-serif uppercase tracking-[0.25em] text-[#f5ebd8] font-medium">
+                  {formattedDayName}, {formattedDateNum} {formattedMonthLong} {formattedYear}
+                </span>
+              </div>
+
+              {/* SERASTORY Signature Branding Badge */}
+              <div className="mt-8 pt-5 border-t border-[#caa472]/20 w-full max-w-xs flex flex-col items-center gap-1.5 text-[#caa472]/80 text-[10px] tracking-[0.25em] uppercase font-sans">
+                <p className="flex items-center gap-1.5">
+                  <span>Crafted with</span>
+                  <span className="text-rose-400 animate-pulse text-xs">♥</span>
+                  <span>by</span>
+                  <a
+                    href="https://serastory.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-bold text-[#f5ebd8] hover:text-[#caa472] transition-colors underline decoration-[#caa472]/40 underline-offset-4"
+                  >
+                    SERASTORY
+                  </a>
+                </p>
+                <span className="text-[8.5px] text-[#caa472]/60 tracking-wider font-serif italic normal-case">
+                  Premium Digital Wedding Invitation
+                </span>
+              </div>
+            </div>
           </footer>
         </main>
       )}
