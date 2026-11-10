@@ -483,7 +483,7 @@ export default function RightSidebar({
                 </motion.div>
 
                 {/* Photobooth Dispenser Slot Machine */}
-                <div className="relative w-[270px] flex flex-col items-center z-20">
+                <div className="relative w-[295px] sm:w-[310px] flex flex-col items-center z-20">
                   {/* Layer 1: Base Full Slot Housing (z-10) with drop shadow */}
                   <div className="relative z-10 w-full select-none pointer-events-none">
                     <img
@@ -494,9 +494,9 @@ export default function RightSidebar({
                   </div>
 
                   {/* Layer 2: Dispensing Chute & Photostrip (z-20) */}
-                  {/* Anchored precisely at slit line (top ~30px). Cuts off anything still inside machine! */}
+                  {/* Anchored precisely at slit line. Cuts off anything still inside machine! */}
                   <div 
-                    className="absolute top-[30px] w-52 overflow-hidden z-20 pb-4 pt-0 pointer-events-none"
+                    className="absolute top-[32px] w-[218px] sm:w-[226px] overflow-hidden z-20 pb-4 pt-0 pointer-events-none"
                   >
                     {/* Photostrip: slowly emerges from inside slit downwards over bottom bezel */}
                     <motion.div
@@ -507,39 +507,39 @@ export default function RightSidebar({
                         ease: [0.25, 0.1, 0.25, 1],
                         delay: 0.8
                       }}
-                      className="w-full bg-[#751727] p-2.5 pt-3 pb-3 border-2 border-[#caa472] shadow-[0_12px_28px_rgba(0,0,0,0.7)] rounded-sm flex flex-col gap-2.5 pointer-events-auto"
+                      className="w-full bg-[#751727] p-2.5 pt-4 pb-3 border-2 border-[#caa472] shadow-[0_12px_28px_rgba(0,0,0,0.7)] rounded-sm flex flex-col gap-2.5 pointer-events-auto"
                     >
-                      <div className="w-full h-26 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40 shadow-inner">
+                      <div className="w-full h-32 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40 shadow-inner">
                         <img
                           src={rawGallery[0] || LACE10_ASSETS.defaultPhotos.photostrip1}
                           alt="Couple Photo 1"
-                          className="w-full h-full object-cover object-[center_18%]"
-                          style={{ objectPosition: 'center 18%' }}
+                          className="w-full h-full object-cover"
+                          style={{ objectPosition: 'center 28%' }}
                         />
                       </div>
-                      <div className="w-full h-26 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40 shadow-inner">
+                      <div className="w-full h-32 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40 shadow-inner">
                         <img
                           src={rawGallery[1] || LACE10_ASSETS.defaultPhotos.photostrip2}
                           alt="Couple Photo 2"
-                          className="w-full h-full object-cover object-[center_18%]"
-                          style={{ objectPosition: 'center 18%' }}
+                          className="w-full h-full object-cover"
+                          style={{ objectPosition: 'center 26%' }}
                         />
                       </div>
-                      <div className="w-full h-26 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40 shadow-inner">
+                      <div className="w-full h-32 bg-neutral-900 rounded overflow-hidden border border-[#caa472]/40 shadow-inner">
                         <img
                           src={rawGallery[2] || LACE10_ASSETS.defaultPhotos.photostrip3}
                           alt="Couple Photo 3"
-                          className="w-full h-full object-cover object-[center_18%]"
-                          style={{ objectPosition: 'center 18%' }}
+                          className="w-full h-full object-cover"
+                          style={{ objectPosition: 'center 22%' }}
                         />
                       </div>
                     </motion.div>
                   </div>
 
                   {/* Layer 3: Slot Machine Upper Bezel Lip (z-30) */}
-                  {/* Covers only the upper 32px so the emerging strip stays hidden above the slit */}
+                  {/* Covers only the upper 34px so the emerging strip stays hidden above the slit */}
                   <div 
-                    className="absolute top-0 left-0 right-0 h-[32px] overflow-hidden z-30 pointer-events-none select-none"
+                    className="absolute top-0 left-0 right-0 h-[34px] overflow-hidden z-30 pointer-events-none select-none"
                   >
                     <img
                       src={LACE10_ASSETS.photoboothSlot}
@@ -549,10 +549,10 @@ export default function RightSidebar({
                   </div>
 
                   {/* Layer 4: Deep Shadow inside the slit mouth (z-25) */}
-                  <div className="absolute top-[30px] left-[14%] right-[14%] h-2.5 bg-gradient-to-b from-black/95 via-black/60 to-transparent pointer-events-none z-25 rounded-b-sm" />
+                  <div className="absolute top-[32px] left-[13%] right-[13%] h-2.5 bg-gradient-to-b from-black/95 via-black/60 to-transparent pointer-events-none z-25 rounded-b-sm" />
 
                   {/* Spacer to hold the layout height while the photostrip dispenses */}
-                  <div className="w-52 h-[385px] pointer-events-none" />
+                  <div className="w-[218px] sm:w-[226px] h-[440px] pointer-events-none" />
                 </div>
 
                 {/* Continue Button & Heart Swirl Accent */}
@@ -591,18 +591,18 @@ export default function RightSidebar({
           {/* SECTION 0: HERO FLATLAY COLLAGE (Full Width Background)               */}
           {/* --------------------------------------------------------------------- */}
           <section
-            className="relative w-full overflow-hidden select-none py-3"
+            className="relative w-full overflow-hidden select-none py-4 px-2"
             style={{
               backgroundImage: `url(${LACE10_ASSETS.bgRedSatinDraped})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
           >
-            {/* Inner responsive frame with balanced 430:545 flatlay proportions */}
-            <div className="relative w-full max-w-[430px] aspect-[430/545] mx-auto overflow-hidden">
+            {/* Inner responsive frame with balanced full flatlay proportions */}
+            <div className="relative w-full max-w-[470px] aspect-[430/525] mx-auto">
               {/* 1. Pleated Red Circular Fan on the left background */}
               <div
-                className="absolute -left-[16%] top-[16%] w-[56%] aspect-square rounded-full overflow-hidden shadow-2xl pointer-events-none opacity-95"
+                className="absolute left-[-2%] top-[14%] w-[52%] aspect-square rounded-full overflow-hidden shadow-2xl pointer-events-none opacity-95"
                 style={{
                   backgroundImage: `url(${LACE10_ASSETS.pleatedSunburstMat})`,
                   backgroundSize: "cover",
@@ -614,12 +614,12 @@ export default function RightSidebar({
               <img
                 src={LACE10_ASSETS.hangingMoss}
                 alt="Moss"
-                className="absolute left-[7%] top-[24%] w-[12%] h-auto object-contain pointer-events-none opacity-90 z-10"
+                className="absolute left-[9%] top-[22%] w-[12%] h-auto object-contain pointer-events-none opacity-90 z-10"
               />
               <img
                 src={LACE10_ASSETS.flowerRoseBouquet}
                 alt="Rose Accent"
-                className="absolute left-[12%] top-[20%] w-[18%] h-auto object-contain pointer-events-none z-10 rotate-[-15deg]"
+                className="absolute left-[13%] top-[18%] w-[18%] h-auto object-contain pointer-events-none z-10 rotate-[-15deg]"
               />
 
               {/* 2. Elegant Subtle Gold Watermark Monogram in Center Background (Replaces harsh green letter) */}
@@ -637,7 +637,7 @@ export default function RightSidebar({
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="absolute left-[37%] top-[3%] w-[48%] h-[38%] z-10 flex items-center justify-center cursor-pointer group"
+                className="absolute left-[36%] top-[2%] w-[48%] h-[38%] z-10 flex items-center justify-center cursor-pointer group"
                 onClick={() => setLightboxImg(rawGallery[0] || LACE10_ASSETS.defaultPhotos.heroEnvelope)}
               >
                 {/* Couple Photo peaking inside the open flap */}
@@ -645,8 +645,8 @@ export default function RightSidebar({
                   <img
                     src={rawGallery[0] || LACE10_ASSETS.defaultPhotos.heroEnvelope}
                     alt="Couple Hero"
-                    className="w-full h-full object-cover object-[center_18%] group-hover:scale-105 transition-transform duration-500"
-                    style={{ objectPosition: "center 18%" }}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    style={{ objectPosition: "center 26%" }}
                   />
                 </div>
                 {/* Open Envelope Front & Flap */}
@@ -668,7 +668,7 @@ export default function RightSidebar({
                 href="#rsvp-section"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.96 }}
-                className="absolute left-[13%] top-[14%] w-[33%] aspect-[2400/1743] z-20 flex items-center justify-center cursor-pointer filter drop-shadow-xl"
+                className="absolute left-[8%] top-[14%] w-[33%] aspect-[2400/1743] z-20 flex items-center justify-center cursor-pointer filter drop-shadow-xl"
                 style={{ rotate: "-5deg" }}
               >
                 {/* White lace insert card */}
@@ -704,7 +704,7 @@ export default function RightSidebar({
                 initial={{ opacity: 0, scale: 0.92 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="absolute left-[56%] top-[17%] w-[37%] h-[49%] z-20 bg-[#fdfbf7] rounded-t-[50px] rounded-b-2xl border border-[#caa472]/50 shadow-2xl p-2.5 pl-4 pr-2 text-center flex flex-col items-center justify-center"
+                className="absolute left-[55%] top-[16%] w-[38%] h-[50%] z-20 bg-[#fdfbf7] rounded-t-[50px] rounded-b-2xl border border-[#caa472]/50 shadow-2xl p-2.5 pl-4 pr-2 text-center flex flex-col items-center justify-center"
               >
                 <p className="text-[8.5px] font-serif italic text-[#7a1827] tracking-wider mb-1">
                   The Wedding Of
@@ -735,7 +735,7 @@ export default function RightSidebar({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="absolute left-[11%] top-[42%] w-[31%] h-[49%] z-20 bg-[#6b1523] p-[2px] rounded-t-full rounded-b-xl shadow-2xl"
+                className="absolute left-[8%] top-[42%] w-[32%] h-[50%] z-20 bg-[#6b1523] p-[2px] rounded-t-full rounded-b-xl shadow-2xl"
               >
                 <div className="w-full h-full bg-[#fdfaf5] rounded-t-full rounded-b-lg border border-[#caa472]/40 p-2 flex flex-col items-center justify-center text-center">
                   <img
@@ -776,7 +776,7 @@ export default function RightSidebar({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="absolute left-[37%] top-[53%] w-[27%] h-[24%] z-30 bg-[#fdfbf7] p-2 rounded-xl border border-[#caa472]/70 shadow-2xl flex flex-col items-center justify-center text-center"
+                className="absolute left-[36%] top-[54%] w-[29%] min-h-[22%] z-30 bg-[#fdfbf7] p-2 rounded-xl border border-[#caa472]/70 shadow-2xl flex flex-col items-center justify-center text-center"
                 style={{ rotate: "1.5deg" }}
               >
                 {/* Header label */}
@@ -794,40 +794,8 @@ export default function RightSidebar({
                 </p>
               </motion.div>
 
-              {/* 8. Spinning Vinyl Record Music Player below venue card */}
-              <div
-                onClick={toggleAudio}
-                className="absolute left-[41%] top-[76%] w-[19%] aspect-square z-30 flex items-center justify-center cursor-pointer group"
-                title={isPlaying ? "Pause Musik" : "Putar Musik"}
-              >
-                <motion.div
-                  animate={{ rotate: isPlaying ? 360 : 0 }}
-                  transition={{ duration: 3.5, repeat: Infinity, ease: "linear" }}
-                  className="relative w-full h-full rounded-full overflow-hidden shadow-2xl filter drop-shadow-lg"
-                >
-                  <img
-                    src={LACE10_ASSETS.vinylDisc}
-                    alt="Vinyl Record"
-                    className="w-full h-full object-contain"
-                  />
-                  {/* Red center label with play triangle button */}
-                  <div className="absolute inset-0 m-auto w-[36%] h-[36%] rounded-full bg-[#851c2d] border border-[#f5ebd8] flex items-center justify-center shadow-inner">
-                    {isPlaying ? (
-                      <div className="flex gap-0.5">
-                        <div className="w-[2px] h-2 bg-white rounded-full"></div>
-                        <div className="w-[2px] h-2 bg-white rounded-full"></div>
-                      </div>
-                    ) : (
-                      <svg className="w-2.5 h-2.5 text-white fill-current ml-0.5" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                    )}
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* 9. Brass Candlestick Holder with Burning Red Candle */}
-              <div className="absolute left-[74%] top-[64%] w-[11%] h-auto z-20 pointer-events-none">
+              {/* 8. Brass Candlestick Holder with Burning Red Candle */}
+              <div className="absolute left-[74%] top-[62%] w-[12%] h-auto z-20 pointer-events-none">
                 <img
                   src={LACE10_ASSETS.candleBrassStand}
                   alt="Candle"
@@ -1384,8 +1352,8 @@ export default function RightSidebar({
                     <img
                       src={photo}
                       alt={`Gallery ${idx + 1}`}
-                      className="w-full h-full object-cover object-[center_18%] group-hover:scale-105 transition-transform duration-500"
-                      style={{ objectPosition: 'center 18%' }}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      style={{ objectPosition: 'center 24%' }}
                     />
                   </motion.div>
                 );
@@ -1430,8 +1398,8 @@ export default function RightSidebar({
                     <img
                       src={getCandidPhoto(0)}
                       alt="Moment 1"
-                      className="w-full h-full object-cover object-[center_18%]"
-                      style={{ objectPosition: 'center 18%' }}
+                      className="w-full h-full object-cover"
+                      style={{ objectPosition: 'center 24%' }}
                     />
                   </div>
                 </motion.div>
@@ -1451,8 +1419,8 @@ export default function RightSidebar({
                       <img
                         src={getCandidPhoto(1)}
                         alt="Moment 2"
-                        className="w-full h-full object-cover object-[center_18%]"
-                        style={{ objectPosition: 'center 18%' }}
+                        className="w-full h-full object-cover"
+                        style={{ objectPosition: 'center 24%' }}
                       />
                     </div>
                   </motion.div>
@@ -1469,8 +1437,8 @@ export default function RightSidebar({
                       <img
                         src={getCandidPhoto(2)}
                         alt="Moment 3"
-                        className="w-full h-full object-cover object-[center_18%]"
-                        style={{ objectPosition: 'center 18%' }}
+                        className="w-full h-full object-cover"
+                        style={{ objectPosition: 'center 24%' }}
                       />
                     </div>
                   </motion.div>
@@ -1491,8 +1459,8 @@ export default function RightSidebar({
                       <img
                         src={getCandidPhoto(3)}
                         alt="Moment 4"
-                        className="w-full h-full object-cover object-[center_18%]"
-                        style={{ objectPosition: 'center 18%' }}
+                        className="w-full h-full object-cover"
+                        style={{ objectPosition: 'center 24%' }}
                       />
                     </div>
                   </motion.div>
@@ -1509,8 +1477,8 @@ export default function RightSidebar({
                       <img
                         src={getCandidPhoto(4)}
                         alt="Moment 5"
-                        className="w-full h-full object-cover object-[center_18%]"
-                        style={{ objectPosition: 'center 18%' }}
+                        className="w-full h-full object-cover"
+                        style={{ objectPosition: 'center 24%' }}
                       />
                     </div>
                   </motion.div>
