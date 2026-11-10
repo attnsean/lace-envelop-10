@@ -80,6 +80,9 @@ export default function RightSidebar({
   const [isSubmittingWish, setIsSubmittingWish] = useState(false);
   const [copiedBank, setCopiedBank] = useState<string | null>(null);
 
+  // Map Tab State (for separate venues)
+  const [activeMapTab, setActiveMapTab] = useState<'akad' | 'resepsi'>('akad');
+
   // Lightbox Modal
   const [lightboxImg, setLightboxImg] = useState<string | null>(null);
 
@@ -737,29 +740,47 @@ export default function RightSidebar({
                 transition={{ duration: 0.8, delay: 0.3 }}
                 className="absolute left-[8%] top-[42%] w-[32%] h-[50%] z-20 bg-[#6b1523] p-[2px] rounded-t-full rounded-b-xl shadow-2xl"
               >
-                <div className="w-full h-full bg-[#fdfaf5] rounded-t-full rounded-b-lg border border-[#caa472]/40 p-2 flex flex-col items-center justify-center text-center">
-                  <img
-                    src={LACE10_ASSETS.swansHeart}
-                    alt="Swans"
-                    className="w-[26px] h-auto object-contain mb-0.5 opacity-90"
-                  />
-                  <p className="text-[7.5px] font-serif uppercase tracking-[0.18em] text-[#5a4a42] mb-1">
-                    Save The Date
-                  </p>
-                  <p className="text-[11px] font-serif uppercase tracking-wider text-[#6b1523] font-bold">
-                    {formattedDayName}
-                  </p>
+                <div className="w-full h-full bg-[#fdfaf5] rounded-t-full rounded-b-lg border border-[#caa472]/40 p-2 flex flex-col items-center justify-between text-center py-2.5 sm:py-3.5">
+                  {/* Top: Swans icon & subtitle */}
+                  <div className="flex flex-col items-center">
+                    <img
+                      src={LACE10_ASSETS.swansHeart}
+                      alt="Swans"
+                      className="w-[26px] h-auto object-contain mb-0.5 opacity-90"
+                    />
+                    <p className="text-[7px] font-serif uppercase tracking-[0.2em] text-[#5a4a42]">
+                      Save The Date
+                    </p>
+                  </div>
+
+                  {/* Middle: Day name & Editorial Date Column */}
                   <div className="flex flex-col items-center my-0.5 leading-none">
-                    <span className="text-[21px] font-serif font-bold text-[#6b1523] leading-none">
-                      {formattedDateNum}
-                    </span>
-                    <span className="text-[9px] text-[#6b1523] my-0.5">•</span>
-                    <span className="text-[13px] font-serif font-bold text-[#6b1523] leading-none">
-                      {formattedMonthNum}
-                    </span>
-                    <span className="text-[9px] text-[#6b1523] my-0.5">•</span>
-                    <span className="text-[10px] font-serif text-[#6b1523]">
-                      {formattedYear}
+                    <p className="text-[11px] font-serif uppercase tracking-wider text-[#6b1523] font-bold mb-1">
+                      {formattedDayName}
+                    </p>
+                    <div className="flex flex-col items-center leading-none">
+                      <span className="text-[23px] font-serif font-bold text-[#6b1523] leading-none tracking-tight">
+                        {formattedDateNum}
+                      </span>
+                      <span className="text-[9px] text-[#caa472] my-0.5">•</span>
+                      <span className="text-[14px] font-serif font-bold text-[#6b1523] leading-none">
+                        {formattedMonthNum}
+                      </span>
+                      <span className="text-[9px] text-[#caa472] my-0.5">•</span>
+                      <span className="text-[11px] font-serif text-[#6b1523] tracking-widest font-medium">
+                        {formattedYear}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Bottom: Luxury Ornamental Divider & Romantic Tagline */}
+                  <div className="flex flex-col items-center w-full px-1">
+                    <div className="w-10 h-[1px] bg-gradient-to-r from-transparent via-[#caa472] to-transparent my-1" />
+                    <p className="text-[7px] font-serif italic text-[#7a1827] tracking-wider leading-tight">
+                      The Beginning of Forever
+                    </p>
+                    <span className="text-[6.5px] font-serif uppercase tracking-[0.25em] text-[#8c6b45] font-semibold mt-0.5">
+                      {groomNickname ? groomNickname[0] : "H"} &amp; {brideNickname ? brideNickname[0] : "S"}
                     </span>
                   </div>
                 </div>
@@ -772,27 +793,63 @@ export default function RightSidebar({
               </motion.div>
 
               {/* 7. Center Venue Details Card (Neatly layered without covering names) */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="absolute left-[36%] top-[54%] w-[29%] min-h-[22%] z-30 bg-[#fdfbf7] p-2 rounded-xl border border-[#caa472]/70 shadow-2xl flex flex-col items-center justify-center text-center"
-                style={{ rotate: "1.5deg" }}
-              >
-                {/* Header label */}
-                <span className="text-[6.5px] font-serif uppercase tracking-[0.15em] text-[#7a1827] font-bold border-b border-[#caa472]/30 pb-0.5 mb-1 block w-full">
-                  Akad &amp; Resepsi
-                </span>
-                <p className="text-[7.5px] font-serif font-bold text-[#7a1827] leading-tight mb-0.5">
-                  {akadEvent.event_time ? `Pukul ${akadEvent.event_time}` : "07.00 WIB - Selesai"}
-                </p>
-                <p className="text-[8px] font-serif font-semibold text-[#222] leading-tight mb-0.5 line-clamp-1">
-                  {akadEvent.venue_name || "Kediaman Mempelai Wanita"}
-                </p>
-                <p className="text-[6.5px] text-[#555] font-sans leading-tight line-clamp-2">
-                  {akadEvent.venue_address || "Kp. Koleberes, Cianjur"}
-                </p>
-              </motion.div>
+              {(() => {
+                const hasSeparateVenues = Boolean(
+                  resepsiEvent && 
+                  resepsiEvent.venue_name && 
+                  akadEvent.venue_name && 
+                  resepsiEvent.venue_name.trim().toLowerCase() !== akadEvent.venue_name.trim().toLowerCase()
+                );
+
+                return (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                    className="absolute left-[36%] top-[54%] w-[30%] min-h-[22%] z-30 bg-[#fdfbf7] p-2 rounded-xl border border-[#caa472]/70 shadow-2xl flex flex-col items-center justify-center text-center"
+                    style={{ rotate: "1.5deg" }}
+                  >
+                    {hasSeparateVenues ? (
+                      <div className="flex flex-col gap-1 w-full text-center">
+                        {/* Akad row */}
+                        <div className="border-b border-[#caa472]/30 pb-1">
+                          <span className="text-[6.5px] font-serif uppercase tracking-[0.12em] text-[#7a1827] font-bold block">
+                            Akad ({akadEvent.event_time || "07.00 WIB"})
+                          </span>
+                          <p className="text-[7.5px] font-serif font-bold text-[#222] leading-tight truncate">
+                            {akadEvent.venue_name}
+                          </p>
+                        </div>
+                        {/* Resepsi row */}
+                        <div className="pt-0.5">
+                          <span className="text-[6.5px] font-serif uppercase tracking-[0.12em] text-[#7a1827] font-bold block">
+                            Resepsi ({resepsiEvent.event_time || "11.00 WIB"})
+                          </span>
+                          <p className="text-[7.5px] font-serif font-bold text-[#222] leading-tight truncate">
+                            {resepsiEvent.venue_name}
+                          </p>
+                        </div>
+                      </div>
+                    ) : (
+                      <>
+                        {/* Header label */}
+                        <span className="text-[6.5px] font-serif uppercase tracking-[0.15em] text-[#7a1827] font-bold border-b border-[#caa472]/30 pb-0.5 mb-1 block w-full">
+                          Akad &amp; Resepsi
+                        </span>
+                        <p className="text-[7.5px] font-serif font-bold text-[#7a1827] leading-tight mb-0.5">
+                          {akadEvent.event_time ? `Pukul ${akadEvent.event_time}` : "07.00 WIB - Selesai"}
+                        </p>
+                        <p className="text-[8px] font-serif font-semibold text-[#222] leading-tight mb-0.5 line-clamp-1">
+                          {akadEvent.venue_name || "Kediaman Mempelai Wanita"}
+                        </p>
+                        <p className="text-[6.5px] text-[#555] font-sans leading-tight line-clamp-2">
+                          {akadEvent.venue_address || "Kp. Koleberes, Cianjur"}
+                        </p>
+                      </>
+                    )}
+                  </motion.div>
+                );
+              })()}
 
               {/* 8. Spinning Vinyl Record Music Player below venue card */}
               <div
@@ -1858,51 +1915,92 @@ export default function RightSidebar({
           {/* --------------------------------------------------------------------- */}
           {/* SECTION 10: LOCATION & MAPS (Full Width Velvet BG)                     */}
           {/* --------------------------------------------------------------------- */}
-          <section
-            className="relative w-full px-5 py-14 flex flex-col items-center text-center overflow-hidden"
-            style={{
-              backgroundImage: `url(${LACE10_ASSETS.bgRedVelvet})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
-          >
-            {/* Dark luxury vignette overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#1b0307]/80 via-transparent to-[#1b0307]/80 pointer-events-none" />
+          {(() => {
+            const hasSeparateVenues = Boolean(
+              resepsiEvent && 
+              resepsiEvent.venue_name && 
+              akadEvent.venue_name && 
+              resepsiEvent.venue_name.trim().toLowerCase() !== akadEvent.venue_name.trim().toLowerCase()
+            );
+            const currentEvent = (hasSeparateVenues && activeMapTab === 'resepsi') ? resepsiEvent : akadEvent;
 
-            <h2 className="relative z-10 text-3xl font-serif text-[#f5ebd8] uppercase tracking-wider mb-2 drop-shadow">
-              Location
-            </h2>
-            <img
-              src={LACE10_ASSETS.flourishDivider2}
-              alt="Divider"
-              className="relative z-10 w-48 h-auto object-contain my-2 opacity-80"
-            />
-            <p className="relative z-10 text-sm font-serif font-bold text-[#f5ebd8] mt-2 mb-1">
-              {akadEvent.venue_name}
-            </p>
-            <p className="relative z-10 text-xs text-[#e8cfb5] font-sans max-w-xs leading-relaxed mb-6">
-              {akadEvent.venue_address}
-            </p>
+            return (
+              <section
+                className="relative w-full px-5 py-14 flex flex-col items-center text-center overflow-hidden"
+                style={{
+                  backgroundImage: `url(${LACE10_ASSETS.bgRedVelvet})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              >
+                {/* Dark luxury vignette overlay */}
+                <div className="absolute inset-0 bg-gradient-to-b from-[#1b0307]/80 via-transparent to-[#1b0307]/80 pointer-events-none" />
 
-            {/* Google Maps Preview Card */}
-            <div className="relative z-10 w-full max-w-xs h-56 rounded-2xl overflow-hidden border-2 border-[#caa472] shadow-2xl bg-neutral-900">
-              <iframe
-                title="Venue Location"
-                src={`https://maps.google.com/maps?q=${encodeURIComponent(akadEvent.venue_address || akadEvent.venue_name || 'Batulawang')}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
-                className="w-full h-full border-0"
-                loading="lazy"
-              />
-            </div>
+                <h2 className="relative z-10 text-3xl font-serif text-[#f5ebd8] uppercase tracking-wider mb-2 drop-shadow">
+                  Location
+                </h2>
+                <img
+                  src={LACE10_ASSETS.flourishDivider2}
+                  alt="Divider"
+                  className="relative z-10 w-48 h-auto object-contain my-2 opacity-80"
+                />
 
-            <a
-              href={akadEvent.venue_maps_url || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(akadEvent.venue_address || '')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative z-10 mt-5 inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#821c2c] text-white text-xs font-sans uppercase tracking-[0.2em] shadow-lg hover:bg-[#5c1320] transition-colors border border-[#caa472]/60"
-            >
-              <span>Buka Google Maps</span>
-            </a>
-          </section>
+                {/* Switcher if Akad & Resepsi are in different venues */}
+                {hasSeparateVenues && (
+                  <div className="relative z-10 flex items-center justify-center gap-1.5 p-1 bg-[#1b0407]/90 rounded-full border border-[#caa472]/60 shadow-lg mb-4 mt-1">
+                    <button
+                      type="button"
+                      onClick={() => setActiveMapTab('akad')}
+                      className={`px-4 py-1.5 rounded-full text-xs font-serif font-bold transition-all cursor-pointer ${
+                        activeMapTab === 'akad'
+                          ? 'bg-[#821c2c] text-white shadow'
+                          : 'text-[#e8cfb5] hover:text-white'
+                      }`}
+                    >
+                      {akadEvent.custom_label || 'Lokasi Akad'}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setActiveMapTab('resepsi')}
+                      className={`px-4 py-1.5 rounded-full text-xs font-serif font-bold transition-all cursor-pointer ${
+                        activeMapTab === 'resepsi'
+                          ? 'bg-[#821c2c] text-white shadow'
+                          : 'text-[#e8cfb5] hover:text-white'
+                      }`}
+                    >
+                      {resepsiEvent.custom_label || 'Lokasi Resepsi'}
+                    </button>
+                  </div>
+                )}
+
+                <p className="relative z-10 text-sm font-serif font-bold text-[#f5ebd8] mt-2 mb-1">
+                  {currentEvent.venue_name}
+                </p>
+                <p className="relative z-10 text-xs text-[#e8cfb5] font-sans max-w-xs leading-relaxed mb-6">
+                  {currentEvent.venue_address}
+                </p>
+
+                {/* Google Maps Preview Card */}
+                <div className="relative z-10 w-full max-w-xs h-56 rounded-2xl overflow-hidden border-2 border-[#caa472] shadow-2xl bg-neutral-900">
+                  <iframe
+                    title="Venue Location"
+                    src={`https://maps.google.com/maps?q=${encodeURIComponent(currentEvent.venue_address || currentEvent.venue_name || 'Batulawang')}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+                    className="w-full h-full border-0"
+                    loading="lazy"
+                  />
+                </div>
+
+                <a
+                  href={currentEvent.venue_maps_url || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(currentEvent.venue_address || '')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative z-10 mt-5 inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#821c2c] text-white text-xs font-sans uppercase tracking-[0.2em] shadow-lg hover:bg-[#5c1320] transition-colors border border-[#caa472]/60"
+                >
+                  <span>Buka Google Maps</span>
+                </a>
+              </section>
+            );
+          })()}
 
           {/* --------------------------------------------------------------------- */}
           {/* SECTION 11: RSVP & BLESSING WALL (Full Width Curtain BG)              */}
