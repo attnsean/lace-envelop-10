@@ -319,7 +319,7 @@ export default function RightSidebar({
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           onClick={toggleAudio}
-          className="fixed md:absolute bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-[#1e0508]/85 backdrop-blur-md border border-[#c49a6c]/40 shadow-2xl flex items-center justify-center p-1 group hover:scale-105 transition-transform cursor-pointer"
+          className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#1e0508]/90 backdrop-blur-md border-2 border-[#c49a6c] shadow-[0_8px_25px_rgba(0,0,0,0.7)] flex items-center justify-center p-1 group hover:scale-110 active:scale-95 transition-all cursor-pointer"
           title={isPlaying ? "Jeda Musik" : "Putar Musik"}
         >
           <motion.img
@@ -794,7 +794,39 @@ export default function RightSidebar({
                 </p>
               </motion.div>
 
-              {/* 8. Brass Candlestick Holder with Burning Red Candle */}
+              {/* 8. Spinning Vinyl Record Music Player below venue card */}
+              <div
+                onClick={toggleAudio}
+                className="absolute left-[39%] top-[74%] w-[21%] aspect-square z-30 flex items-center justify-center cursor-pointer group"
+                title={isPlaying ? "Pause Musik" : "Putar Musik"}
+              >
+                <motion.div
+                  animate={{ rotate: isPlaying ? 360 : 0 }}
+                  transition={{ duration: 3.5, repeat: Infinity, ease: "linear" }}
+                  className="relative w-full h-full rounded-full overflow-hidden shadow-2xl filter drop-shadow-xl hover:scale-105 transition-transform"
+                >
+                  <img
+                    src={LACE10_ASSETS.vinylDisc}
+                    alt="Vinyl Record"
+                    className="w-full h-full object-contain"
+                  />
+                  {/* Red center label with play/pause button */}
+                  <div className="absolute inset-0 m-auto w-[36%] h-[36%] rounded-full bg-[#851c2d] border border-[#f5ebd8] flex items-center justify-center shadow-inner">
+                    {isPlaying ? (
+                      <div className="flex gap-0.5">
+                        <div className="w-[2px] h-2 bg-white rounded-full"></div>
+                        <div className="w-[2px] h-2 bg-white rounded-full"></div>
+                      </div>
+                    ) : (
+                      <svg className="w-2.5 h-2.5 text-white fill-current ml-0.5" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    )}
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* 9. Brass Candlestick Holder with Burning Red Candle */}
               <div className="absolute left-[74%] top-[62%] w-[12%] h-auto z-20 pointer-events-none">
                 <img
                   src={LACE10_ASSETS.candleBrassStand}
@@ -1508,7 +1540,7 @@ export default function RightSidebar({
           )}
 
           {/* --------------------------------------------------------------------- */}
-          {/* SECTION 8: RUNDOWN ACARA (Only rendered if user inputs rundown)       */}
+          {/* SECTION 8: RUNDOWN ACARA (Redesigned: Luxury Stationery Plaque)       */}
           {/* --------------------------------------------------------------------- */}
           {(() => {
             const rundownList = (Array.isArray((project as any)?.dining_schedule) && (project as any).dining_schedule.length > 0)
@@ -1521,7 +1553,7 @@ export default function RightSidebar({
 
             return (
               <section
-                className="relative w-full px-5 py-14 flex flex-col items-center text-center overflow-hidden"
+                className="relative w-full px-4 sm:px-6 py-14 flex flex-col items-center text-center overflow-hidden"
                 style={{
                   backgroundImage: `url(${LACE10_ASSETS.bgRedVelvet})`,
                   backgroundSize: 'cover',
@@ -1529,45 +1561,103 @@ export default function RightSidebar({
                 }}
               >
                 {/* Dark luxury vignette overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-[#1f0307]/75 via-transparent to-[#1f0307]/80 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-b from-[#1f0307]/85 via-transparent to-[#1f0307]/90 pointer-events-none" />
 
-                <h3
-                  className="relative z-10 text-4xl sm:text-5xl text-[#f5ebd8] mb-1 drop-shadow-md"
-                  style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
+                {/* Luxury Cream Stationery Plaque */}
+                <motion.div
+                  initial={{ opacity: 0, y: 25 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8 }}
+                  className="relative z-10 w-full max-w-sm bg-[#fdfbf7] text-[#3d1017] rounded-3xl p-6 sm:p-7 border-2 border-[#caa472] shadow-[0_20px_45px_rgba(0,0,0,0.65)] flex flex-col items-center"
                 >
-                  Rundown Acara
-                </h3>
-                <img
-                  src={LACE10_ASSETS.rundownWavyLine}
-                  alt="Wavy Line"
-                  className="relative z-10 w-44 h-auto object-contain my-3 opacity-80"
-                />
-
-                {/* Timeline Schedule Cards with Luxury Borders */}
-                <div className="relative z-10 w-full max-w-xs flex flex-col gap-3 mt-4 text-[#f8f4ed]">
-                  {rundownList.map((item: any, idx: number) => (
-                    <div
-                      key={idx}
-                      className="flex items-center justify-between p-3.5 rounded-2xl bg-[#fdfaf5]/95 border-2 border-[#caa472] shadow-xl text-[#3d1017] hover:scale-[1.02] transition-transform"
-                    >
-                      <span className="px-3 py-1 rounded-full bg-[#7a1827] text-white text-[11px] font-sans font-bold tracking-wider shadow shrink-0">
-                        {item.time}
-                      </span>
-                      <span className="text-xs sm:text-sm font-serif font-bold text-[#42111a] text-right ml-2">
-                        {item.title}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Bottom Getaway Wedding Car Illustration */}
-                <div className="relative z-10 w-40 h-auto mt-8 opacity-85 filter drop-shadow invert">
+                  {/* Top-Right Corner Floral Accent */}
                   <img
-                    src={LACE10_ASSETS.weddingCarGetaway}
-                    alt="Wedding Car"
-                    className="w-full h-auto object-contain"
+                    src={LACE10_ASSETS.flowerRoseBouquet}
+                    alt="Rose"
+                    className="absolute -top-6 -right-5 w-16 sm:w-20 h-auto object-contain pointer-events-none drop-shadow-md z-20 rotate-[10deg]"
                   />
-                </div>
+
+                  {/* Wax Seal Medallion at top arch */}
+                  <div className="w-12 h-12 -mt-10 mb-2 filter drop-shadow-md relative z-20">
+                    <img
+                      src={LACE10_ASSETS.waxSealRose}
+                      alt="Wax Seal"
+                      className="w-full h-full object-contain rounded-full"
+                    />
+                  </div>
+
+                  {/* Subtitle & Title */}
+                  <p className="text-[9px] uppercase font-serif font-bold tracking-[0.3em] text-[#8c6b45] mt-1">
+                    Susunan Agenda
+                  </p>
+                  <h3
+                    className="text-3xl sm:text-4xl text-[#7a1827] tracking-wide my-1 leading-tight"
+                    style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
+                  >
+                    Rundown Acara
+                  </h3>
+
+                  {/* Delicate Gold Flourish Divider */}
+                  <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-[#caa472] to-transparent my-2" />
+
+                  <p className="text-[10px] text-[#7a6250] font-serif italic mb-5 max-w-[260px]">
+                    Rangkaian momen sakral dan istimewa pada hari pernikahan kami
+                  </p>
+
+                  {/* Vertical Golden Timeline Stem */}
+                  <div className="relative w-full flex flex-col gap-4 pl-3 sm:pl-4 pr-1">
+                    {/* Golden timeline track */}
+                    <div className="absolute left-[26px] sm:left-[30px] top-4 bottom-4 w-0.5 border-l-2 border-dashed border-[#caa472]/60 pointer-events-none" />
+
+                    {rundownList.map((item: any, idx: number) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, x: -15 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: idx * 0.15, duration: 0.5 }}
+                        className="relative flex items-start gap-3 group"
+                      >
+                        {/* Numbered Burgundy Pin on Timeline */}
+                        <div className="relative z-10 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#7a1827] border-2 border-[#f5ebd8] text-[#fdfbf7] flex items-center justify-center text-xs font-serif font-bold shadow-md shrink-0 group-hover:scale-110 transition-transform">
+                          <span>{idx + 1}</span>
+                        </div>
+
+                        {/* Event Card Content */}
+                        <div className="flex-1 bg-[#f7f2ea]/90 border border-[#caa472]/50 rounded-2xl p-3 sm:p-3.5 shadow-sm text-left hover:border-[#7a1827]/50 hover:bg-[#f7f2ea] transition-all">
+                          {/* Time badge */}
+                          <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#7a1827] text-white text-[9.5px] font-sans font-bold tracking-wider mb-1.5 shadow-xs">
+                            <span>⏱</span>
+                            <span>{item.time}</span>
+                          </div>
+                          {/* Title */}
+                          <h4 className="font-serif font-bold text-sm sm:text-[15px] text-[#3d1017] leading-snug">
+                            {item.title}
+                          </h4>
+                          {/* Description if available */}
+                          {Boolean(item.description) && (
+                            <p className="text-[10px] sm:text-[11px] text-[#6b503e] font-sans mt-1 leading-relaxed">
+                              {item.description}
+                            </p>
+                          )}
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {/* Bottom Doves Flourish Accent */}
+                  <div className="mt-6 flex flex-col items-center">
+                    <img
+                      src={LACE10_ASSETS.doveOliveBranch}
+                      alt="Doves"
+                      className="w-9 h-auto object-contain opacity-75 mb-1"
+                    />
+                    <span className="text-[9px] uppercase tracking-[0.25em] text-[#8c6b45] font-serif font-medium">
+                      {groomNickname} &amp; {brideNickname}
+                    </span>
+                  </div>
+                </motion.div>
               </section>
             );
           })()}
