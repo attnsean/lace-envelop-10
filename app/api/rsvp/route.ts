@@ -9,7 +9,8 @@ const supabaseAdmin = createClient(supabaseUrl, supabaseServiceRoleKey);
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    let { project_id, guest_id, guest_name, guest_phone, attendance, pax, message } = body;
+    let { project_id, guest_id, guest_name, name, guest_phone, phone, attendance, pax, message } = body;
+    const resolvedGuestName = (guest_name || name || 'Tamu Undangan').trim() || 'Tamu Undangan';
 
     // Self-healing: if project_id is wedding_details.id, find the real projects.id
     if (project_id) {
@@ -39,10 +40,10 @@ export async function POST(request: Request) {
       .insert({
         project_id,
         guest_id: guest_id || null,
-        guest_name,
-        guest_phone,
-        attendance,
-        pax,
+        guest_name: resolvedGuestName,
+        guest_phone: guest_phone || phone || null,
+        attendance: attendance || 'hadir',
+        pax: pax !== undefined ? Number(pax) : 1,
         message: message || ''
       })
       .select();

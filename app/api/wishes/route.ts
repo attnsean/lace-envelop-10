@@ -9,7 +9,8 @@ const supabaseAdmin = createClient(supabaseUrl, supabaseServiceRoleKey);
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    let { project_id, guest_id, name, message } = body;
+    let { project_id, guest_id, name, guest_name, message } = body;
+    const resolvedName = (name || guest_name || 'Tamu Undangan').trim() || 'Tamu Undangan';
 
     // Self-healing: if project_id is wedding_details.id, find the real projects.id
     if (project_id) {
@@ -34,8 +35,8 @@ export async function POST(request: Request) {
       project_id = 'e8b15d20-8012-4eb2-a083-d92ea407c001';
     }
 
-    if (!name || !message) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    if (!message || !message.trim()) {
+      return NextResponse.json({ error: 'Pesan ucapan tidak boleh kosong' }, { status: 400 });
     }
 
     const { data, error } = await supabaseAdmin
@@ -43,8 +44,8 @@ export async function POST(request: Request) {
       .insert({
         project_id,
         guest_id: guest_id || null,
-        name,
-        message,
+        name: resolvedName,
+        message: message.trim(),
         is_approved: true
       })
       .select();
