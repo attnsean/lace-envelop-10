@@ -167,6 +167,7 @@ export default function RightSidebar({
 
   const akadDateFormatted = formatEventDate(akadEvent?.event_date, weddingDate);
   const resepsiDateFormatted = formatEventDate(resepsiEvent?.event_date, weddingDate);
+  const isSeparateDates = akadDateFormatted.dateNum !== resepsiDateFormatted.dateNum;
 
   // Gallery Photos
   const rawGallery = Array.isArray(project?.gallery_photos) && project.gallery_photos.length > 0 
@@ -753,30 +754,59 @@ export default function RightSidebar({
                 initial={{ opacity: 0, scale: 0.92 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="absolute left-[55%] top-[16%] w-[38%] h-[50%] z-20 bg-[#fdfbf7] rounded-t-[50px] rounded-b-2xl border border-[#caa472]/50 shadow-2xl p-2.5 pl-4 pr-2 text-center flex flex-col items-center justify-center"
+                className="absolute left-[54%] top-[16%] w-[39%] h-[51%] z-20 bg-gradient-to-b from-[#8f2132] via-[#6b1523] to-[#4a0d18] p-[2.5px] rounded-t-[54px] rounded-b-2xl shadow-[0_14px_35px_rgba(0,0,0,0.6)]"
               >
-                <p className="text-[8.5px] font-serif italic text-[#7a1827] tracking-wider mb-1">
-                  The Wedding Of
-                </p>
-                <h1
-                  className="text-[27px] leading-[1.1] text-[#7a1827] tracking-wide my-0.5"
-                  style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
-                >
-                  {brideNickname}
-                </h1>
-                <span className="text-[13px] text-[#7a1827] italic font-serif my-0.5 leading-none">&amp;</span>
-                <h1
-                  className="text-[27px] leading-[1.1] text-[#7a1827] tracking-wide my-0.5"
-                  style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
-                >
-                  {groomNickname}
-                </h1>
-                {/* Two Doves icon at bottom */}
-                <img
-                  src={LACE10_ASSETS.doveOliveBranch}
-                  alt="Doves"
-                  className="w-[28px] h-auto object-contain mt-1.5 opacity-80"
-                />
+                <div className="w-full h-full bg-[#fdfaf5] rounded-t-[51px] rounded-b-xl border border-[#caa472]/60 p-2 flex flex-col items-center justify-between text-center relative overflow-hidden py-2 sm:py-3">
+                  {/* Subtle inner vintage dashed border */}
+                  <div className="absolute inset-1 rounded-t-[48px] rounded-b-lg border border-dashed border-[#caa472]/30 pointer-events-none" />
+
+                  {/* Top Arch Decoration */}
+                  <div className="relative z-10 flex flex-col items-center mt-0.5">
+                    <div className="flex items-center gap-1 mb-0.5">
+                      <span className="text-[6.5px] text-[#caa472]">✦</span>
+                      <p className="text-[7.5px] font-serif uppercase tracking-[0.24em] text-[#8c6b45] font-bold">
+                        The Wedding Of
+                      </p>
+                      <span className="text-[6.5px] text-[#caa472]">✦</span>
+                    </div>
+                    <div className="w-10 h-[1px] bg-gradient-to-r from-transparent via-[#caa472]/60 to-transparent" />
+                  </div>
+
+                  {/* Couple Calligraphy */}
+                  <div className="relative z-10 flex flex-col items-center my-0.5 leading-none">
+                    <h1
+                      className="text-[28px] leading-[1.08] text-[#7a1827] tracking-wide my-0.5 drop-shadow-xs"
+                      style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
+                    >
+                      {brideNickname}
+                    </h1>
+                    <div className="flex items-center justify-center gap-1 my-0.5">
+                      <div className="w-3 h-[1px] bg-[#caa472]/40" />
+                      <span className="text-[12px] text-[#8c6b45] italic font-serif leading-none">&amp;</span>
+                      <div className="w-3 h-[1px] bg-[#caa472]/40" />
+                    </div>
+                    <h1
+                      className="text-[28px] leading-[1.08] text-[#7a1827] tracking-wide my-0.5 drop-shadow-xs"
+                      style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
+                    >
+                      {groomNickname}
+                    </h1>
+                  </div>
+
+                  {/* Bottom Emblem with Dove & Badge */}
+                  <div className="relative z-10 flex flex-col items-center pb-0.5">
+                    <img
+                      src={LACE10_ASSETS.doveOliveBranch}
+                      alt="Doves"
+                      className="w-[28px] h-auto object-contain opacity-90 filter drop-shadow-xs mb-1"
+                    />
+                    <div className="inline-flex items-center px-2 py-0.5 rounded-full bg-gradient-to-r from-[#eedcc5] via-[#f9f1e4] to-[#eedcc5] border border-[#c49a6c]">
+                      <span className="text-[6px] font-serif uppercase tracking-[0.2em] text-[#7a1827] font-bold">
+                        Forever Starts Here
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
 
               {/* 6. Bottom-Left Tall Arched Card ("Save The Date") */}
@@ -804,30 +834,68 @@ export default function RightSidebar({
                     </div>
                   </div>
 
-                  {/* Middle: Day name badge & Editorial Date */}
+                  {/* Middle: Day name badge & Editorial Date (Handles Single Day or 2 Days) */}
                   <div className="relative z-10 flex flex-col items-center my-0.5 leading-none">
-                    <span className="text-[7.5px] font-serif uppercase tracking-[0.2em] text-[#8c6b45] font-bold mb-1">
-                      {formattedDayName}
-                    </span>
-                    <div className="flex flex-col items-center leading-none my-0.5">
-                      <span
-                        className="text-[28px] font-serif font-bold text-[#7a1827] leading-none tracking-tight"
-                        style={{ textShadow: "0 1px 2px rgba(122,24,39,0.15)" }}
-                      >
-                        {formattedDateNum}
-                      </span>
-                      <div className="flex items-center gap-1 mt-1">
-                        <span className="text-[6.5px] text-[#caa472]">✦</span>
-                        <span className="text-[10px] font-serif font-bold text-[#6b1523] uppercase tracking-[0.16em]">
-                          {formattedMonthLong.slice(0, 3)}
+                    {isSeparateDates ? (
+                      <>
+                        <div className="px-2 py-0.5 rounded-full bg-[#f4e6d2] border border-[#caa472]/60 mb-0.5 shadow-2xs">
+                          <span className="text-[6.8px] font-serif uppercase tracking-[0.12em] text-[#7a1827] font-bold block">
+                            {akadDateFormatted.dayName.slice(0, 3)} &amp; {resepsiDateFormatted.dayName.slice(0, 3)}
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-center gap-1 my-0.5">
+                          <span
+                            className="text-[24px] font-serif font-bold text-[#7a1827] leading-none tracking-tight"
+                            style={{ textShadow: "0 1px 2px rgba(122,24,39,0.15)" }}
+                          >
+                            {akadDateFormatted.dateNum}
+                          </span>
+                          <span className="text-[13px] font-serif font-semibold text-[#c49a6c] leading-none">&amp;</span>
+                          <span
+                            className="text-[24px] font-serif font-bold text-[#7a1827] leading-none tracking-tight"
+                            style={{ textShadow: "0 1px 2px rgba(122,24,39,0.15)" }}
+                          >
+                            {resepsiDateFormatted.dateNum}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-1 mt-0.5">
+                          <span className="text-[6px] text-[#caa472]">✦</span>
+                          <span className="text-[9.5px] font-serif font-bold text-[#6b1523] uppercase tracking-[0.16em]">
+                            {formattedMonthLong.slice(0, 3)}
+                          </span>
+                          <span className="text-[5.5px] text-[#caa472]">•</span>
+                          <span className="text-[9.5px] font-serif font-medium text-[#7a1827] tracking-wider">
+                            {formattedYear}
+                          </span>
+                          <span className="text-[6px] text-[#caa472]">✦</span>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <span className="text-[7.5px] font-serif uppercase tracking-[0.2em] text-[#8c6b45] font-bold mb-1">
+                          {formattedDayName}
                         </span>
-                        <span className="text-[6px] text-[#caa472]">•</span>
-                        <span className="text-[10px] font-serif font-medium text-[#7a1827] tracking-wider">
-                          {formattedYear}
-                        </span>
-                        <span className="text-[6.5px] text-[#caa472]">✦</span>
-                      </div>
-                    </div>
+                        <div className="flex flex-col items-center leading-none my-0.5">
+                          <span
+                            className="text-[28px] font-serif font-bold text-[#7a1827] leading-none tracking-tight"
+                            style={{ textShadow: "0 1px 2px rgba(122,24,39,0.15)" }}
+                          >
+                            {formattedDateNum}
+                          </span>
+                          <div className="flex items-center gap-1 mt-1">
+                            <span className="text-[6.5px] text-[#caa472]">✦</span>
+                            <span className="text-[10px] font-serif font-bold text-[#6b1523] uppercase tracking-[0.16em]">
+                              {formattedMonthLong.slice(0, 3)}
+                            </span>
+                            <span className="text-[6px] text-[#caa472]">•</span>
+                            <span className="text-[10px] font-serif font-medium text-[#7a1827] tracking-wider">
+                              {formattedYear}
+                            </span>
+                            <span className="text-[6.5px] text-[#caa472]">✦</span>
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </div>
 
                   {/* Bottom: Luxury Ornamental Divider & Romantic Initials */}
@@ -2490,84 +2558,43 @@ export default function RightSidebar({
             </motion.div>
           </section>
 
-          {/* Footer / Outro Section with Luxury Botanical Floral & Wax Seal Accessories */}
-          <footer className="relative w-full text-center pt-14 pb-28 px-5 bg-gradient-to-b from-[#1b0307] via-[#240409] to-[#140103] text-[#f5ebd8] border-t border-[#caa472]/40 overflow-hidden select-none">
-            {/* Top Ornamental Garland Divider */}
-            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#caa472] to-transparent" />
-            
-            {/* Corner Floral Bouquet Accents */}
-            <img
-              src={LACE10_ASSETS.flowerRoseBouquet}
-              alt="Rose"
-              className="absolute -top-6 -left-6 w-20 h-auto object-contain opacity-70 pointer-events-none filter drop-shadow-md rotate-[15deg]"
-            />
-            <img
-              src={LACE10_ASSETS.flowerRedDahlia}
-              alt="Dahlia"
-              className="absolute -top-5 -right-5 w-16 h-auto object-contain opacity-70 pointer-events-none filter drop-shadow-md rotate-[-20deg]"
-            />
-
-            {/* Central Wax Seal Medallion with soft golden halo */}
-            <div className="relative z-10 flex flex-col items-center">
-              <div className="relative w-16 h-16 mb-4 filter drop-shadow-[0_8px_20px_rgba(0,0,0,0.65)]">
-                <img
-                  src={LACE10_ASSETS.waxSealMonogram}
-                  alt="Wax Seal Monogram"
-                  className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
-                />
+          {/* Simple, Compact & Elegant Footer */}
+          <footer className="w-full text-center pt-7 pb-20 px-4 bg-[#180205] text-[#f5ebd8] border-t border-[#caa472]/30 select-none">
+            <div className="flex flex-col items-center max-w-sm mx-auto">
+              {/* Subtle gold ornamental divider */}
+              <div className="flex items-center justify-center gap-2 mb-2 w-36">
+                <span className="flex-1 h-[1px] bg-gradient-to-r from-transparent via-[#caa472]/60 to-transparent" />
+                <span className="text-[#caa472] text-[10px]">✦</span>
+                <span className="flex-1 h-[1px] bg-gradient-to-r from-transparent via-[#caa472]/60 to-transparent" />
               </div>
 
-              {/* Calligraphy Names */}
-              <p className="text-[10px] uppercase font-serif tracking-[0.35em] text-[#caa472] font-semibold mb-1">
-                The Wedding Celebration Of
+              {/* Title & Couple Names */}
+              <p className="text-[10px] font-serif uppercase tracking-[0.25em] text-[#e8d5be] font-bold">
+                The Wedding of {brideNickname} &amp; {groomNickname}
               </p>
-              <h2
-                className="text-4xl sm:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-[#fff7ef] via-[#f5e4bd] to-[#caa472] tracking-wide my-1 drop-shadow-md leading-tight"
-                style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
-              >
-                {brideNickname} &amp; {groomNickname}
-              </h2>
-              <p className="font-serif text-xs text-[#d6b797] tracking-wider mb-3">
-                {brideName} &amp; {groomName}
+              
+              {/* Event Date Tag */}
+              <p className="text-[9px] font-serif text-[#caa472]/85 tracking-widest mt-0.5">
+                {isSeparateDates 
+                  ? `${akadDateFormatted.dayName.slice(0, 3)} & ${resepsiDateFormatted.dayName.slice(0, 3)}, ${akadDateFormatted.dateNum} - ${resepsiDateFormatted.dateNum} ${formattedMonthLong} ${formattedYear}`
+                  : `${formattedDayName}, ${formattedDateNum} ${formattedMonthLong} ${formattedYear}`}
               </p>
 
-              {/* Ornamental Flourish Divider */}
-              <div className="flex items-center justify-center gap-2.5 my-3 w-48 mx-auto">
-                <div className="flex-1 h-[1px] bg-gradient-to-r from-transparent via-[#caa472]/70 to-transparent" />
-                <span className="text-[#caa472] text-xs">❦</span>
-                <div className="flex-1 h-[1px] bg-gradient-to-r from-transparent via-[#caa472]/70 to-transparent" />
-              </div>
-
-              {/* Sincere Thank You / Closing Wish */}
-              <p className="text-xs font-serif italic text-neutral-300 max-w-sm mx-auto leading-relaxed px-4 my-2">
-                “Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu bagi kami berdua.”
-              </p>
-
-              {/* Date Badge */}
-              <div className="mt-4 px-3.5 py-1 rounded-full bg-[#1b0307]/90 border border-[#caa472]/45 shadow-sm">
-                <span className="text-[9.5px] font-serif uppercase tracking-[0.25em] text-[#f5ebd8] font-medium">
-                  {formattedDayName}, {formattedDateNum} {formattedMonthLong} {formattedYear}
-                </span>
-              </div>
-
-              {/* SERASTORY Signature Branding Badge */}
-              <div className="mt-8 pt-5 border-t border-[#caa472]/20 w-full max-w-xs flex flex-col items-center gap-1.5 text-[#caa472]/80 text-[10px] tracking-[0.25em] uppercase font-sans">
+              {/* Clean compact Serastory credit */}
+              <div className="mt-3.5 pt-2.5 border-t border-[#caa472]/15 w-40 flex items-center justify-center text-[#caa472]/70 text-[8.5px] tracking-[0.22em] uppercase font-sans">
                 <p className="flex items-center gap-1.5">
                   <span>Crafted with</span>
-                  <span className="text-rose-400 animate-pulse text-xs">♥</span>
+                  <span className="text-rose-400 text-[10px]">♥</span>
                   <span>by</span>
                   <a
                     href="https://serastory.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-bold text-[#f5ebd8] hover:text-[#caa472] transition-colors underline decoration-[#caa472]/40 underline-offset-4"
+                    className="font-semibold text-[#f5ebd8] hover:text-[#caa472] transition-colors underline decoration-[#caa472]/30 underline-offset-2"
                   >
                     SERASTORY
                   </a>
                 </p>
-                <span className="text-[8.5px] text-[#caa472]/60 tracking-wider font-serif italic normal-case">
-                  Premium Digital Wedding Invitation
-                </span>
               </div>
             </div>
           </footer>
