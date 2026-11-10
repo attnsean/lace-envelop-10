@@ -747,7 +747,7 @@ export default function RightSidebar({
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="absolute left-[34%] top-[1%] w-[58%] h-[46%] z-15 flex items-center justify-center cursor-pointer group"
+                className="absolute left-[33%] top-[2%] w-[63%] h-[42%] z-15 flex items-center justify-center cursor-pointer group"
                 onClick={() => setLightboxImg(rawGallery[0] || LACE10_ASSETS.defaultPhotos.heroEnvelope)}
               >
                 {/* Envelope Backdrop (Shows top open flap and side wings) */}
@@ -758,7 +758,7 @@ export default function RightSidebar({
                 />
 
                 {/* Couple Photo (Elevated, centered, full faces visible inside white print frame) */}
-                <div className="absolute top-[4%] left-[20%] w-[60%] h-[74%] bg-white p-1 shadow-[0_8px_20px_rgba(0,0,0,0.5)] rounded-xs overflow-hidden z-10 border border-[#e8d7c3]">
+                <div className="absolute top-[3%] left-[18%] w-[64%] h-[78%] bg-white p-1.5 shadow-[0_10px_24px_rgba(0,0,0,0.55)] rounded-xs overflow-hidden z-10 border border-[#e8d7c3]">
                   <img
                     src={rawGallery[0] || LACE10_ASSETS.defaultPhotos.heroEnvelope}
                     alt="Couple Hero"
@@ -769,7 +769,7 @@ export default function RightSidebar({
 
                 {/* Envelope Lower Pocket Overlay (Holds bottom of photo neatly) */}
                 <div 
-                  className="absolute bottom-[4%] left-[16%] w-[68%] h-[40%] pointer-events-none z-20 overflow-hidden"
+                  className="absolute bottom-[3%] left-[14%] w-[72%] h-[38%] pointer-events-none z-20 overflow-hidden"
                   style={{ clipPath: "polygon(0% 45%, 50% 100%, 100% 45%, 100% 100%, 0% 100%)" }}
                 >
                   <div className="w-full h-full bg-gradient-to-t from-[#5a121d] via-[#731826] to-[#8a1d2e] border-t border-[#caa472]/40 shadow-inner" />
@@ -779,7 +779,7 @@ export default function RightSidebar({
                 <img
                   src={LACE10_ASSETS.flowerRoseBouquet}
                   alt="Rose"
-                  className="absolute -top-[10%] -right-[4%] w-[34%] h-auto object-contain pointer-events-none z-30"
+                  className="absolute -top-[10%] -right-[2%] w-[34%] h-auto object-contain pointer-events-none z-30"
                 />
               </motion.div>
 
@@ -788,7 +788,7 @@ export default function RightSidebar({
                 href="#rsvp-section"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.96 }}
-                className="absolute left-[3%] top-[14%] w-[30%] aspect-[2400/1743] z-10 flex items-center justify-center cursor-pointer filter drop-shadow-xl"
+                className="absolute left-[2%] top-[12%] w-[29%] aspect-[2400/1743] z-10 flex items-center justify-center cursor-pointer filter drop-shadow-xl"
                 style={{ rotate: "-5deg" }}
               >
                 {/* White lace insert card */}
@@ -819,14 +819,14 @@ export default function RightSidebar({
                 />
               </motion.a>
 
-              {/* 5. Right Arched Plaque */}
+              {/* 5. Right Arched Plaque ("The Wedding Of") - Repositioned cleanly below envelope */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.92 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="absolute left-[52%] top-[23%] w-[42%] h-[49%] z-20 bg-gradient-to-b from-[#8f2132] via-[#6b1523] to-[#4a0d18] p-[2.5px] rounded-t-[54px] rounded-b-2xl shadow-[0_14px_35px_rgba(0,0,0,0.6)]"
+                className="absolute left-[55%] top-[39%] w-[41%] h-[48%] z-20 bg-gradient-to-b from-[#8f2132] via-[#6b1523] to-[#4a0d18] p-[2.5px] rounded-t-[54px] rounded-b-2xl shadow-[0_14px_35px_rgba(0,0,0,0.6)]"
               >
-                <div className="w-full h-full bg-[#fdfaf5] rounded-t-[51px] rounded-b-xl border border-[#caa472]/60 p-2 flex flex-col items-center justify-between text-center relative overflow-hidden py-2 sm:py-3">
+                <div className="w-full h-full bg-[#fdfaf5] rounded-t-[51px] rounded-b-xl border border-[#caa472]/60 p-2 flex flex-col items-center justify-between text-center relative overflow-hidden py-2 sm:py-2.5">
                   {/* Subtle inner vintage dashed border */}
                   <div className="absolute inset-1 rounded-t-[48px] rounded-b-lg border border-dashed border-[#caa472]/30 pointer-events-none" />
 
@@ -839,24 +839,24 @@ export default function RightSidebar({
                       </p>
                       <span className="text-[6.5px] text-[#caa472]">✦</span>
                     </div>
-                    <div className="w-10 h-[1px] bg-gradient-to-r from-transparent via-[#caa472]/60 to-transparent" />
+                    <div className="w-8 h-[1px] bg-gradient-to-r from-transparent via-[#caa472]/60 to-transparent" />
                   </div>
 
                   {/* Couple Calligraphy */}
                   <div className="relative z-10 flex flex-col items-center my-0.5 leading-none">
                     <h1
-                      className="text-[28px] leading-[1.08] text-[#7a1827] tracking-wide my-0.5 drop-shadow-xs"
+                      className="text-[24px] leading-[1.05] text-[#7a1827] tracking-wide my-0.5 drop-shadow-xs"
                       style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
                     >
                       {brideNickname}
                     </h1>
                     <div className="flex items-center justify-center gap-1 my-0.5">
                       <div className="w-3 h-[1px] bg-[#caa472]/40" />
-                      <span className="text-[12px] text-[#8c6b45] italic font-serif leading-none">&amp;</span>
+                      <span className="text-[11px] text-[#8c6b45] italic font-serif leading-none">&amp;</span>
                       <div className="w-3 h-[1px] bg-[#caa472]/40" />
                     </div>
                     <h1
-                      className="text-[28px] leading-[1.08] text-[#7a1827] tracking-wide my-0.5 drop-shadow-xs"
+                      className="text-[24px] leading-[1.05] text-[#7a1827] tracking-wide my-0.5 drop-shadow-xs"
                       style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
                     >
                       {groomNickname}
@@ -868,10 +868,10 @@ export default function RightSidebar({
                     <img
                       src={LACE10_ASSETS.doveOliveBranch}
                       alt="Doves"
-                      className="w-[28px] h-auto object-contain opacity-90 filter drop-shadow-xs mb-1"
+                      className="w-[22px] h-auto object-contain opacity-90 filter drop-shadow-xs mb-0.5"
                     />
                     <div className="inline-flex items-center px-2 py-0.5 rounded-full bg-gradient-to-r from-[#eedcc5] via-[#f9f1e4] to-[#eedcc5] border border-[#c49a6c]">
-                      <span className="text-[6px] font-serif uppercase tracking-[0.2em] text-[#7a1827] font-bold">
+                      <span className="text-[5.5px] font-serif uppercase tracking-[0.2em] text-[#7a1827] font-bold">
                         Forever Starts Here
                       </span>
                     </div>
@@ -884,7 +884,7 @@ export default function RightSidebar({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="absolute left-[7%] top-[40%] w-[33%] h-[53%] z-20 bg-gradient-to-b from-[#8f2132] via-[#6b1523] to-[#4a0d18] p-[2.5px] rounded-t-full rounded-b-2xl shadow-[0_14px_35px_rgba(0,0,0,0.65)]"
+                className="absolute left-[6%] top-[39%] w-[34%] h-[55%] z-20 bg-gradient-to-b from-[#8f2132] via-[#6b1523] to-[#4a0d18] p-[2.5px] rounded-t-full rounded-b-2xl shadow-[0_14px_35px_rgba(0,0,0,0.65)]"
               >
                 <div className="w-full h-full bg-[#fdfaf5] rounded-t-full rounded-b-xl border border-[#caa472]/60 p-2 flex flex-col items-center justify-between text-center py-2.5 sm:py-3.5 relative overflow-hidden">
                   {/* Subtle inner vintage dashed border */}
@@ -1003,29 +1003,20 @@ export default function RightSidebar({
 
                 return (
                   <motion.div
-                    drag
-                    dragConstraints={{ left: -140, right: 140, top: -160, bottom: 160 }}
-                    dragElastic={0.15}
-                    whileDrag={{ scale: 1.05, zIndex: 60, cursor: "grabbing" }}
-                    whileHover={{ scale: 1.02 }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="absolute left-[33%] top-[54%] w-[36%] min-h-[25%] z-30 bg-[#fdfbf7] p-2 rounded-xl border border-[#caa472]/90 shadow-[0_14px_35px_rgba(0,0,0,0.6)] flex flex-col items-center justify-center text-center cursor-grab active:cursor-grabbing select-none touch-none"
-                    style={{ rotate: "1.5deg" }}
+                    className="absolute left-[24%] top-[60%] w-[46%] min-h-[25%] z-30 bg-[#fdfbf7] p-2 rounded-xl border border-[#caa472]/90 shadow-[0_14px_35px_rgba(0,0,0,0.65)] flex flex-col items-center justify-center text-center select-none"
                   >
-                    {/* Header Label with Drag Indicator */}
-                    <div className="w-full pb-0.5 mb-1 border-b border-[#caa472]/40 flex items-center justify-between px-0.5">
-                      <span className="text-[7px] font-serif uppercase tracking-[0.16em] text-[#7a1827] font-bold">
+                    {/* Header Label */}
+                    <div className="w-full pb-0.5 mb-1 border-b border-[#caa472]/40 text-center">
+                      <span className="text-[7.5px] font-serif uppercase tracking-[0.16em] text-[#7a1827] font-bold">
                         Rangkaian Acara
-                      </span>
-                      <span className="text-[6px] text-[#caa472] font-mono flex items-center gap-0.5 font-bold" title="Bisa digeser">
-                        <span className="text-[7.5px] leading-none">⠿</span> geser
                       </span>
                     </div>
 
                     {/* Akad Nikah Session */}
-                    <div className="w-full bg-[#f8f3ea] rounded-md px-1.5 py-1 border border-[#caa472]/35 mb-1 text-left">
+                    <div className="w-full bg-[#f8f3ea] rounded-md px-1.5 py-0.5 border border-[#caa472]/35 mb-1 text-left">
                       <div className="flex items-center justify-between gap-0.5">
                         <span className="text-[6.8px] font-serif uppercase tracking-[0.08em] text-[#7a1827] font-bold">
                           {akadEvent.custom_label || "Akad Nikah"}
@@ -1040,7 +1031,7 @@ export default function RightSidebar({
                     </div>
 
                     {/* Resepsi Pernikahan Session */}
-                    <div className="w-full bg-[#f8f3ea] rounded-md px-1.5 py-1 border border-[#caa472]/35 mb-1 text-left">
+                    <div className="w-full bg-[#f8f3ea] rounded-md px-1.5 py-0.5 border border-[#caa472]/35 mb-1 text-left">
                       <div className="flex items-center justify-between gap-0.5">
                         <span className="text-[6.8px] font-serif uppercase tracking-[0.08em] text-[#7a1827] font-bold">
                           {resepsiEvent.custom_label || "Resepsi Pernikahan"}
@@ -1072,7 +1063,7 @@ export default function RightSidebar({
               {/* 8. Spinning Vinyl Record Music Player below venue card */}
               <div
                 onClick={toggleAudio}
-                className="absolute left-[40%] top-[79%] w-[21%] aspect-square z-30 flex items-center justify-center cursor-pointer group"
+                className="absolute left-[38%] bottom-[2%] w-[22%] aspect-square z-35 flex items-center justify-center cursor-pointer group"
                 title={isPlaying ? "Pause Musik" : "Putar Musik"}
               >
                 <motion.div
@@ -1102,7 +1093,7 @@ export default function RightSidebar({
               </div>
 
               {/* 9. Brass Candlestick Holder with Burning Red Candle */}
-              <div className="absolute left-[74%] top-[62%] w-[12%] h-auto z-20 pointer-events-none">
+              <div className="absolute left-[82%] top-[60%] w-[12%] h-auto z-20 pointer-events-none">
                 <img
                   src={LACE10_ASSETS.candleBrassStand}
                   alt="Candle"
