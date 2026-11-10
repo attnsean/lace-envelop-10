@@ -78,7 +78,7 @@ export default function TimelineSection({
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
+        viewport={{ once: false, amount: 0.15 }}
         transition={{ duration: 0.8 }}
         className="relative z-10 w-28 sm:w-32 mb-2 pointer-events-none"
       >
@@ -93,7 +93,7 @@ export default function TimelineSection({
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: false, amount: 0.15 }}
         transition={{ duration: 0.7 }}
         className="relative z-10 text-center mb-10 max-w-sm px-2"
       >
@@ -125,7 +125,7 @@ export default function TimelineSection({
                 key={event.id || `story-${idx}`}
                 initial={{ opacity: 0, x: 25 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
+                viewport={{ once: false, margin: "-20px" }}
                 transition={{ duration: 0.7, delay: idx * 0.12 }}
                 className="relative w-full flex items-start pl-14 sm:pl-16 pr-1"
               >
@@ -176,7 +176,7 @@ export default function TimelineSection({
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
+        viewport={{ once: false, amount: 0.15 }}
         transition={{ delay: 0.3, duration: 0.8 }}
         className="relative z-10 mt-10 text-center select-none pointer-events-none"
       >

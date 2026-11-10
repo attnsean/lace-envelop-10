@@ -934,7 +934,13 @@ export default function RightSidebar({
             </div>
 
             {/* Header Text */}
-            <div className="relative z-10 text-center mb-6 max-w-sm">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+              className="relative z-10 text-center mb-6 max-w-sm"
+            >
               <p className="text-[10px] uppercase font-serif tracking-[0.35em] text-[#d6b797] font-semibold mb-1">
                 Save The Date
               </p>
@@ -947,13 +953,14 @@ export default function RightSidebar({
               <p className="text-xs font-serif text-[#e5c7a9] tracking-widest mt-1">
                 {formattedDayName}, {formattedDateNum} {formattedMonthLong} {formattedYear}
               </p>
-            </div>
+            </motion.div>
 
             {/* Clean, Neat, Non-Overlapping Calendar Card */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0, y: 25, scale: 0.98 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ duration: 0.7 }}
               className="relative z-10 w-full max-w-xs bg-[#fdfaf5] text-[#3d1017] rounded-3xl p-6 shadow-2xl border-2 border-[#caa472] flex flex-col items-center"
             >
               {/* 3D Red Ribbon Bow on Top Center */}
@@ -1016,7 +1023,8 @@ export default function RightSidebar({
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
               className="relative z-10 w-full max-w-xs mt-5 rounded-2xl bg-[#1b0307]/85 backdrop-blur-md border border-[#caa472]/60 shadow-xl flex flex-col items-center justify-center p-4 text-center"
             >
               <p className="text-[9px] uppercase tracking-[0.3em] text-[#d6b797] font-serif font-bold mb-2">
@@ -1059,9 +1067,10 @@ export default function RightSidebar({
           >
             {/* Laser-Cut White Arched Lace Frame Card */}
             <motion.div
-              initial={{ opacity: 0, y: 35 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0, y: 35, scale: 0.98 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
               className="relative w-full max-w-[360px] aspect-[800/1299] mx-auto filter drop-shadow-2xl"
             >
               <img
@@ -1150,7 +1159,8 @@ export default function RightSidebar({
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ duration: 0.7 }}
               className="relative w-full max-w-sm bg-[#f8f4ed] text-[#3d1017] rounded-2xl p-6 border-2 border-[#7a1827] shadow-2xl text-center"
             >
               {/* Corner Flower Accent */}
@@ -1190,7 +1200,8 @@ export default function RightSidebar({
               <motion.div
                 initial={{ opacity: 0, x: -25 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false, amount: 0.15 }}
+                transition={{ duration: 0.7 }}
                 className="relative bg-[#f8f4ed] rounded-xl p-2 border border-[#7a1827] shadow-xl flex flex-col items-center"
               >
                 <div className="w-full h-36 rounded-lg overflow-hidden border border-[#d6b797]">
@@ -1211,7 +1222,8 @@ export default function RightSidebar({
               <motion.div
                 initial={{ opacity: 0, x: 25 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false, amount: 0.15 }}
+                transition={{ duration: 0.7 }}
                 className="relative bg-[#f8f4ed] text-[#3d1017] rounded-t-full rounded-b-xl p-4 pt-6 border border-[#7a1827] shadow-xl text-center flex flex-col items-center justify-between"
               >
                 {/* Wax seal at top arch */}
@@ -1240,14 +1252,18 @@ export default function RightSidebar({
             </div>
 
             {/* Google Calendar Link Button */}
-            <a
+            <motion.a
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.5 }}
               href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pernikahan+${encodeURIComponent(brideNickname)}+%26+${encodeURIComponent(groomNickname)}&dates=${formattedYear}${formattedMonthNum}${formattedDateNum}T020000Z/${formattedYear}${formattedMonthNum}${formattedDateNum}T090000Z&details=Pernikahan+${encodeURIComponent(brideName)}+dan+${encodeURIComponent(groomName)}&location=${encodeURIComponent(akadEvent.venue_name || '')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-2 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1b0407] text-[#f8f4ed] text-xs font-sans uppercase tracking-[0.2em] border border-[#c49a6c]/60 shadow-lg hover:bg-[#851c2d] transition-colors"
             >
               <span>Simpan ke Kalender</span>
-            </a>
+            </motion.a>
           </section>
 
           {/* --------------------------------------------------------------------- */}
@@ -1262,7 +1278,13 @@ export default function RightSidebar({
             }}
           >
             {/* Title */}
-            <div className="text-center mb-1 z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-1 z-10"
+            >
               <h2
                 className="text-4xl sm:text-5xl text-[#f5ebd8] text-center"
                 style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
@@ -1272,7 +1294,7 @@ export default function RightSidebar({
               <p className="text-[10px] uppercase tracking-[0.25em] text-[#caa472] mt-1 font-serif">
                 Pasangan Mempelai
               </p>
-            </div>
+            </motion.div>
 
             {/* Pearl Rope Bow Divider */}
             <img
@@ -1286,9 +1308,10 @@ export default function RightSidebar({
               {/* Mempelai Wanita */}
               <div className="flex flex-col items-center">
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
+                  initial={{ opacity: 0, scale: 0.92, y: 20 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.15 }}
+                  transition={{ duration: 0.7 }}
                   className="relative w-64 h-88 rounded-3xl p-3 bg-[#fdfaf5] shadow-2xl flex items-center justify-center cursor-pointer group overflow-hidden border border-[#e8d7c3]"
                   onClick={() => setLightboxImg(project?.bride_photo_url || rawGallery[4] || LACE10_ASSETS.defaultPhotos.bridePortrait1)}
                 >
@@ -1337,9 +1360,10 @@ export default function RightSidebar({
               {/* Mempelai Pria */}
               <div className="flex flex-col items-center">
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
+                  initial={{ opacity: 0, scale: 0.92, y: 20 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.15 }}
+                  transition={{ duration: 0.7 }}
                   className="relative w-64 h-88 rounded-3xl p-3 bg-[#fdfaf5] shadow-2xl flex items-center justify-center cursor-pointer group overflow-hidden border border-[#e8d7c3]"
                   onClick={() => setLightboxImg(project?.groom_photo_url || rawGallery[5] || LACE10_ASSETS.defaultPhotos.bridePortrait2)}
                 >
@@ -1407,9 +1431,10 @@ export default function RightSidebar({
           >
             {/* Baroque Ornate Lace Arch Card */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0, y: 30, scale: 0.98 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
               className="relative w-full max-w-[340px] aspect-[800/997] mx-auto filter drop-shadow-2xl flex items-center justify-center"
             >
               <img
@@ -1446,9 +1471,10 @@ export default function RightSidebar({
                 return (
                   <motion.div
                     key={`gal-${idx}`}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
+                    initial={{ opacity: 0, scale: 0.9, y: 15 }}
+                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                    viewport={{ once: false, amount: 0.15 }}
+                    transition={{ duration: 0.5, delay: (idx % 3) * 0.08 }}
                     onClick={() => setLightboxImg(photo)}
                     className={`relative rounded-lg overflow-hidden border border-[#d6b797]/60 shadow-md cursor-pointer group ${
                       isSpan2 ? 'col-span-2 h-44 sm:h-48' : 'col-span-1 h-32 sm:h-36'
@@ -1481,12 +1507,16 @@ export default function RightSidebar({
             <div className="absolute inset-0 bg-gradient-to-b from-[#1f0307]/75 via-transparent to-[#1f0307]/80 pointer-events-none" />
 
             {/* Title */}
-            <h2
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
               className="relative z-10 text-4xl sm:text-5xl text-[#f5ebd8] mb-4 drop-shadow-md"
               style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
             >
               Our Moment
-            </h2>
+            </motion.h2>
 
             {/* Casual Polaroids / Candids Collage (5 Photos prioritized from user's gallery) */}
             <div className="relative z-10 w-full max-w-sm flex flex-col items-center gap-3 my-4">
@@ -1495,7 +1525,8 @@ export default function RightSidebar({
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false, amount: 0.15 }}
+                  transition={{ duration: 0.6 }}
                   onClick={() => setLightboxImg(getCandidPhoto(0))}
                   className="w-[82%] bg-[#f8f4ed] p-2 pb-6 shadow-2xl rounded-xs border border-[#caa472]/40 transform rotate-[1deg] hover:scale-105 transition-transform cursor-pointer"
                 >
@@ -1516,7 +1547,8 @@ export default function RightSidebar({
                   <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false, amount: 0.15 }}
+                    transition={{ duration: 0.6 }}
                     onClick={() => setLightboxImg(getCandidPhoto(1))}
                     className="w-[46%] bg-[#f8f4ed] p-1.5 pb-5 shadow-xl rounded-xs border border-[#caa472]/40 transform -rotate-[4deg] hover:scale-105 transition-transform cursor-pointer"
                   >
@@ -1534,7 +1566,8 @@ export default function RightSidebar({
                   <motion.div
                     initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false, amount: 0.15 }}
+                    transition={{ duration: 0.6 }}
                     onClick={() => setLightboxImg(getCandidPhoto(2))}
                     className="w-[46%] bg-[#f8f4ed] p-1.5 pb-5 shadow-xl rounded-xs border border-[#caa472]/40 transform rotate-[3deg] hover:scale-105 transition-transform cursor-pointer"
                   >
@@ -1556,7 +1589,8 @@ export default function RightSidebar({
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false, amount: 0.15 }}
+                    transition={{ duration: 0.6 }}
                     onClick={() => setLightboxImg(getCandidPhoto(3))}
                     className="w-[48%] bg-[#f8f4ed] p-1.5 pb-5 shadow-xl rounded-xs border border-[#caa472]/40 transform rotate-[2deg] hover:scale-105 transition-transform cursor-pointer z-10"
                   >
@@ -1574,7 +1608,8 @@ export default function RightSidebar({
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false, amount: 0.15 }}
+                    transition={{ duration: 0.6 }}
                     onClick={() => setLightboxImg(getCandidPhoto(4))}
                     className="w-[48%] bg-[#f8f4ed] p-1.5 pb-5 shadow-xl rounded-xs border border-[#caa472]/40 transform -rotate-[3deg] hover:scale-105 transition-transform cursor-pointer z-20"
                   >
@@ -1592,13 +1627,19 @@ export default function RightSidebar({
             </div>
 
             {/* Two Doves Carrying Ribbon (Clean Transparent PNG without black box) */}
-            <div className="relative z-10 w-44 h-auto my-6 filter drop-shadow-md">
+            <motion.div
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              whileInView={{ opacity: 0.95, y: 0, scale: 1 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.7 }}
+              className="relative z-10 w-44 h-auto my-6 filter drop-shadow-md"
+            >
               <img
                 src={LACE10_ASSETS.dovesFlightRibbon}
                 alt="Two Doves"
                 className="w-full h-auto object-contain opacity-95"
               />
-            </div>
+            </motion.div>
           </section>
 
           {/* --------------------------------------------------------------------- */}
@@ -1653,23 +1694,36 @@ export default function RightSidebar({
                 {/* Dark luxury vignette overlay */}
                 <div className="absolute inset-0 bg-gradient-to-b from-[#1f0307]/75 via-transparent to-[#1f0307]/80 pointer-events-none" />
 
-                <h3
-                  className="relative z-10 text-4xl sm:text-5xl text-[#f5ebd8] mb-1 drop-shadow-md"
-                  style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
+                {/* Header with entrance animation */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.6 }}
+                  className="relative z-10 flex flex-col items-center"
                 >
-                  Rundown Acara
-                </h3>
-                <img
-                  src={LACE10_ASSETS.rundownWavyLine}
-                  alt="Wavy Line"
-                  className="relative z-10 w-44 h-auto object-contain my-3 opacity-80"
-                />
+                  <h3
+                    className="text-4xl sm:text-5xl text-[#f5ebd8] mb-1 drop-shadow-md"
+                    style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
+                  >
+                    Rundown Acara
+                  </h3>
+                  <img
+                    src={LACE10_ASSETS.rundownWavyLine}
+                    alt="Wavy Line"
+                    className="w-44 h-auto object-contain my-3 opacity-80"
+                  />
+                </motion.div>
 
                 {/* Timeline Schedule Cards with Luxury Borders */}
                 <div className="relative z-10 w-full max-w-sm flex flex-col gap-3.5 mt-4 text-[#f8f4ed]">
                   {rundownList.map((item: any, idx: number) => (
-                    <div
+                    <motion.div
                       key={idx}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: false, amount: 0.15 }}
+                      transition={{ duration: 0.45, delay: idx * 0.08 }}
                       className="flex items-center justify-between p-3 sm:p-3.5 rounded-2xl bg-[#fdfaf5]/95 border-2 border-[#caa472] shadow-xl text-[#3d1017] hover:scale-[1.01] transition-transform"
                     >
                       <span className="px-3.5 py-1.5 rounded-full bg-[#7a1827] text-white text-[11px] sm:text-xs font-sans font-bold tracking-wider shadow shrink-0">
@@ -1678,18 +1732,24 @@ export default function RightSidebar({
                       <span className="text-xs sm:text-sm font-serif font-bold text-[#42111a] text-right ml-3 pr-1">
                         {item.title}
                       </span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
 
                 {/* Bottom Getaway Wedding Car Illustration */}
-                <div className="relative z-10 w-40 sm:w-44 h-auto mt-8 opacity-85 filter drop-shadow invert">
+                <motion.div
+                  initial={{ opacity: 0, y: 25, scale: 0.95 }}
+                  whileInView={{ opacity: 0.85, y: 0, scale: 1 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.7 }}
+                  className="relative z-10 w-40 sm:w-44 h-auto mt-8 opacity-85 filter drop-shadow invert"
+                >
                   <img
                     src={LACE10_ASSETS.weddingCarGetaway}
                     alt="Wedding Car"
                     className="w-full h-auto object-contain"
                   />
-                </div>
+                </motion.div>
               </section>
             );
           })()}
@@ -1726,21 +1786,30 @@ export default function RightSidebar({
                 {/* Dark luxury vignette overlay */}
                 <div className="absolute inset-0 bg-gradient-to-b from-[#1f0307]/80 via-[#26050b]/65 to-[#1f0307]/85 pointer-events-none" />
 
-                <h3
-                  className="relative z-10 text-4xl sm:text-5xl text-[#f5ebd8] mb-1 drop-shadow-md"
-                  style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
+                {/* Header */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.6 }}
+                  className="relative z-10 flex flex-col items-center"
                 >
-                  Turut Mengundang
-                </h3>
-                <img
-                  src={LACE10_ASSETS.flourishDivider2}
-                  alt="Divider"
-                  className="relative z-10 w-44 h-auto object-contain my-3 opacity-80"
-                />
+                  <h3
+                    className="text-4xl sm:text-5xl text-[#f5ebd8] mb-1 drop-shadow-md"
+                    style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
+                  >
+                    Turut Mengundang
+                  </h3>
+                  <img
+                    src={LACE10_ASSETS.flourishDivider2}
+                    alt="Divider"
+                    className="w-44 h-auto object-contain my-3 opacity-80"
+                  />
 
-                <p className="relative z-10 text-xs text-[#e8cfb5] font-sans max-w-xs leading-relaxed mb-6 italic">
-                  Ungkapan terima kasih yang tulus dari segenap keluarga besar kedua mempelai:
-                </p>
+                  <p className="text-xs text-[#e8cfb5] font-sans max-w-xs leading-relaxed mb-6 italic">
+                    Ungkapan terima kasih yang tulus dari segenap keluarga besar kedua mempelai:
+                  </p>
+                </motion.div>
 
                 <div className="relative z-10 w-full max-w-sm flex flex-col gap-4">
                   {/* Mempelai Wanita Column */}
@@ -1748,7 +1817,8 @@ export default function RightSidebar({
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
+                      viewport={{ once: false, amount: 0.15 }}
+                      transition={{ duration: 0.6 }}
                       className="rounded-2xl bg-[#fdfaf5]/95 border-2 border-[#caa472] p-5 shadow-2xl text-left"
                     >
                       <div className="flex items-center gap-2 border-b border-[#caa472]/40 pb-2.5 mb-3">
@@ -1773,7 +1843,8 @@ export default function RightSidebar({
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
+                      viewport={{ once: false, amount: 0.15 }}
+                      transition={{ duration: 0.6 }}
                       className="rounded-2xl bg-[#fdfaf5]/95 border-2 border-[#caa472] p-5 shadow-2xl text-left"
                     >
                       <div className="flex items-center gap-2 border-b border-[#caa472]/40 pb-2.5 mb-3">
@@ -1798,7 +1869,8 @@ export default function RightSidebar({
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
+                      viewport={{ once: false, amount: 0.15 }}
+                      transition={{ duration: 0.6 }}
                       className="rounded-2xl bg-[#fdfaf5]/95 border-2 border-[#caa472] p-5 shadow-2xl text-left"
                     >
                       <ul className="space-y-1.5 text-xs font-serif text-[#3d1017]">
@@ -1830,12 +1902,21 @@ export default function RightSidebar({
             {/* Dark luxury vignette overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#1b0307]/80 via-transparent to-[#1b0307]/80 pointer-events-none" />
 
-            <h2 className="relative z-10 text-3xl font-serif text-[#f5ebd8] uppercase tracking-wider mb-2 drop-shadow">
-              Wedding Gift
-            </h2>
-            <p className="relative z-10 text-xs text-[#e8cfb5] font-sans max-w-xs leading-relaxed mb-6">
-              Bagi keluarga dan rekan yang ingin memberikan tanda kasih untuk kami, dapat menyalurkannya melalui rekening / e-wallet di bawah ini:
-            </p>
+            {/* Header */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+              className="relative z-10 flex flex-col items-center"
+            >
+              <h2 className="text-3xl font-serif text-[#f5ebd8] uppercase tracking-wider mb-2 drop-shadow">
+                Wedding Gift
+              </h2>
+              <p className="text-xs text-[#e8cfb5] font-sans max-w-xs leading-relaxed mb-6">
+                Bagi keluarga dan rekan yang ingin memberikan tanda kasih untuk kami, dapat menyalurkannya melalui rekening / e-wallet di bawah ini:
+              </p>
+            </motion.div>
 
             {/* ATM / Bank Cards Redesigned Luxury Royal Card */}
             <div className="relative z-10 w-full max-w-xs flex flex-col gap-5">
@@ -1846,9 +1927,10 @@ export default function RightSidebar({
                 return (
                   <motion.div
                     key={idx}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    initial={{ opacity: 0, y: 25, scale: 0.98 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: false, amount: 0.15 }}
+                    transition={{ duration: 0.6, delay: idx * 0.1 }}
                     className="relative w-full rounded-2xl bg-gradient-to-br from-[#2a060d] via-[#1a0307] to-[#120104] text-[#f7eee1] p-5 shadow-[0_15px_30px_rgba(0,0,0,0.7)] border border-[#caa472]/60 overflow-hidden text-left"
                   >
                     {/* Metallic Gold Sheen & Watermark Background */}
@@ -1959,14 +2041,23 @@ export default function RightSidebar({
                 {/* Dark luxury vignette overlay */}
                 <div className="absolute inset-0 bg-gradient-to-b from-[#1b0307]/80 via-transparent to-[#1b0307]/80 pointer-events-none" />
 
-                <h2 className="relative z-10 text-3xl font-serif text-[#f5ebd8] uppercase tracking-wider mb-2 drop-shadow">
-                  Location
-                </h2>
-                <img
-                  src={LACE10_ASSETS.flourishDivider2}
-                  alt="Divider"
-                  className="relative z-10 w-48 h-auto object-contain my-2 opacity-80"
-                />
+                {/* Header with entrance animation */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.6 }}
+                  className="relative z-10 flex flex-col items-center"
+                >
+                  <h2 className="text-3xl font-serif text-[#f5ebd8] uppercase tracking-wider mb-2 drop-shadow">
+                    Location
+                  </h2>
+                  <img
+                    src={LACE10_ASSETS.flourishDivider2}
+                    alt="Divider"
+                    className="w-48 h-auto object-contain my-2 opacity-80"
+                  />
+                </motion.div>
 
                 {/* Switcher if Akad & Resepsi are in different venues */}
                 {hasSeparateVenues && (
@@ -1996,31 +2087,49 @@ export default function RightSidebar({
                   </div>
                 )}
 
-                <p className="relative z-10 text-sm font-serif font-bold text-[#f5ebd8] mt-2 mb-1">
-                  {currentEvent.venue_name}
-                </p>
-                <p className="relative z-10 text-xs text-[#e8cfb5] font-sans max-w-xs leading-relaxed mb-6">
-                  {currentEvent.venue_address}
-                </p>
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.5 }}
+                  className="relative z-10 flex flex-col items-center"
+                >
+                  <p className="text-sm font-serif font-bold text-[#f5ebd8] mt-2 mb-1">
+                    {currentEvent.venue_name}
+                  </p>
+                  <p className="text-xs text-[#e8cfb5] font-sans max-w-xs leading-relaxed mb-6">
+                    {currentEvent.venue_address}
+                  </p>
+                </motion.div>
 
                 {/* Google Maps Preview Card */}
-                <div className="relative z-10 w-full max-w-xs h-56 rounded-2xl overflow-hidden border-2 border-[#caa472] shadow-2xl bg-neutral-900">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.96, y: 25 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.15 }}
+                  transition={{ duration: 0.7 }}
+                  className="relative z-10 w-full max-w-xs h-56 rounded-2xl overflow-hidden border-2 border-[#caa472] shadow-2xl bg-neutral-900"
+                >
                   <iframe
                     title="Venue Location"
                     src={`https://maps.google.com/maps?q=${encodeURIComponent(currentEvent.venue_address || currentEvent.venue_name || 'Batulawang')}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
                     className="w-full h-full border-0"
                     loading="lazy"
                   />
-                </div>
+                </motion.div>
 
-                <a
+                <motion.a
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.5 }}
                   href={currentEvent.venue_maps_url || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(currentEvent.venue_address || '')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="relative z-10 mt-5 inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#821c2c] text-white text-xs font-sans uppercase tracking-[0.2em] shadow-lg hover:bg-[#5c1320] transition-colors border border-[#caa472]/60"
                 >
                   <span>Buka Google Maps</span>
-                </a>
+                </motion.a>
               </section>
             );
           })()}
@@ -2041,7 +2150,13 @@ export default function RightSidebar({
             <div className="absolute inset-0 bg-gradient-to-b from-[#1b0307]/85 via-[#1b0307]/75 to-[#1b0307]/95 pointer-events-none" />
 
             {/* Section Header */}
-            <div className="relative z-10 flex flex-col items-center text-center mb-6">
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ duration: 0.7 }}
+              className="relative z-10 flex flex-col items-center text-center mb-6"
+            >
               <span className="text-[10px] tracking-[0.35em] text-[#caa472] uppercase font-serif font-bold mb-1">
                 The Honor of Your Presence
               </span>
@@ -2062,10 +2177,16 @@ export default function RightSidebar({
               <p className="text-xs text-[#e8cfb5]/90 font-sans text-center max-w-xs leading-relaxed mt-1">
                 Mohon konfirmasi kehadiran Anda untuk membantu kami mempersiapkan jamuan terbaik bagi seluruh keluarga &amp; sahabat tercinta.
               </p>
-            </div>
+            </motion.div>
 
             {/* RSVP Card with Layered Floral Accessories */}
-            <div className="relative z-10 w-full max-w-sm mx-auto my-4">
+            <motion.div
+              initial={{ opacity: 0, y: 35, scale: 0.98 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+              className="relative z-10 w-full max-w-sm mx-auto my-4"
+            >
               {/* Botanical Floral Accent Top-Right (Behind/Flanking Card) */}
               <div className="absolute -top-12 -right-8 w-28 sm:w-32 h-auto pointer-events-none z-20 filter drop-shadow-[0_12px_20px_rgba(0,0,0,0.65)] rotate-12">
                 <img
@@ -2202,10 +2323,16 @@ export default function RightSidebar({
                   </>
                 )}
               </form>
-            </div>
+            </motion.div>
 
             {/* Wishes & Greetings Wall (Doa & Ucapan) */}
-            <div className="relative z-10 w-full max-w-sm mt-12 flex flex-col items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ duration: 0.7 }}
+              className="relative z-10 w-full max-w-sm mt-12 flex flex-col items-center"
+            >
               <span className="text-[10px] tracking-[0.3em] text-[#caa472] uppercase font-serif font-bold mb-1">
                 Warmest Wishes
               </span>
@@ -2304,7 +2431,7 @@ export default function RightSidebar({
                   })
                 )}
               </div>
-            </div>
+            </motion.div>
           </section>
 
           {/* Footer */}
