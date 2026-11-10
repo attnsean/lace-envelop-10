@@ -13,7 +13,7 @@ export const LACE10_ASSETS = {
   envelopeClosed: `${LACE10_CDN}/MAG7Iwxzl6U.png?opt=1`,
   envelopeOpen: `${LACE10_CDN}/MAG7IymuufA.png?opt=1`,
   envelopeOpenLining: `${LACE10_CDN}/MAHUUKKt_Eg.png?opt=1`,
-  waxSealMonogram: `${LACE10_CDN}/MAHUS_PhHjA.jpg?opt=1`,
+  waxSealMonogram: `${LACE10_CDN}/wax-seal-ivory.png`,
   waxSealRose: `${LACE10_CDN}/MAG0cIYwKJE.svg?opt=1`,
   waxSealGold: `${LACE10_CDN}/MAHWcYczVww.png?opt=1`,
   miniRsvpEnvelope: `${LACE10_CDN}/MAHUVpaSVwg.png?opt=1`,

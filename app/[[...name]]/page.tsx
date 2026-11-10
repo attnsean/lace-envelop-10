@@ -157,8 +157,8 @@ export default async function Home({ params, searchParams }: Props) {
         {/* Center Card / Typography Showcase */}
         <div className="relative z-10 text-center px-10 py-12 rounded-3xl bg-[#260408]/85 backdrop-blur-md border border-[#c49a6c]/40 shadow-2xl max-w-lg mx-6 flex flex-col items-center">
           {/* Wax Seal Medallion */}
-          <div className="w-18 h-18 mb-4 filter drop-shadow-md">
-            <img src={LACE10_ASSETS.waxSealMonogram} alt="Seal" className="w-full h-full object-contain rounded-full" />
+          <div className="w-18 h-18 mb-4 filter drop-shadow-[0_6px_14px_rgba(0,0,0,0.5)]">
+            <img src={LACE10_ASSETS.waxSealMonogram} alt="Seal" className="w-full h-full object-contain" />
           </div>
 
           <p className="text-xs uppercase font-serif font-semibold tracking-[0.35em] text-[#caa472] mb-3">

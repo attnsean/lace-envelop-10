@@ -435,12 +435,12 @@ export default function RightSidebar({
                     onClick={handleOpenEnvelope}
                     whileHover={{ scale: 1.08 }}
                     whileTap={{ scale: 0.94 }}
-                    className="absolute top-[62%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-18 sm:h-18 rounded-full z-20 flex items-center justify-center cursor-pointer shadow-[0_8px_25px_rgba(0,0,0,0.5)] focus:outline-none group"
+                    className="absolute top-[62%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-18 sm:h-18 z-20 flex items-center justify-center cursor-pointer focus:outline-none group"
                   >
                     <img
                       src={LACE10_ASSETS.waxSealMonogram}
                       alt="Wax Seal"
-                      className="w-full h-full object-contain rounded-full border border-[#f3e3cb]/30 group-hover:brightness-110 transition-all"
+                      className="w-full h-full object-contain filter drop-shadow-[0_6px_16px_rgba(0,0,0,0.55)] group-hover:brightness-105 transition-all select-none"
                     />
                   </motion.button>
                 </div>
