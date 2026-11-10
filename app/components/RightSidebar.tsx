@@ -89,10 +89,11 @@ export default function RightSidebar({
   const groomName = formatPersonName(project?.groom_name) || "Sopyan Hidayat";
   const groomNickname = formatPersonName(project?.groom_nickname) || "Sopyan";
 
-  const brideFather = project?.bride_father || "Bapak Hendra Jaya";
-  const brideMother = project?.bride_mother || "Ibu Nurul Sa'adah";
-  const groomFather = project?.groom_father || "Bapak Atep Sumardi";
-  const groomMother = project?.groom_mother || "Ibu Ai Karina";
+  const isDemo = !project || (!project.id && !project.project_name);
+  const brideFather = isDemo ? "Bapak Hendra Jaya" : (project?.bride_father?.trim() || "");
+  const brideMother = isDemo ? "Ibu Nurul Sa'adah" : (project?.bride_mother?.trim() || "");
+  const groomFather = isDemo ? "Bapak Atep Sumardi" : (project?.groom_father?.trim() || "");
+  const groomMother = isDemo ? "Ibu Ai Karina" : (project?.groom_mother?.trim() || "");
 
   const weddingDateStr = project?.wedding_date || "2026-11-09";
   const weddingDate = new Date(weddingDateStr);
@@ -1013,9 +1014,11 @@ export default function RightSidebar({
                   >
                     {brideName}
                   </h2>
-                  <p className="text-[8.5px] sm:text-[9.5px] text-[#555] font-sans mt-0.5">
-                    Putri kedua dari {brideFather} dan {brideMother}
-                  </p>
+                  {Boolean(brideFather || brideMother) && (
+                    <p className="text-[8.5px] sm:text-[9.5px] text-[#555] font-sans mt-0.5">
+                      Putri dari {brideFather}{Boolean(brideFather && brideMother) ? " dan " : ""}{brideMother}
+                    </p>
+                  )}
                 </div>
 
                 {/* Ampersand Divider */}
@@ -1029,9 +1032,11 @@ export default function RightSidebar({
                   >
                     {groomName}
                   </h2>
-                  <p className="text-[8.5px] sm:text-[9.5px] text-[#555] font-sans mt-0.5">
-                    Putra pertama dari {groomFather} dan {groomMother}
-                  </p>
+                  {Boolean(groomFather || groomMother) && (
+                    <p className="text-[8.5px] sm:text-[9.5px] text-[#555] font-sans mt-0.5">
+                      Putra dari {groomFather}{Boolean(groomFather && groomMother) ? " dan " : ""}{groomMother}
+                    </p>
+                  )}
                 </div>
 
                 {/* Closing blessing text */}
