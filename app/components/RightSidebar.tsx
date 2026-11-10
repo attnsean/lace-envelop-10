@@ -299,6 +299,7 @@ export default function RightSidebar({
   // Submit RSVP
   const handleRsvpSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const finalName = (rsvpName || wishName || guestName || 'Tamu Undangan').trim();
     setIsSubmittingRsvp(true);
     try {
       const res = await fetch('/api/rsvp', {
@@ -306,23 +307,31 @@ export default function RightSidebar({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           project_id: project?.id,
-          name: rsvpName,
-          guest_name: rsvpName,
+          guest_id: guest?.id || null,
+          name: finalName,
+          guest_name: finalName,
           attendance: rsvpAttendance,
-          pax: rsvpPax,
+          pax: rsvpAttendance === 'hadir' ? rsvpPax : 0,
         }),
       });
       if (res.ok) {
         setRsvpSubmitted(true);
+      } else {
+        const errJson = await res.json().catch(() => ({}));
+        alert(errJson.error || 'Gagal menyimpan konfirmasi. Silakan coba lagi.');
       }
-    } catch {}
-    setIsSubmittingRsvp(false);
+    } catch {
+      alert('Terjadi kesalahan koneksi saat mengirim RSVP. Silakan coba lagi.');
+    } finally {
+      setIsSubmittingRsvp(false);
+    }
   };
 
   // Submit Wish
   const handleWishSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!wishMessage.trim()) return;
+    const finalName = (wishName || rsvpName || guestName || 'Tamu Undangan').trim();
     setIsSubmittingWish(true);
     try {
       const res = await fetch('/api/wishes', {
@@ -330,22 +339,30 @@ export default function RightSidebar({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           project_id: project?.id,
-          name: wishName || 'Tamu Undangan',
-          message: wishMessage,
+          guest_id: guest?.id || null,
+          name: finalName,
+          message: wishMessage.trim(),
         }),
       });
       if (res.ok) {
         const newWish = {
           id: Date.now().toString(),
-          name: wishName || 'Tamu Undangan',
-          message: wishMessage,
+          name: finalName,
+          message: wishMessage.trim(),
           created_at: new Date().toISOString(),
+          is_approved: true,
         };
-        setWishesList([newWish, ...wishesList]);
+        setWishesList((prev) => [newWish, ...(prev || [])]);
         setWishMessage('');
+      } else {
+        const errJson = await res.json().catch(() => ({}));
+        alert(errJson.error || 'Gagal mengirim ucapan. Silakan coba lagi.');
       }
-    } catch {}
-    setIsSubmittingWish(false);
+    } catch {
+      alert('Terjadi kesalahan koneksi saat mengirim ucapan. Silakan coba lagi.');
+    } finally {
+      setIsSubmittingWish(false);
+    }
   };
 
   return (
@@ -2526,17 +2543,17 @@ export default function RightSidebar({
                   </div>
                 ) : (
                   wishesList.map((wish: any, i: number) => {
-                    const initials = (wish.name || 'G')
+                    const initials = (wish?.name || 'G')
                       .trim()
                       .split(' ')
                       .slice(0, 2)
                       .map((w: string) => w.charAt(0))
                       .join('')
-                      .toUpperCase();
+                      .toUpperCase() || 'G';
 
                     return (
                       <div
-                        key={wish.id || i}
+                        key={wish?.id || i}
                         className="p-4 rounded-2xl bg-[#200307]/90 border border-[#caa472]/35 text-left text-xs shadow-md flex items-start gap-3"
                       >
                         <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#7a1827] to-[#42111a] border border-[#caa472]/60 flex items-center justify-center text-[10px] font-bold text-[#f5ebd8] uppercase shrink-0 shadow">
@@ -2544,10 +2561,10 @@ export default function RightSidebar({
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="font-serif font-bold text-sm text-[#f5ebd8] truncate">
-                            {wish.name}
+                            {wish?.name || 'Tamu Undangan'}
                           </p>
                           <p className="text-neutral-300 font-sans mt-1 whitespace-pre-line leading-relaxed">
-                            {wish.message}
+                            {wish?.message}
                           </p>
                         </div>
                       </div>

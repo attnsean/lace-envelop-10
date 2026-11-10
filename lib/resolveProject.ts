@@ -202,6 +202,11 @@ export async function resolveProjectData(slug?: string, host?: string): Promise<
       }
     }
 
+    // 2.5 Fallback for template repository (lace-envelop-10 / luxury-01)
+    if (!projectId) {
+      projectId = 'e8b15d20-8012-4eb2-a083-d92ea407c001';
+    }
+
     // 3. Fetch project details
     if (projectId) {
       const { data: projectData, error: projectError } = await supabase

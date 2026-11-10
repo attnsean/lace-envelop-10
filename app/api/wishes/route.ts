@@ -30,7 +30,11 @@ export async function POST(request: Request) {
       }
     }
 
-    if (!project_id || !name || !message) {
+    if (!project_id) {
+      project_id = 'e8b15d20-8012-4eb2-a083-d92ea407c001';
+    }
+
+    if (!name || !message) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 

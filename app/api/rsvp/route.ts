@@ -31,7 +31,7 @@ export async function POST(request: Request) {
     }
 
     if (!project_id) {
-      return NextResponse.json({ error: 'Missing project_id' }, { status: 400 });
+      project_id = 'e8b15d20-8012-4eb2-a083-d92ea407c001';
     }
 
     const { data, error } = await supabaseAdmin
