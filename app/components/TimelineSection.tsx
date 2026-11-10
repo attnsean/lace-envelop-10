@@ -56,10 +56,11 @@ export default function TimelineSection({
   groomName = "Sopyan",
   brideName = "Zahra",
 }: TimelineSectionProps) {
-  const events =
-    loveStoryItems && loveStoryItems.length > 0
-      ? [...loveStoryItems].sort((a, b) => (a.order || 0) - (b.order || 0))
-      : DEFAULT_STORIES;
+  if (!loveStoryItems || loveStoryItems.length === 0) {
+    return null;
+  }
+
+  const events = [...loveStoryItems].sort((a, b) => (a.order || 0) - (b.order || 0));
 
   return (
     <section

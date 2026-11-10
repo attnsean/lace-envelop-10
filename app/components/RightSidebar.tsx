@@ -1499,78 +1499,78 @@ export default function RightSidebar({
           {/* --------------------------------------------------------------------- */}
           {/* SECTION 7.5: OUR LOVE STORY (Timeline Perjalanan Cinta)               */}
           {/* --------------------------------------------------------------------- */}
-          <TimelineSection
-            loveStoryItems={loveStoryData}
-            groomName={groomNickname}
-            brideName={brideNickname}
-          />
-
-          {/* --------------------------------------------------------------------- */}
-          {/* SECTION 8: RUNDOWN ACARA (Full Width Velvet BG & Elegant Cards)       */}
-          {/* --------------------------------------------------------------------- */}
-          <section
-            className="relative w-full px-5 py-14 flex flex-col items-center text-center overflow-hidden"
-            style={{
-              backgroundImage: `url(${LACE10_ASSETS.bgRedVelvet})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
-          >
-            {/* Dark luxury vignette overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#1f0307]/75 via-transparent to-[#1f0307]/80 pointer-events-none" />
-
-            <h3
-              className="relative z-10 text-4xl sm:text-5xl text-[#f5ebd8] mb-1 drop-shadow-md"
-              style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
-            >
-              Rundown Acara
-            </h3>
-            <img
-              src={LACE10_ASSETS.rundownWavyLine}
-              alt="Wavy Line"
-              className="relative z-10 w-44 h-auto object-contain my-3 opacity-80"
+          {loveStoryData && loveStoryData.length > 0 && (
+            <TimelineSection
+              loveStoryItems={loveStoryData}
+              groomName={groomNickname}
+              brideName={brideNickname}
             />
+          )}
 
-            {/* Timeline Schedule Cards with Luxury Borders */}
-            <div className="relative z-10 w-full max-w-xs flex flex-col gap-3 mt-4 text-[#f8f4ed]">
-              {(() => {
-                const rundownList = (Array.isArray((project as any)?.dining_schedule) && (project as any).dining_schedule.length > 0)
-                  ? (project as any).dining_schedule
-                  : (Array.isArray((project as any)?.rundown) && (project as any).rundown.length > 0)
-                  ? (project as any).rundown
-                  : [
-                      { time: '07.30 WIB', title: 'Mapag Panganten' },
-                      { time: '08.00 - 10.00 WIB', title: 'Akad Nikah' },
-                      { time: '10.00 - 11.00 WIB', title: 'Sungkeman' },
-                      { time: '11.00 - 11.30 WIB', title: 'Upacara Adat Sunda' },
-                      { time: '12.00 - 16.00 WIB', title: 'Resepsi Pernikahan' },
-                    ];
+          {/* --------------------------------------------------------------------- */}
+          {/* SECTION 8: RUNDOWN ACARA (Only rendered if user inputs rundown)       */}
+          {/* --------------------------------------------------------------------- */}
+          {(() => {
+            const rundownList = (Array.isArray((project as any)?.dining_schedule) && (project as any).dining_schedule.length > 0)
+              ? (project as any).dining_schedule
+              : (Array.isArray((project as any)?.rundown) && (project as any).rundown.length > 0)
+              ? (project as any).rundown
+              : null;
 
-                return rundownList.map((item: any, idx: number) => (
-                  <div
-                    key={idx}
-                    className="flex items-center justify-between p-3.5 rounded-2xl bg-[#fdfaf5]/95 border-2 border-[#caa472] shadow-xl text-[#3d1017] hover:scale-[1.02] transition-transform"
-                  >
-                    <span className="px-3 py-1 rounded-full bg-[#7a1827] text-white text-[11px] font-sans font-bold tracking-wider shadow shrink-0">
-                      {item.time}
-                    </span>
-                    <span className="text-xs sm:text-sm font-serif font-bold text-[#42111a] text-right ml-2">
-                      {item.title}
-                    </span>
-                  </div>
-                ));
-              })()}
-            </div>
+            if (!rundownList || rundownList.length === 0) return null;
 
-            {/* Bottom Getaway Wedding Car Illustration */}
-            <div className="relative z-10 w-40 h-auto mt-8 opacity-85 filter drop-shadow invert">
-              <img
-                src={LACE10_ASSETS.weddingCarGetaway}
-                alt="Wedding Car"
-                className="w-full h-auto object-contain"
-              />
-            </div>
-          </section>
+            return (
+              <section
+                className="relative w-full px-5 py-14 flex flex-col items-center text-center overflow-hidden"
+                style={{
+                  backgroundImage: `url(${LACE10_ASSETS.bgRedVelvet})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              >
+                {/* Dark luxury vignette overlay */}
+                <div className="absolute inset-0 bg-gradient-to-b from-[#1f0307]/75 via-transparent to-[#1f0307]/80 pointer-events-none" />
+
+                <h3
+                  className="relative z-10 text-4xl sm:text-5xl text-[#f5ebd8] mb-1 drop-shadow-md"
+                  style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
+                >
+                  Rundown Acara
+                </h3>
+                <img
+                  src={LACE10_ASSETS.rundownWavyLine}
+                  alt="Wavy Line"
+                  className="relative z-10 w-44 h-auto object-contain my-3 opacity-80"
+                />
+
+                {/* Timeline Schedule Cards with Luxury Borders */}
+                <div className="relative z-10 w-full max-w-xs flex flex-col gap-3 mt-4 text-[#f8f4ed]">
+                  {rundownList.map((item: any, idx: number) => (
+                    <div
+                      key={idx}
+                      className="flex items-center justify-between p-3.5 rounded-2xl bg-[#fdfaf5]/95 border-2 border-[#caa472] shadow-xl text-[#3d1017] hover:scale-[1.02] transition-transform"
+                    >
+                      <span className="px-3 py-1 rounded-full bg-[#7a1827] text-white text-[11px] font-sans font-bold tracking-wider shadow shrink-0">
+                        {item.time}
+                      </span>
+                      <span className="text-xs sm:text-sm font-serif font-bold text-[#42111a] text-right ml-2">
+                        {item.title}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Bottom Getaway Wedding Car Illustration */}
+                <div className="relative z-10 w-40 h-auto mt-8 opacity-85 filter drop-shadow invert">
+                  <img
+                    src={LACE10_ASSETS.weddingCarGetaway}
+                    alt="Wedding Car"
+                    className="w-full h-auto object-contain"
+                  />
+                </div>
+              </section>
+            );
+          })()}
 
           {/* --------------------------------------------------------------------- */}
           {/* SECTION 8.5: TURUT MENGUNDANG (Full Width Red Curtain & Vintage Card)  */}
