@@ -78,10 +78,25 @@ export default function RightSidebar({
   const [wishMessage, setWishMessage] = useState('');
   const [wishesList, setWishesList] = useState<any[]>(initialWishes || []);
   const [isSubmittingWish, setIsSubmittingWish] = useState(false);
-  const [copiedBank, setCopiedBank] = useState<string | null>(null);
+
+  // Check if guest name comes from personalized link (e.g. /Michael%20Sean or ?to=...)
+  const isNameLocked = Boolean(
+    guestName &&
+    guestName.trim() !== '' &&
+    guestName !== 'Tamu Undangan' &&
+    guestName !== 'Special Guest'
+  );
+
+  useEffect(() => {
+    if (guestName && guestName.trim() !== '') {
+      setRsvpName(guestName);
+      setWishName(guestName);
+    }
+  }, [guestName]);
 
   // Map Tab State (for separate venues)
   const [activeMapTab, setActiveMapTab] = useState<'akad' | 'resepsi'>('akad');
+  const [copiedBank, setCopiedBank] = useState<string | null>(null);
 
   // Lightbox Modal
   const [lightboxImg, setLightboxImg] = useState<string | null>(null);
@@ -1609,14 +1624,21 @@ export default function RightSidebar({
             if (!rawList || rawList.length === 0) return null;
 
             // Sanitize: strip out day/date strings in parentheses e.g. "(Jum'at, 27 Nov)", "(Selasa, 28 Nov)", "(Sabtu, 28 Nov)"
-            const rundownList = rawList.map((item: any) => {
-              const rawTitle = typeof item.title === "string" ? item.title : "";
-              const cleanTitle = rawTitle.replace(/\s*\([^)]*\)/g, "").trim();
-              return {
-                ...item,
-                title: cleanTitle || rawTitle
-              };
-            });
+            // and filter out empty items where neither title nor time is filled
+            const rundownList = rawList
+              .map((item: any) => {
+                const rawTitle = typeof item?.title === "string" ? item.title : "";
+                const cleanTitle = rawTitle.replace(/\s*\([^)]*\)/g, "").trim();
+                const cleanTime = typeof item?.time === "string" ? item.time.trim() : "";
+                return {
+                  ...item,
+                  time: cleanTime,
+                  title: cleanTitle || rawTitle
+                };
+              })
+              .filter((item: any) => item.title || item.time);
+
+            if (rundownList.length === 0) return null;
 
             return (
               <section
@@ -2037,16 +2059,31 @@ export default function RightSidebar({
               ) : (
                 <>
                   <div>
-                    <label className="text-[10px] font-sans uppercase tracking-wider text-neutral-600 block mb-1">
-                      Nama Lengkap
-                    </label>
+                    <div className="flex items-center justify-between mb-1">
+                      <label className="text-[10px] font-sans uppercase tracking-wider text-neutral-600 block">
+                        Nama Lengkap
+                      </label>
+                      {isNameLocked && (
+                        <span className="text-[9px] font-sans text-neutral-400 italic">
+                          (Sesuai Undangan)
+                        </span>
+                      )}
+                    </div>
                     <input
                       type="text"
                       required
+                      readOnly={isNameLocked}
                       value={rsvpName}
-                      onChange={(e) => setRsvpName(e.target.value)}
-                      className="w-full px-3.5 py-2 rounded-xl border border-[#c49a6c]/60 text-xs text-neutral-800 focus:outline-none focus:border-[#821c2c] bg-white"
+                      onChange={(e) => {
+                        if (!isNameLocked) setRsvpName(e.target.value);
+                      }}
+                      className={`w-full px-3.5 py-2 rounded-xl border border-[#c49a6c]/60 text-xs focus:outline-none ${
+                        isNameLocked
+                          ? 'bg-[#ede5da] text-neutral-700 cursor-not-allowed select-none font-semibold'
+                          : 'bg-white text-neutral-800 focus:border-[#821c2c]'
+                      }`}
                       placeholder="Nama Anda"
+                      title={isNameLocked ? "Nama terkunci sesuai link undangan Anda" : undefined}
                     />
                   </div>
 
@@ -2100,13 +2137,29 @@ export default function RightSidebar({
               </h3>
 
               <form onSubmit={handleWishSubmit} className="flex flex-col gap-2 mb-6">
-                <input
-                  type="text"
-                  value={wishName}
-                  onChange={(e) => setWishName(e.target.value)}
-                  placeholder="Nama Pengirim"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#2b040a]/90 border border-[#caa472]/50 text-xs text-[#f8f4ed] focus:outline-none"
-                />
+                <div className="relative">
+                  <input
+                    type="text"
+                    required
+                    readOnly={isNameLocked}
+                    value={wishName}
+                    onChange={(e) => {
+                      if (!isNameLocked) setWishName(e.target.value);
+                    }}
+                    placeholder="Nama Pengirim"
+                    className={`w-full px-3.5 py-2.5 rounded-xl border border-[#caa472]/50 text-xs text-[#f8f4ed] focus:outline-none ${
+                      isNameLocked
+                        ? 'bg-[#1b0307]/90 text-[#f8f4ed]/90 cursor-not-allowed select-none font-semibold'
+                        : 'bg-[#2b040a]/90'
+                    }`}
+                    title={isNameLocked ? "Nama terkunci sesuai link undangan Anda" : undefined}
+                  />
+                  {isNameLocked && (
+                    <span className="absolute right-3 top-2.5 text-[9px] text-[#caa472]/70 font-sans italic">
+                      Terkunci
+                    </span>
+                  )}
+                </div>
                 <textarea
                   rows={3}
                   value={wishMessage}
