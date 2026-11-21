@@ -238,25 +238,19 @@ export default function RightSidebar({
   }
 
   // Bank Accounts / Gifts
-  let bankAccounts: any[] = [];
-  if (Array.isArray(project?.payment_accounts) && project.payment_accounts.length > 0) {
-    bankAccounts = project.payment_accounts;
-  } else {
-    bankAccounts = [
-      {
-        bank_name: 'DANA',
-        account_number: '0813-5880-4454',
-        account_holder: brideName,
-        type: 'ewallet'
-      },
-      {
-        bank_name: 'BCA',
-        account_number: '1832684494',
-        account_holder: groomName,
-        type: 'bank'
-      }
-    ];
-  }
+  let rawBankAccounts: any[] = Array.isArray(project?.payment_accounts) ? project.payment_accounts : [];
+  const bankAccounts = rawBankAccounts.filter(
+    (acc: any) =>
+      acc &&
+      acc.account_number &&
+      String(acc.account_number).trim() !== "" &&
+      String(acc.account_number).trim() !== "0813-5880-4454" &&
+      String(acc.account_number).trim() !== "1832684494"
+  );
+  const isCashlessEnabled = Boolean(
+    ((project as any)?.has_cashless || (project as any)?.subscriptions?.packages?.has_amplop_digital) &&
+    bankAccounts.length > 0
+  );
 
   // Calendar generation for the wedding month
   const getCalendarDays = () => {
