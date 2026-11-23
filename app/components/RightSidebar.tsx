@@ -122,9 +122,9 @@ export default function RightSidebar({
   const [lightboxImg, setLightboxImg] = useState<string | null>(null);
 
   // Extract couple data
-  const brideName = formatPersonName(project?.bride_nickname) || formatPersonName(project?.bride_name) || "Nabila";
+  const brideFull = formatPersonName(project?.bride_nickname) || formatPersonName(project?.bride_name) || "Nabila";
   const brideNickname = formatPersonName(project?.bride_nickname) || "Nabila";
-  const groomName = formatPersonName(project?.groom_nickname) || formatPersonName(project?.groom_name) || "Rayhan";
+  const groomFull = formatPersonName(project?.groom_nickname) || formatPersonName(project?.groom_name) || "Rayhan";
   const groomNickname = formatPersonName(project?.groom_nickname) || "Rayhan";
 
   const brideFather = project?.bride_father?.trim() || "Bapak Hendra Wijaya";
@@ -1231,7 +1231,7 @@ export default function RightSidebar({
                     className="text-2xl sm:text-[26px] text-[#7a1827] tracking-wide leading-tight"
                     style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
                   >
-                    {brideName}
+                    {brideFull}
                   </h2>
                   {Boolean(brideFather || brideMother) && (
                     <p className="text-[8px] sm:text-[8.5px] text-[#555] font-sans mt-0.5">
@@ -1249,7 +1249,7 @@ export default function RightSidebar({
                     className="text-2xl sm:text-[26px] text-[#7a1827] tracking-wide leading-tight"
                     style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
                   >
-                    {groomName}
+                    {groomFull}
                   </h2>
                   {Boolean(groomFather || groomMother) && (
                     <p className="text-[8px] sm:text-[8.5px] text-[#555] font-sans mt-0.5">
@@ -1379,7 +1379,7 @@ export default function RightSidebar({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.2 }}
               transition={{ duration: 0.5 }}
-              href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pernikahan+${encodeURIComponent(brideNickname)}+%26+${encodeURIComponent(groomNickname)}&dates=${formattedYear}${formattedMonthNum}${formattedDateNum}T020000Z/${formattedYear}${formattedMonthNum}${formattedDateNum}T090000Z&details=Pernikahan+${encodeURIComponent(brideName)}+dan+${encodeURIComponent(groomName)}&location=${encodeURIComponent(akadEvent.venue_name || '')}`}
+              href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pernikahan+${encodeURIComponent(brideNickname)}+%26+${encodeURIComponent(groomNickname)}&dates=${formattedYear}${formattedMonthNum}${formattedDateNum}T020000Z/${formattedYear}${formattedMonthNum}${formattedDateNum}T090000Z&details=Pernikahan+${encodeURIComponent(brideFull)}+dan+${encodeURIComponent(groomFull)}&location=${encodeURIComponent(akadEvent.venue_name || '')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-2 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1b0407] text-[#f8f4ed] text-xs font-sans uppercase tracking-[0.2em] border border-[#c49a6c]/60 shadow-lg hover:bg-[#851c2d] transition-colors"
@@ -1459,7 +1459,7 @@ export default function RightSidebar({
                     className="text-2xl sm:text-3xl text-[#f5ebd8] tracking-wide mt-0.5"
                     style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
                   >
-                    {brideName}
+                    {brideFull}
                   </h3>
                   {Boolean(brideFather || brideMother) && (
                     <p className="text-[11px] text-[#e5c7a9] font-sans mt-1">
@@ -1511,7 +1511,7 @@ export default function RightSidebar({
                     className="text-2xl sm:text-3xl text-[#f5ebd8] tracking-wide mt-0.5"
                     style={{ fontFamily: "'Alex Brush', 'Great Vibes', cursive" }}
                   >
-                    {groomName}
+                    {groomFull}
                   </h3>
                   {Boolean(groomFather || groomMother) && (
                     <p className="text-[11px] text-[#e5c7a9] font-sans mt-1">
@@ -1770,8 +1770,8 @@ export default function RightSidebar({
           {loveStoryData && loveStoryData.length > 0 && (
             <TimelineSection
               loveStoryItems={loveStoryData}
-              groomName={groomNickname}
-              brideName={brideNickname}
+              groomFull={groomNickname}
+              brideFull={brideNickname}
             />
           )}
 
